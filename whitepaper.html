@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S256 Whitepaper - Digital Platinum</title>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <style>
+        @page {
+            margin: 2cm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #1f2430;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #ffffff;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #a300ff;
+        }
+
+        .title {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a300ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #6b7280;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .meta {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin: 40px 0 20px;
+            color: #1f2430;
+            border-bottom: 2px solid #a300ff;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin: 30px 0 15px;
+            color: #a300ff;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin: 20px 0 10px;
+            color: #1f2430;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .abstract {
+            background: #f5f7fb;
+            padding: 30px;
+            border-left: 4px solid #a300ff;
+            margin: 40px 0;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: linear-gradient(135deg, #a300ff 0%, #00d4ff 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        code {
+            background: #f5f7fb;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .formula {
+            background: #f5f7fb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .quote {
+            border-left: 4px solid #FFD700;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #6b7280;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 40px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #e5e7eb;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <span class="pi-symbol" id="pi-easter-egg" title="π" style="position: fixed; top: 20px; right: 20px; font-size: 1.6rem; color: #a300ff; opacity: 0.35; cursor: pointer; padding: 0.5rem; transition: all 0.3s ease; user-select: none; font-family: 'Times New Roman', serif; font-weight: 600; z-index: 1000;">π</span>
+    <div class="header">
+        <div class="title">S256</div>
+        <div class="subtitle">Digital Platinum: A Contrarian Approach to Cryptocurrency</div>
+        <div class="meta">
+            <strong>Version:</strong> 1.0<br>
+            <strong>Date:</strong> November 30, 2025<br>
+            <strong>Genesis Block:</strong> 00000000abe2a78ceb00eca81258804d59fe4ad45345e1750e705139e6da7297
+        </div>
+    </div>
+
+    <div class="abstract">
+        <strong>Abstract:</strong> S256 is a SHA-256 proof-of-work cryptocurrency that challenges the conventional wisdom of blockchain scaling through increased throughput. Instead of making mining easier and blocks faster, S256 doubles Bitcoin's key parameters: 20-minute blocks, 100 S256 rewards, 84 million total supply (4x Bitcoin), and 16-year halving cycles. This whitepaper presents the philosophy, technical implementation, and economic model of a cryptocurrency built on the principle that true value comes from genuine scarcity and deliberate proof of work.
+    </div>
+
+    <h1>1. Introduction</h1>
+
+    <h2>1.1 The Problem</h2>
+    <p>
+        The cryptocurrency space has witnessed a proliferation of projects racing toward the same goal: faster transactions, easier mining, and increased supply. While these approaches have merit in specific contexts, they collectively dilute the fundamental value proposition of digital scarcity that made Bitcoin revolutionary.
+    </p>
+
+    <p>
+        Most Bitcoin forks reduce block times to 2.5 minutes, 1 minute, or even seconds, arguing this improves usability. However, this comes at the cost of increased orphan rates, reduced security confirmation times, and network instability. The result is a degradation of the very properties that make proof-of-work valuable: deliberation, security, and genuine resource expenditure.
+    </p>
+
+    <h2>1.2 The Contrarian Solution</h2>
+    <p>
+        S256 takes the opposite approach. If Bitcoin is digital gold, S256 is digital platinum—rarer, requiring more work to obtain, and more deliberate in its creation. By doubling Bitcoin's parameters rather than halving them, S256 creates a cryptocurrency optimized for store of value rather than high-frequency transactions.
+    </p>
+
+    <div class="quote">
+        "Excellence is never an accident. It is always the result of high intention, sincere effort, and intelligent execution." — Aristotle
+    </div>
+
+    <h1>2. Philosophy</h1>
+
+    <h2>2.1 Double the Work, Double the Value</h2>
+    <p>
+        S256's core philosophy challenges the assumption that cryptocurrencies must compete on transaction speed. Instead, we argue that true digital scarcity requires genuine work and time. Our "2x Bitcoin" approach manifests in every parameter:
+    </p>
+
+    <ul>
+        <li><strong>20-minute blocks</strong> instead of 10 minutes, allowing more time for network consensus and reducing orphan rates</li>
+        <li><strong>100 S256 block rewards</strong> instead of 50 BTC, maintaining proportional inflation</li>
+        <li><strong>84 million total supply</strong> instead of 21 million (4x total supply, 2x reward × 2x halving interval)</li>
+        <li><strong>16-year halving cycles</strong> instead of 4 years, creating longer economic epochs</li>
+    </ul>
+
+    <h2>2.2 Proof of Real Work</h2>
+    <p>
+        In an era of proof-of-stake and other consensus mechanisms designed to reduce energy expenditure, S256 embraces proof-of-work as a feature, not a bug. The energy and computational resources required to mine S256 represent genuine economic investment, creating a more robust security model and ensuring that only those genuinely committed to the network participate in its consensus.
+    </p>
+
+    <h2>2.3 Time Preference and Deliberation</h2>
+    <p>
+        Twenty-minute blocks enforce a lower time preference. Users must wait longer for confirmations, but this deliberation reduces impulsive transactions and encourages thoughtful economic behavior. In a financial system optimized for speculation, S256 is optimized for consideration.
+    </p>
+
+    <h1>3. Technical Specification</h1>
+
+    <h2>3.1 Core Parameters</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Bitcoin</th>
+                <th>S256</th>
+                <th>Ratio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Block Time</td>
+                <td>10 minutes</td>
+                <td>20 minutes</td>
+                <td>2x</td>
+            </tr>
+            <tr>
+                <td>Block Reward (Initial)</td>
+                <td>50 BTC</td>
+                <td>100 S256</td>
+                <td>2x</td>
+            </tr>
+            <tr>
+                <td>Halving Interval</td>
+                <td>210,000 blocks</td>
+                <td>420,000 blocks</td>
+                <td>2x</td>
+            </tr>
+            <tr>
+                <td>Total Supply</td>
+                <td>21,000,000</td>
+                <td>84,000,000</td>
+                <td>4x</td>
+            </tr>
+            <tr>
+                <td>Time per Halving</td>
+                <td>~4 years</td>
+                <td>~16 years</td>
+                <td>4x</td>
+            </tr>
+            <tr>
+                <td>Coinbase Maturity</td>
+                <td>100 blocks</td>
+                <td>200 blocks</td>
+                <td>2x</td>
+            </tr>
+            <tr>
+                <td>Difficulty Adjustment</td>
+                <td>2016 blocks</td>
+                <td>1008 blocks</td>
+                <td>~0.5x*</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="font-size: 12px; color: #6b7280;">
+        *Difficulty adjusts every 1008 blocks to maintain ~14 day adjustment periods (1008 blocks × 20 minutes ≈ 14 days)
+    </p>
+
+    <h2>3.2 Consensus Algorithm</h2>
+    <p>
+        S256 utilizes the SHA-256 proof-of-work algorithm, ensuring compatibility with existing Bitcoin mining infrastructure. Miners can seamlessly switch between mining Bitcoin and S256 based on profitability, creating a competitive mining ecosystem while leveraging the most battle-tested hashing algorithm in cryptocurrency.
+    </p>
+
+    <h3>3.2.1 Mining Difficulty</h3>
+    <p>
+        The mining difficulty adjusts every 1008 blocks (approximately 14 days at 20-minute block times) to maintain the target block time. The difficulty adjustment follows the same algorithm as Bitcoin:
+    </p>
+
+    <div class="formula">
+        new_difficulty = old_difficulty × (2_weeks / actual_time)
+    </div>
+
+    <h2>3.3 Network Configuration</h2>
+    <ul>
+        <li><strong>Default Port:</strong> 25256</li>
+        <li><strong>RPC Port:</strong> 25332</li>
+        <li><strong>Magic Bytes:</strong> 0xf1, 0xc2, 0xa5, 0xd8</li>
+        <li><strong>Address Prefix:</strong> 'S' (PUBKEY_ADDRESS = 63)</li>
+        <li><strong>Script Address:</strong> '8' (SCRIPT_ADDRESS = 18)</li>
+        <li><strong>Bech32 HRP:</strong> s2</li>
+    </ul>
+
+    <h2>3.4 Security Model</h2>
+
+    <h3>3.4.1 Confirmation Depth</h3>
+    <p>
+        Due to the 20-minute block time, S256 adjusts its security model accordingly:
+    </p>
+    <ul>
+        <li><strong>Standard Transactions:</strong> 3 confirmations (~1 hour)</li>
+        <li><strong>High-Value Transactions:</strong> 6 confirmations (~2 hours)</li>
+        <li><strong>Coinbase Maturity:</strong> 200 confirmations (~67 hours)</li>
+        <li><strong>Exchange Deposits:</strong> 500+ confirmations recommended (~7 days)</li>
+    </ul>
+
+    <h3>3.4.2 51% Attack Resistance</h3>
+    <p>
+        The longer block time increases the cost of a 51% attack. An attacker must sustain computational dominance for longer periods to execute deep reorganizations, making short-term attacks economically unviable. The recommended 500+ confirmations for exchange deposits create a security buffer exceeding 6 days, making double-spend attacks impractical.
+    </p>
+
+    <h1>4. Economic Model</h1>
+
+    <h2>4.1 Supply Schedule</h2>
+    <p>
+        S256's supply follows a predictable halving schedule identical to Bitcoin but scaled 2x:
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Halving</th>
+                <th>Block Height</th>
+                <th>Year</th>
+                <th>Reward</th>
+                <th>Cumulative Supply</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0 (Genesis)</td>
+                <td>0</td>
+                <td>2025</td>
+                <td>100 S256</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>420,000</td>
+                <td>~2041</td>
+                <td>50 S256</td>
+                <td>42,000,000</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>840,000</td>
+                <td>~2057</td>
+                <td>25 S256</td>
+                <td>63,000,000</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1,260,000</td>
+                <td>~2073</td>
+                <td>12.5 S256</td>
+                <td>73,500,000</td>
+            </tr>
+            <tr>
+                <td>∞</td>
+                <td>∞</td>
+                <td>~2549</td>
+                <td>0 S256</td>
+                <td>84,000,000</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4.2 Inflation Rate</h2>
+    <p>
+        S256's inflation rate follows an identical curve to Bitcoin, maintaining the same scarcity properties:
+    </p>
+
+    <ul>
+        <li><strong>Year 1-16:</strong> ~4% annual inflation</li>
+        <li><strong>Year 16-32:</strong> ~2% annual inflation</li>
+        <li><strong>Year 32-48:</strong> ~1% annual inflation</li>
+        <li><strong>Year 48+:</strong> <0.5% annual inflation, approaching zero</li>
+    </ul>
+
+    <h2>4.3 Mining Economics</h2>
+    <p>
+        The doubled block reward (100 S256 vs 50 BTC) provides stronger incentives for miners, while the doubled block time (20 minutes vs 10 minutes) results in identical inflation:
+    </p>
+
+    <div class="formula">
+        Inflation = (100 S256 / 20 min) = (50 BTC / 10 min) = 5 coins per minute
+    </div>
+
+    <p>
+        This maintains the same economic security model as Bitcoin while allowing for different market dynamics based on price discovery.
+    </p>
+
+    <h1>5. Use Cases</h1>
+
+    <h2>5.1 Store of Value</h2>
+    <p>
+        S256's primary use case is as a long-term store of value. The extended block time and confirmation requirements discourage high-frequency trading and encourage holding behavior, similar to physical precious metals.
+    </p>
+
+    <h2>5.2 Large Value Transfers</h2>
+    <p>
+        The 20-minute block time is optimized for large, infrequent value transfers where security and deliberation outweigh speed. Real estate transactions, corporate treasury movements, and inheritance transfers benefit from the enhanced security model.
+    </p>
+
+    <h2>5.3 Cross-Exchange Arbitrage Resistance</h2>
+    <p>
+        The longer block time and high confirmation requirements create natural friction against high-frequency arbitrage trading, reducing market manipulation and promoting price stability.
+    </p>
+
+    <h1>6. Comparison with Bitcoin</h1>
+
+    <h2>6.1 Similarities</h2>
+    <ul>
+        <li>SHA-256 proof-of-work algorithm</li>
+        <li>Same fundamental code base (Bitcoin Core v30.0)</li>
+        <li>Identical security assumptions</li>
+        <li>Compatible mining hardware</li>
+        <li>Same total supply curve (scaled 2x)</li>
+    </ul>
+
+    <h2>6.2 Differences</h2>
+    <ul>
+        <li>All time-based parameters doubled</li>
+        <li>All quantity-based parameters doubled</li>
+        <li>Unique network identity (different magic bytes, ports, addresses)</li>
+        <li>Optimized for different use case (store of value vs. medium of exchange)</li>
+    </ul>
+
+    <h1>7. Governance and Development</h1>
+
+    <h2>7.1 Open Source</h2>
+    <p>
+        S256 is fully open source, based on Bitcoin Core v30.0. All modifications are transparent and verifiable. The codebase maintains Bitcoin's MIT license, ensuring permissionless use and modification.
+    </p>
+
+    <h2>7.2 Conservative Development</h2>
+    <p>
+        S256 follows Bitcoin's conservative development philosophy. Changes to consensus rules require overwhelming community support. The focus remains on stability and security over feature additions.
+    </p>
+
+    <h2>7.3 Testnet and Regtest</h2>
+    <p>
+        While the initial release focuses on mainnet, testnet and regtest environments can be configured for development and testing purposes. The core infrastructure supports all Bitcoin testing networks with appropriate parameter modifications.
+    </p>
+
+    <h1>8. Security Considerations</h1>
+
+    <h2>8.1 Exchange Integration</h2>
+    <p>
+        Exchanges integrating S256 must account for the extended block time:
+    </p>
+    <ul>
+        <li>Minimum 500 confirmations for deposits (~167 hours / 7 days)</li>
+        <li>Withdrawal processing after 6 confirmations (~2 hours)</li>
+        <li>Clear communication to users about expected wait times</li>
+    </ul>
+
+    <h2>8.2 Wallet Security</h2>
+    <p>
+        Users should follow standard Bitcoin security practices:
+    </p>
+    <ul>
+        <li>Use hardware wallets for large holdings</li>
+        <li>Maintain encrypted backups of wallet.dat</li>
+        <li>Verify all addresses before sending (S-prefix for mainnet)</li>
+        <li>Wait for appropriate confirmation depth based on transaction value</li>
+    </ul>
+
+    <h1>9. Roadmap</h1>
+
+    <h2>Phase 1: Network Launch (Q4 2025)</h2>
+    <ul>
+        <li>✅ Genesis block mined</li>
+        <li>✅ Core wallet released (Linux, Windows)</li>
+        <li>⏳ Seed node deployment</li>
+        <li>⏳ Mining pool infrastructure</li>
+        <li>⏳ Block explorer deployment</li>
+    </ul>
+
+    <h2>Phase 2: Infrastructure (Q1 2026)</h2>
+    <ul>
+        <li>Additional seed nodes</li>
+        <li>Web wallet development</li>
+        <li>Mobile wallet (Android/iOS)</li>
+        <li>Mining pool diversity</li>
+        <li>Exchange listings (DEX first)</li>
+    </ul>
+
+    <h2>Phase 3: Ecosystem Growth (Q2-Q4 2026)</h2>
+    <ul>
+        <li>Hardware wallet integration</li>
+        <li>Payment processor development</li>
+        <li>API services and libraries</li>
+        <li>Community governance tools</li>
+        <li>Documentation and education</li>
+    </ul>
+
+    <h2>Phase 4: Maturity (2027+)</h2>
+    <ul>
+        <li>CEX listings (major exchanges)</li>
+        <li>Merchant adoption programs</li>
+        <li>DeFi integration possibilities</li>
+        <li>Layer 2 solutions (if needed)</li>
+        <li>Ongoing security audits</li>
+    </ul>
+
+    <h1>10. Conclusion</h1>
+
+    <p>
+        S256 represents a contrarian bet in the cryptocurrency space. While others optimize for speed and ease of use, S256 optimizes for security, deliberation, and genuine scarcity. By doubling Bitcoin's parameters rather than reducing them, S256 creates a digital asset class optimized for store of value and long-term holding.
+    </p>
+
+    <p>
+        The cryptocurrency market has room for both high-frequency transaction networks and deliberate, secure value storage systems. S256 fills the latter niche, providing an alternative for users who value security and scarcity over transaction speed.
+    </p>
+
+    <div class="quote">
+        "Proof of work is the only mechanism that allows a network to bootstrap itself from nothing while remaining permissionless and decentralized." — Satoshi Nakamoto (paraphrased)
+    </div>
+
+    <p>
+        S256 embraces this truth, implementing proof of work not as a necessary evil to be minimized, but as a core feature that provides genuine security and value. In doing so, S256 offers the cryptocurrency community a choice: faster transactions or proven security. We believe there's value in both.
+    </p>
+
+    <h1>References</h1>
+
+    <ol>
+        <li>Nakamoto, S. (2008). Bitcoin: A Peer-to-Peer Electronic Cash System</li>
+        <li>Bitcoin Core Development Team (2025). Bitcoin Core v30.0</li>
+        <li>Antonopoulos, A. M. (2017). Mastering Bitcoin, 2nd Edition</li>
+        <li>Proof of Work Summit (2022). The Energy Debate in Cryptocurrency</li>
+    </ol>
+
+    <div class="footer">
+        <p><strong>S256 - Digital Platinum</strong></p>
+        <p>Genesis Block: 00000000abe2a78ceb00eca81258804d59fe4ad45345e1750e705139e6da7297</p>
+        <p>Merkle Root: 328fbe73f2b764658b57a0ac538d67e59b5c6bcde2c266a71bbb842f5430d595</p>
+        <p>Genesis Date: November 30, 2025</p>
+        <p style="margin-top: 20px;">Double the Work, Double the Value</p>
+    </div>
+
+    <!-- Matrix Terminal Easter Egg -->
+    <link rel="stylesheet" href="styles.css">
+    <div class="matrix-terminal" id="matrix-terminal">
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-title">S256_SECURE_TERMINAL v1.337 [ENCRYPTED]</div>
+                <button class="terminal-close" id="terminal-close">[X] CLOSE</button>
+            </div>
+            <div class="terminal-content" id="terminal-content">
+                <div class="terminal-line">Initializing secure connection...</div>
+                <div class="terminal-line">Decrypting blockchain parameters...</div>
+                <div class="terminal-line">Access granted.<span class="terminal-cursor"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Terminal Easter Egg
+        let terminalContentLoaded = false;
+
+        async function openMatrixTerminal() {
+            const terminal = document.getElementById('matrix-terminal');
+            if (terminal) {
+                terminal.classList.add('active');
+                if (!terminalContentLoaded) {
+                    await loadCoinSupply();
+                    terminalContentLoaded = true;
+                }
+            }
+        }
+
+        function closeMatrixTerminal() {
+            const terminal = document.getElementById('matrix-terminal');
+            if (terminal) {
+                terminal.classList.remove('active');
+            }
+        }
+
+        async function loadCoinSupply() {
+            const content = document.getElementById('terminal-content');
+            if (!content) return;
+
+            try {
+                content.innerHTML = `
+                    <div class="terminal-line">Initializing secure connection...</div>
+                    <div class="terminal-line">Decrypting blockchain parameters...</div>
+                    <div class="terminal-line">Accessing S256_SUPPLY.dat...</div>
+                    <div class="terminal-line">Loading...</div>
+                `;
+
+                const response = await fetch('/static/COIN_SUPPLY.txt');
+                const text = await response.text();
+
+                setTimeout(() => {
+                    displayTerminalContent(text);
+                }, 1000);
+
+            } catch (error) {
+                content.innerHTML = `
+                    <div class="terminal-line">ERROR: Unable to access COIN_SUPPLY.txt</div>
+                    <div class="terminal-line">Connection failed: ${error.message}</div>
+                    <div class="terminal-line"><span class="terminal-cursor"></span></div>
+                `;
+            }
+        }
+
+        function displayTerminalContent(text) {
+            const content = document.getElementById('terminal-content');
+            if (!content) return;
+
+            const lines = text.split('\n');
+
+            content.innerHTML = `
+                <div class="terminal-line">Connection established...</div>
+                <div class="terminal-line">Decryption complete.</div>
+                <div class="terminal-line">Displaying: COIN_SUPPLY.txt</div>
+                <div class="terminal-line">═══════════════════════════════════════════════════════════════════</div>
+                <br>
+            `;
+
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    const lineDiv = document.createElement('div');
+                    lineDiv.className = 'terminal-line';
+                    lineDiv.textContent = line;
+                    lineDiv.style.animationDelay = '0s';
+                    content.appendChild(lineDiv);
+                    content.scrollTop = content.scrollHeight;
+                }, index * 20);
+            });
+
+            setTimeout(() => {
+                const cursorDiv = document.createElement('div');
+                cursorDiv.className = 'terminal-line';
+                cursorDiv.innerHTML = '<br><span class="terminal-cursor"></span>';
+                content.appendChild(cursorDiv);
+                content.scrollTop = content.scrollHeight;
+            }, lines.length * 20 + 100);
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const piSymbol = document.getElementById('pi-easter-egg');
+            const terminalClose = document.getElementById('terminal-close');
+            const matrixTerminal = document.getElementById('matrix-terminal');
+
+            if (piSymbol) {
+                piSymbol.addEventListener('click', openMatrixTerminal);
+                piSymbol.addEventListener('mouseenter', function() {
+                    this.style.opacity = '1';
+                    this.style.textShadow = '0 0 10px #a300ff, 0 0 20px #a300ff';
+                    this.style.transform = 'scale(1.3)';
+                });
+                piSymbol.addEventListener('mouseleave', function() {
+                    this.style.opacity = '0.35';
+                    this.style.textShadow = 'none';
+                    this.style.transform = 'scale(1)';
+                });
+            }
+
+            if (terminalClose) {
+                terminalClose.addEventListener('click', closeMatrixTerminal);
+            }
+
+            if (matrixTerminal) {
+                matrixTerminal.addEventListener('click', (e) => {
+                    if (e.target === matrixTerminal) {
+                        closeMatrixTerminal();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

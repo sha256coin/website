@@ -1,0 +1,22 @@
+{
+  "name": "s256-website",
+  "version": "1.0.0",
+  "description": "S256 Cryptocurrency Official Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "s256",
+    "cryptocurrency",
+    "blockchain"
+  ],
+  "author": "S256 Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5"
+  }
+}

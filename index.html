@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="S256 - Digital Platinum. Double the Work, Double the Value. A SHA-256 cryptocurrency with 2x Bitcoin parameters." />
+  <title>S256 - Digital Platinum</title>
+  <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <span class="logo">S256</span>
+        <span class="tagline">Digital Platinum</span>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
+        <li><a href="#downloads">Downloads</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">
+            Exchanges
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="https://rabid-rabbit.org/account/trade/S256-USDT" target="_blank">
+                <img src="img/RR_Logo.svg" alt="Rabid Rabbit" class="exchange-logo">
+                Rabid Rabbit
+              </a>
+            </li>
+            <li>
+              <a href="https://klingex.io/trade/S256-USDT" target="_blank">
+                <img src="img/klingex.svg" alt="KlingEx" class="exchange-logo">
+                KlingEx
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">
+            Mining Pools
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu">
+            <!--
+            <li>
+              <a href="https://sha256-mining.go.ro:50300/" target="_blank">
+                <img src="img/sha256-mining-logo_small.png" alt="SHA256 Mining Pool" class="exchange-logo">
+                sha256-mining.go.ro
+              </a>
+            </li>
+            -->
+            <li>
+              <a href="https://pool.ris-universe.eu/" target="_blank">
+                <img src="img/ris-universe-logo.jpeg" alt="RISuniverse Mining Pool" class="exchange-logo">
+                RIS-universe.eu
+              </a>
+            </li>
+            <li>
+              <a href="https://kriptokyng.com/pools/s256" target="_blank">
+                <img src="img/logo-mini-kryptoking.png" alt="KryptoKing Mining Pool" class="exchange-logo">
+                KryptoKing.com
+              </a>
+            </li>
+            <li>
+              <a href="https://altcoinspool.cc/" target="_blank">
+                <img src="img/altcoin-pool.png" alt="Altcoin Mining Pool" class="exchange-logo">
+                altcoinspool.cc
+              </a>
+            </li>
+            <li>
+              <a href="https://www.solopool.site/" target="_blank">
+                <img src="img/solo-mining-pool.jpeg" alt="Solo Mining Pool" class="exchange-logo">
+                Solopool.site
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://explorer.sha256coin.eu" class="btn-explorer">Explorer</a>
+        </li>
+        <li>
+          <button id="price-ticker-toggle" class="price-ticker-toggle-nav" aria-label="Toggle price ticker">
+            <span class="toggle-icon">💰</span>
+          </button>
+        </li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </li>
+        <li>
+          <span class="pi-symbol" id="pi-easter-egg" title="π">π</span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-gradient"></div>
+    <div class="container hero-content">
+      <h1 class="hero-title">
+        <span class="gradient-text">S256</span>
+        Digital Platinum
+      </h1>
+      <p class="hero-subtitle">Double the Work, Double the Value</p>
+      <p class="hero-description">
+        The contrarian approach to cryptocurrency: harder to mine, longer
+        block times, true scarcity through proof of real work.
+      </p>
+      <div class="hero-buttons">
+        <a href="#downloads" class="btn btn-primary">Download Wallet</a>
+        <a href="https://github.com/sha256coin/android-wallet/releases/tag/v1.0"
+          class="btn btn-primary">Android-Wallet</a>
+        <a href="https://sha256coin.eu/web-wallet/" class="btn btn-primary">Web-Wallet</a>
+        <a href="https://explorer.sha256coin.eu" class="btn btn-secondary">View Explorer</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stats-grid">
+          <div class="stat">
+            <div class="stat-label">Block Time</div>
+            <div class="stat-value">20 min</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Total Supply</div>
+            <div class="stat-value">84M</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Block Reward</div>
+            <div class="stat-value">100</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Algorithm</div>
+            <div class="stat-value">SHA-256</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Price Ticker -->
+  <div class="price-ticker" id="price-ticker">
+    <div class="price-ticker-content" id="price-ticker-content">
+      <div class="price-ticker-header">
+        <div class="price-ticker-tabs">
+          <button class="exchange-tab active" data-exchange="klingex">
+            <img src="img/klingex.svg" alt="KlingEx" class="exchange-logo-small">
+            KlingEx
+          </button>
+          <button class="exchange-tab" data-exchange="rabidrabbit">
+            <img src="img/RR_Logo.svg" alt="Rabid Rabbit" class="exchange-logo-small">
+            Rabid Rabbit
+          </button>
+        </div>
+      </div>
+
+      <!-- KlingEx Data -->
+      <div class="exchange-data" id="klingex-data">
+        <div class="price-ticker-main">
+          <div class="price-ticker-pair">S256/USDT</div>
+          <div class="price-ticker-price" id="klingex-price">$0.000024</div>
+          <div class="price-ticker-change neutral" id="klingex-change">
+            <span class="change-value">+0.00%</span>
+          </div>
+        </div>
+        <div class="price-ticker-details">
+          <div class="price-detail">
+            <span class="detail-label">24h High</span>
+            <span class="detail-value" id="klingex-high">$0.00</span>
+          </div>
+          <div class="price-detail">
+            <span class="detail-label">24h Low</span>
+            <span class="detail-value" id="klingex-low">$0.00</span>
+          </div>
+          <div class="price-detail">
+            <span class="detail-label">Volume (S256)</span>
+            <span class="detail-value" id="klingex-volume">0 S256</span>
+          </div>
+          <div class="price-detail">
+            <span class="detail-label">Volume (USDT)</span>
+            <span class="detail-value" id="klingex-volume-usdt">$0.00</span>
+          </div>
+        </div>
+        <div class="price-ticker-footer">
+          <a href="https://klingex.io/trade/S256-USDT" target="_blank" class="ticker-trade-btn">
+            Trade on KlingEx →
+          </a>
+        </div>
+        <div class="price-ticker-last-update" id="klingex-last-update">
+          Updated: --
+        </div>
+      </div>
+
+      <!-- Rabid Rabbit Data -->
+      <div class="exchange-data" id="rabidrabbit-data" style="display: none;">
+        <div class="price-ticker-main">
+          <div class="price-ticker-pair">S256/USDT</div>
+          <div class="price-ticker-price" id="rabidrabbit-price">$0.000024</div>
+          <div class="price-ticker-change neutral" id="rabidrabbit-change">
+            <span class="change-value">+0.00%</span>
+          </div>
+        </div>
+        <div class="price-ticker-details">
+          <div class="price-detail">
+            <span class="detail-label">24h High</span>
+            <span class="detail-value" id="rabidrabbit-high">N/A</span>
+          </div>
+          <div class="price-detail">
+            <span class="detail-label">24h Low</span>
+            <span class="detail-value" id="rabidrabbit-low">N/A</span>
+          </div>
+          <div class="price-detail">
+            <span class="detail-label">Volume (S256)</span>
+            <span class="detail-value" id="rabidrabbit-volume">0 S256</span>
+          </div>
+          <div class="price-detail">
+            <span class="detail-label">Volume (USDT)</span>
+            <span class="detail-value" id="rabidrabbit-volume-usdt">$0.00</span>
+          </div>
+        </div>
+        <div class="price-ticker-footer">
+          <a href="https://rabid-rabbit.org/account/trade/S256-USDT" target="_blank" class="ticker-trade-btn">
+            Trade on Rabid Rabbit →
+          </a>
+        </div>
+        <div class="price-ticker-last-update" id="rabidrabbit-last-update">
+          Updated: --
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Philosophy Section -->
+  <section class="philosophy">
+    <div class="container">
+      <h2 class="section-title">The Philosophy</h2>
+      <div class="philosophy-grid">
+        <div class="philosophy-card">
+          <div class="icon">⛏️</div>
+          <h3>Harder, Not Easier</h3>
+          <p>
+            While others race to make mining easier, S256 takes the contrarian
+            path. True value comes from genuine work and scarcity.
+          </p>
+        </div>
+        <div class="philosophy-card">
+          <div class="icon">⏱️</div>
+          <h3>Time for Deliberation</h3>
+          <p>
+            20-minute blocks encourage thoughtful transactions over rushed
+            decisions. Quality over speed.
+          </p>
+        </div>
+        <div class="philosophy-card">
+          <div class="icon">💎</div>
+          <h3>Digital Platinum</h3>
+          <p>
+            Like platinum to gold, S256 is rarer and requires more effort.
+            Excellence takes time and energy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title">
+        Everything <span class="gradient-text">2x Bitcoin</span>
+      </h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🕐</div>
+          <h3>20 Minute Blocks</h3>
+          <p>
+            Double Bitcoin's 10 minutes. More time for network consensus and
+            reduced orphan rates.
+          </p>
+          <div class="feature-comparison">
+            <span class="btc">BTC: 10 min</span>
+            <span class="s256">S256: 20 min</span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>100 S256 Reward</h3>
+          <p>
+            Double Bitcoin's 50 BTC initial reward. More incentive for
+            securing the network.
+          </p>
+          <div class="feature-comparison">
+            <span class="btc">BTC: 50</span>
+            <span class="s256">S256: 100</span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>84 Million Supply</h3>
+          <p>
+            Four times Bitcoin's 21 million cap. True scarcity with proportional
+            distribution.
+          </p>
+          <div class="feature-comparison">
+            <span class="btc">BTC: 21M</span>
+            <span class="s256">S256: 84M</span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⏳</div>
+          <h3>16 Year Halving</h3>
+          <p>
+            Four times Bitcoin's 4-year cycle. Longer economic epochs for
+            stability.
+          </p>
+          <div class="feature-comparison">
+            <span class="btc">BTC: 4 years</span>
+            <span class="s256">S256: 16 years</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specifications Section -->
+  <section id="specs" class="specifications">
+    <div class="container">
+      <h2 class="section-title">Technical Specifications</h2>
+      <div class="specs-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Bitcoin</th>
+              <th class="highlight">S256</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Block Time</td>
+              <td>10 minutes</td>
+              <td class="highlight">20 minutes</td>
+            </tr>
+            <tr>
+              <td>Block Reward (Initial)</td>
+              <td>50 BTC</td>
+              <td class="highlight">100 S256</td>
+            </tr>
+            <tr>
+              <td>Halving Interval</td>
+              <td>210,000 blocks</td>
+              <td class="highlight">420,000 blocks</td>
+            </tr>
+            <tr>
+              <td>Total Supply</td>
+              <td>21 million</td>
+              <td class="highlight">84 million</td>
+            </tr>
+            <tr>
+              <td>Time per Halving</td>
+              <td>~4 years</td>
+              <td class="highlight">~16 years</td>
+            </tr>
+            <tr>
+              <td>Coinbase Maturity</td>
+              <td>100 confirmations</td>
+              <td class="highlight">200 confirmations</td>
+            </tr>
+            <tr>
+              <td>Algorithm</td>
+              <td>SHA-256</td>
+              <td class="highlight">SHA-256</td>
+            </tr>
+            <tr>
+              <td>Port</td>
+              <td>8333</td>
+              <td class="highlight">25256</td>
+            </tr>
+            <tr>
+              <td>Address Prefix</td>
+              <td>1 or 3</td>
+              <td class="highlight">S or 8</td>
+            </tr>
+            <tr>
+              <td>Bech32 HRP</td>
+              <td>bc</td>
+              <td class="highlight">s2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads Section -->
+  <section id="downloads" class="downloads">
+    <div class="container">
+      <h2 class="section-title">Download Wallet</h2>
+      <p class="section-subtitle">Available for Android, Linux and Windows</p>
+      <div class="download-cards">
+        <div class="download-card featured">
+          <div class="download-icon">📱</div>
+          <h3>Android</h3>
+          <p>S256 Wallet v1.0</p>
+          <p class="file-size">~74 MB</p>
+          <a href="https://github.com/sha256coin/android-wallet/releases/download/v1.0/s256-wallet-1.0.apk"
+            class="btn btn-download">Download .apk</a>
+          <div class="download-includes">
+            <p>Features:</p>
+            <ul>
+              <li>Send & Receive S256</li>
+              <li>QR Code Scanner</li>
+              <li>Biometric Security</li>
+              <li>Transaction History</li>
+            </ul>
+          </div>
+        </div>
+        <div class="download-card">
+          <div class="download-icon">🐧</div>
+          <h3>Linux</h3>
+          <p>SHA256Coin v1.0.5</p>
+          <p class="file-size">~22 MB</p>
+          <a href="downloads/SHA256Coin-v1.0.5-linux64.tar.gz" class="btn btn-download">Download .tar.gz</a>
+          <div class="download-includes">
+            <p>Includes:</p>
+            <ul>
+              <li>sha256coind (daemon)</li>
+              <li>sha256coin-qt (GUI)</li>
+              <li>sha256coin-cli</li>
+              <li>Utilities</li>
+            </ul>
+          </div>
+        </div>
+        <div class="download-card featured">
+          <div class="download-icon">🪟</div>
+          <h3>Windows</h3>
+          <p>SHA256Coin v1.0.5</p>
+          <p class="file-size">~34 MB</p>
+          <a href="downloads/SHA256Coin-v1.0.5-win64.zip" class="btn btn-download">Download .zip</a>
+          <div class="download-includes">
+            <p>Includes:</p>
+            <ul>
+              <li>sha256coind.exe</li>
+              <li>sha256coin-qt.exe</li>
+              <li>sha256coin-cli.exe</li>
+              <li>Utilities</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Getting Started Section -->
+  <section class="getting-started">
+    <div class="container">
+      <h2 class="section-title">Getting Started</h2>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Download Wallet</h3>
+          <p>Choose your platform and download the S256 wallet</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Install & Sync</h3>
+          <p>Install the wallet and wait for blockchain synchronization</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Get S256</h3>
+          <p>Mine S256 or receive from another wallet</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Start Using</h3>
+          <p>Send and receive S256 with your unique S-address</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3><span class="gradient-text">S256</span></h3>
+          <p class="footer-tagline">Digital Platinum</p>
+          <p class="footer-description">Double the Work, Double the Value. A revolutionary approach to cryptocurrency
+            built on proven SHA-256 technology.</p>
+          <div class="footer-contact">
+            <h4>Contact</h4>
+            <a href="mailto:contact@sha256coin.eu" class="email-link">
+              <span class="email-icon">📧</span>
+              contact@sha256coin.eu
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links-wrapper">
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
+              <li><a href="https://explorer.sha256coin.eu">Block Explorer</a></li>
+              <li><a href="#downloads">Downloads</a></li>
+              <li><a href="https://github.com/sha256coin">GitHub</a></li>
+              <li><a href="https://github.com/bitcoin/bitcoin">Documentation</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>Community</h4>
+            <ul class="social-links">
+              <li>
+                <a href="https://discord.gg/dtn58HrC94" target="_blank" rel="noopener">
+                  <span class="social-icon">💬</span> Discord
+                </a>
+              </li>
+              <li>
+                <a href="https://t.me/s256coin" target="_blank" rel="noopener">
+                  <span class="social-icon">✈️</span> Telegram
+                </a>
+              </li>
+              <li>
+                <a href="https://bitcointalk.org/index.php?topic=5567429.msg66131557#msg66131557" target="_blank"
+                  rel="noopener">
+                  <span class="social-icon">₿</span> Bitcointalk
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noopener">
+                  <span class="social-icon">𝕏</span> Twitter
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noopener">
+                  <span class="social-icon">🔴</span> Reddit
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>Network Info</h4>
+            <ul class="network-specs">
+              <li><span class="spec-label">Port:</span> <span class="spec-value">25256</span></li>
+              <li><span class="spec-label">RPC:</span> <span class="spec-value">25332</span></li>
+              <li><span class="spec-label">Algorithm:</span> <span class="spec-value">SHA-256</span></li>
+              <li><span class="spec-label">Genesis:</span> <span class="spec-value">Nov 30, 2025</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <p>&copy;
+            <script>document.write(new Date().getFullYear())</script> S256. Open source cryptocurrency project.
+          </p>
+          <div class="footer-bottom-links">
+            <a href="#features">Features</a>
+            <span class="separator">•</span>
+            <a href="#specs">Specs</a>
+            <span class="separator">•</span>
+            <a href="#downloads">Downloads</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Matrix Terminal Easter Egg -->
+  <div class="matrix-terminal" id="matrix-terminal">
+    <div class="terminal-container">
+      <div class="terminal-header">
+        <div class="terminal-title">S256_SECURE_TERMINAL v1.337 [ENCRYPTED]</div>
+        <button class="terminal-close" id="terminal-close">[X] CLOSE</button>
+      </div>
+      <div class="terminal-content" id="terminal-content">
+        <div class="terminal-line">Initializing secure connection...</div>
+        <div class="terminal-line">Decrypting blockchain parameters...</div>
+        <div class="terminal-line">Access granted.<span class="terminal-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
