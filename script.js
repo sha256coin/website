@@ -1,7 +1,21 @@
 // S256 Website JavaScript
-// Modern, smooth interactions
+// Modern, smooth interactions with security hardening
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    // Security: Sanitize numeric values from API
+    function sanitizeNumber(value, defaultValue = 0) {
+        const num = parseFloat(value);
+        return isNaN(num) || !isFinite(num) ? defaultValue : num;
+    }
+
+    // Security: Sanitize string for display (escape HTML)
+    function sanitizeString(str) {
+        if (typeof str !== 'string') return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.textContent;
+    }
 
     // Dropdown Menu Functionality - Handle all dropdowns
     const dropdowns = document.querySelectorAll('.dropdown');
@@ -233,17 +247,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Copy functionality for addresses (if needed)
-    function copyToClipboard(text) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
+    // Copy functionality for addresses (using modern Clipboard API)
+    async function copyToClipboard(text) {
+        try {
+            // Modern async Clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(text);
+                showNotification('Copied to clipboard!');
+                return;
+            }
 
-        // Show feedback
-        showNotification('Copied to clipboard!');
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showNotification('Copied to clipboard!');
+        } catch (err) {
+            showNotification('Failed to copy');
+            console.error('Copy failed:', err);
+        }
     }
 
     // Notification system
@@ -251,18 +278,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const notification = document.createElement('div');
         notification.className = 'notification';
         notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #a300ff 0%, #00d4ff 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            z-index: 10000;
-            animation: slideInRight 0.3s ease;
-        `;
+        // Use individual style properties instead of cssText for better security
+        notification.style.position = 'fixed';
+        notification.style.bottom = '20px';
+        notification.style.right = '20px';
+        notification.style.background = 'linear-gradient(135deg, #a300ff 0%, #00d4ff 100%)';
+        notification.style.color = 'white';
+        notification.style.padding = '1rem 2rem';
+        notification.style.borderRadius = '8px';
+        notification.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+        notification.style.zIndex = '10000';
+        notification.style.animation = 'slideInRight 0.3s ease';
 
         document.body.appendChild(notification);
 
@@ -321,17 +347,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Helper to safely create terminal lines
+    function createTerminalLine(text) {
+        const div = document.createElement('div');
+        div.className = 'terminal-line';
+        div.textContent = text;
+        return div;
+    }
+
     async function loadCoinSupply() {
         const content = document.getElementById('terminal-content');
         if (!content) return;
 
         try {
-            content.innerHTML = `
-                <div class="terminal-line">Initializing secure connection...</div>
-                <div class="terminal-line">Decrypting blockchain parameters...</div>
-                <div class="terminal-line">Accessing S256_SUPPLY.dat...</div>
-                <div class="terminal-line">Loading...</div>
-            `;
+            // Clear content and add loading lines safely
+            content.textContent = '';
+            content.appendChild(createTerminalLine('Initializing secure connection...'));
+            content.appendChild(createTerminalLine('Decrypting blockchain parameters...'));
+            content.appendChild(createTerminalLine('Accessing S256_SUPPLY.dat...'));
+            content.appendChild(createTerminalLine('Loading...'));
 
             const response = await fetch('/static/COIN_SUPPLY.txt');
             const text = await response.text();
@@ -341,11 +375,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
 
         } catch (error) {
-            content.innerHTML = `
-                <div class="terminal-line">ERROR: Unable to access COIN_SUPPLY.txt</div>
-                <div class="terminal-line">Connection failed: ${error.message}</div>
-                <div class="terminal-line"><span class="terminal-cursor"></span></div>
-            `;
+            content.textContent = '';
+            content.appendChild(createTerminalLine('ERROR: Unable to access COIN_SUPPLY.txt'));
+            content.appendChild(createTerminalLine('Connection failed'));
+            const cursorLine = createTerminalLine('');
+            const cursor = document.createElement('span');
+            cursor.className = 'terminal-cursor';
+            cursorLine.appendChild(cursor);
+            content.appendChild(cursorLine);
         }
     }
 
@@ -355,19 +392,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const lines = text.split('\n');
 
-        content.innerHTML = `
-            <div class="terminal-line">Connection established...</div>
-            <div class="terminal-line">Decryption complete.</div>
-            <div class="terminal-line">Displaying: COIN_SUPPLY.txt</div>
-            <div class="terminal-line">═══════════════════════════════════════════════════════════════════</div>
-            <br>
-        `;
+        // Clear and add header lines safely
+        content.textContent = '';
+        content.appendChild(createTerminalLine('Connection established...'));
+        content.appendChild(createTerminalLine('Decryption complete.'));
+        content.appendChild(createTerminalLine('Displaying: COIN_SUPPLY.txt'));
+        content.appendChild(createTerminalLine('═══════════════════════════════════════════════════════════════════'));
+        content.appendChild(document.createElement('br'));
 
         lines.forEach((line, index) => {
             setTimeout(() => {
-                const lineDiv = document.createElement('div');
-                lineDiv.className = 'terminal-line';
-                lineDiv.textContent = line;
+                const lineDiv = createTerminalLine(line);
                 lineDiv.style.animationDelay = '0s';
                 content.appendChild(lineDiv);
                 content.scrollTop = content.scrollHeight;
@@ -377,7 +412,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             const cursorDiv = document.createElement('div');
             cursorDiv.className = 'terminal-line';
-            cursorDiv.innerHTML = '<br><span class="terminal-cursor"></span>';
+            cursorDiv.appendChild(document.createElement('br'));
+            const cursor = document.createElement('span');
+            cursor.className = 'terminal-cursor';
+            cursorDiv.appendChild(cursor);
             content.appendChild(cursorDiv);
             content.scrollTop = content.scrollHeight;
         }, lines.length * 20 + 100);
@@ -506,44 +544,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update KlingEx UI
     function updateKlingExUI(ticker) {
-        const price = parseFloat(ticker.last_price);
-        const high = parseFloat(ticker.high);
-        const low = parseFloat(ticker.low);
+        if (!ticker || typeof ticker !== 'object') return;
 
-        // Update price
-        document.getElementById('klingex-price').textContent = `$${price.toFixed(6)}`;
+        const price = sanitizeNumber(ticker.last_price);
+        const high = sanitizeNumber(ticker.high);
+        const low = sanitizeNumber(ticker.low);
+
+        // Update price (using textContent is safe)
+        const priceEl = document.getElementById('klingex-price');
+        if (priceEl) priceEl.textContent = `$${price.toFixed(6)}`;
 
         // Calculate 24h change
         const changeElement = document.getElementById('klingex-change');
-        if (high > 0 && low > 0) {
+        if (changeElement && high > 0 && low > 0) {
             const change = ((price - low) / low * 100);
             const changeValueEl = changeElement.querySelector('.change-value');
 
-            if (change > 0) {
-                changeValueEl.textContent = `+${change.toFixed(2)}%`;
-                changeElement.className = 'price-ticker-change positive';
-            } else if (change < 0) {
-                changeValueEl.textContent = `${change.toFixed(2)}%`;
-                changeElement.className = 'price-ticker-change negative';
-            } else {
-                changeValueEl.textContent = `${change.toFixed(2)}%`;
-                changeElement.className = 'price-ticker-change neutral';
+            if (changeValueEl) {
+                if (change > 0) {
+                    changeValueEl.textContent = `+${change.toFixed(2)}%`;
+                    changeElement.className = 'price-ticker-change positive';
+                } else if (change < 0) {
+                    changeValueEl.textContent = `${change.toFixed(2)}%`;
+                    changeElement.className = 'price-ticker-change negative';
+                } else {
+                    changeValueEl.textContent = `${change.toFixed(2)}%`;
+                    changeElement.className = 'price-ticker-change neutral';
+                }
             }
         }
 
         // Update 24h high/low
-        document.getElementById('klingex-high').textContent =
-            high > 0 ? `$${high.toFixed(6)}` : '$0.00';
-        document.getElementById('klingex-low').textContent =
-            low > 0 ? `$${low.toFixed(6)}` : '$0.00';
+        const highEl = document.getElementById('klingex-high');
+        const lowEl = document.getElementById('klingex-low');
+        if (highEl) highEl.textContent = high > 0 ? `$${high.toFixed(6)}` : '$0.00';
+        if (lowEl) lowEl.textContent = low > 0 ? `$${low.toFixed(6)}` : '$0.00';
 
         // Update S256 volume
-        const volume = parseFloat(ticker.base_volume);
-        document.getElementById('klingex-volume').textContent = formatVolume(volume);
+        const volume = sanitizeNumber(ticker.base_volume);
+        const volumeEl = document.getElementById('klingex-volume');
+        if (volumeEl) volumeEl.textContent = formatVolume(volume);
 
         // Update USDT volume
-        const volumeUsdt = parseFloat(ticker.target_volume);
-        document.getElementById('klingex-volume-usdt').textContent = formatVolumeUsdt(volumeUsdt);
+        const volumeUsdt = sanitizeNumber(ticker.target_volume);
+        const volumeUsdtEl = document.getElementById('klingex-volume-usdt');
+        if (volumeUsdtEl) volumeUsdtEl.textContent = formatVolumeUsdt(volumeUsdt);
 
         // Update last update time
         updateLastUpdateTime('klingex');
@@ -551,27 +596,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update Rabid Rabbit UI
     function updateRabidRabbitUI(data) {
-        const price = parseFloat(data.last_price);
-        const volume = parseFloat(data.base_volume);
-        const volumeUsdt = parseFloat(data.quote_volume);
+        if (!data || typeof data !== 'object') return;
+
+        const price = sanitizeNumber(data.last_price);
+        const volume = sanitizeNumber(data.base_volume);
+        const volumeUsdt = sanitizeNumber(data.quote_volume);
 
         // Update price
-        document.getElementById('rabidrabbit-price').textContent = `$${price.toFixed(6)}`;
+        const priceEl = document.getElementById('rabidrabbit-price');
+        if (priceEl) priceEl.textContent = `$${price.toFixed(6)}`;
 
         // Update change (Rabid Rabbit doesn't provide high/low, so we show neutral)
         const changeElement = document.getElementById('rabidrabbit-change');
-        changeElement.className = 'price-ticker-change neutral';
-        changeElement.querySelector('.change-value').textContent = '--';
+        if (changeElement) {
+            changeElement.className = 'price-ticker-change neutral';
+            const changeValueEl = changeElement.querySelector('.change-value');
+            if (changeValueEl) changeValueEl.textContent = '--';
+        }
 
         // High/Low not available for Rabid Rabbit
-        document.getElementById('rabidrabbit-high').textContent = 'N/A';
-        document.getElementById('rabidrabbit-low').textContent = 'N/A';
+        const highEl = document.getElementById('rabidrabbit-high');
+        const lowEl = document.getElementById('rabidrabbit-low');
+        if (highEl) highEl.textContent = 'N/A';
+        if (lowEl) lowEl.textContent = 'N/A';
 
         // Update S256 volume
-        document.getElementById('rabidrabbit-volume').textContent = formatVolume(volume);
+        const volumeEl = document.getElementById('rabidrabbit-volume');
+        if (volumeEl) volumeEl.textContent = formatVolume(volume);
 
         // Update USDT volume
-        document.getElementById('rabidrabbit-volume-usdt').textContent = formatVolumeUsdt(volumeUsdt);
+        const volumeUsdtEl = document.getElementById('rabidrabbit-volume-usdt');
+        if (volumeUsdtEl) volumeUsdtEl.textContent = formatVolumeUsdt(volumeUsdt);
 
         // Update last update time
         updateLastUpdateTime('rabidrabbit');

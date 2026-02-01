@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="S256 Brand Assets - Download official logos, icons, and brand materials for S256 Digital Platinum." />
+  <title>Resources - S256 Digital Platinum</title>
+  <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .resources-hero {
+      padding: 140px 20px 60px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(163, 0, 255, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .resource-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 25px rgba(192, 192, 192, 0.4);
+    }
+
+    .resource-preview {
+      background: var(--light);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+    }
+
+    [data-theme="dark"] .resource-preview {
+      background: #1a1f2e;
+    }
+
+    .resource-preview img {
+      max-width: 100%;
+      max-height: 120px;
+      object-fit: contain;
+    }
+
+    .resource-info {
+      padding: 1.5rem;
+    }
+
+    .resource-info h3 {
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .resource-info p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .resource-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .resource-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .btn-download-asset {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--gradient);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-download-asset:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .usage-guidelines {
+      max-width: 800px;
+      margin: 4rem auto 0;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .usage-guidelines h3 {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .usage-guidelines ul {
+      color: var(--text-light);
+      padding-left: 1.5rem;
+    }
+
+    .usage-guidelines li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <a href="index.html" style="text-decoration: none;">
+          <span class="logo">S256</span>
+        </a>
+        <span class="tagline">Digital Platinum</span>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#specs">Specs</a></li>
+        <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
+        <li><a href="index.html#downloads">Downloads</a></li>
+        <li><a href="resources.html" class="active">Resources</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">
+            Exchanges
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="https://rabid-rabbit.org/account/trade/S256-USDT" target="_blank">
+                <img src="img/RR_Logo.svg" alt="Rabid Rabbit" class="exchange-logo">
+                Rabid Rabbit
+              </a>
+            </li>
+            <li>
+              <a href="https://klingex.io/trade/S256-USDT" target="_blank">
+                <img src="img/klingex.svg" alt="KlingEx" class="exchange-logo">
+                KlingEx
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">
+            Mining Pools
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="https://ashampool.org/" target="_blank">
+                <img src="img/asham-pool.png" alt="Asham Pool" class="exchange-logo">
+                Asham-pool.org
+              </a>
+            </li>
+            <li>
+              <a href="https://kriptokyng.com/pools/s256" target="_blank">
+                <img src="img/logo-mini-kryptoking.png" alt="KryptoKing Mining Pool" class="exchange-logo">
+                KryptoKing.com
+              </a>
+            </li>
+            <li>
+              <a href="https://www.solopool.site/" target="_blank">
+                <img src="img/solo-mining-pool.jpeg" alt="Solo Mining Pool" class="exchange-logo">
+                Solo-pool.site
+              </a>
+            </li>
+            <li>
+              <a href="https://altcoinspool.cc/" target="_blank">
+                <img src="img/altcoin-pool.png" alt="Altcoins Pool" class="exchange-logo">
+                Altcoins-pool.cc
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://explorer.sha256coin.eu" class="btn-explorer">Explorer</a>
+        </li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="resources-hero">
+    <div class="container">
+      <h1 class="section-title"><span class="gradient-text">Resources</span></h1>
+      <p class="section-subtitle">Download official S256 brand assets for your projects</p>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section class="downloads">
+    <div class="container">
+      <div class="resources-grid">
+
+        <div class="resource-card">
+          <div class="resource-preview">
+            <img src="public/s256_logo.png" alt="S256 Logo">
+          </div>
+          <div class="resource-info">
+            <h3>S256 Logo</h3>
+            <p>Primary logo mark for S256</p>
+            <div class="resource-meta">
+              <span>PNG</span>
+            </div>
+            <a href="public/s256_logo.png" download class="btn-download-asset">Download</a>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-preview">
+            <img src="public/s256_brand.png" alt="S256 Brand">
+          </div>
+          <div class="resource-info">
+            <h3>S256 Brand</h3>
+            <p>Full brand mark with text</p>
+            <div class="resource-meta">
+              <span>PNG</span>
+            </div>
+            <a href="public/s256_brand.png" download class="btn-download-asset">Download</a>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-preview">
+            <img src="public/sha256coin_logo.png" alt="SHA256Coin Logo PNG">
+          </div>
+          <div class="resource-info">
+            <h3>SHA256Coin Logo</h3>
+            <p>Full name logo in PNG format</p>
+            <div class="resource-meta">
+              <span>PNG</span>
+            </div>
+            <a href="public/sha256coin_logo.png" download class="btn-download-asset">Download</a>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-preview">
+            <img src="public/sha256coin_logo.svg" alt="SHA256Coin Logo SVG">
+          </div>
+          <div class="resource-info">
+            <h3>SHA256Coin Logo (Vector)</h3>
+            <p>Scalable vector format for print</p>
+            <div class="resource-meta">
+              <span>SVG</span>
+            </div>
+            <a href="public/sha256coin_logo.svg" download class="btn-download-asset">Download</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="usage-guidelines">
+        <h3>Usage Guidelines</h3>
+        <ul>
+          <li>Use the official logos without modification</li>
+          <li>Maintain adequate spacing around the logo</li>
+          <li>Do not stretch or distort the logos</li>
+          <li>Use SVG format for print materials when available</li>
+          <li>For questions, contact <a href="mailto:contact@sha256coin.eu">contact@sha256coin.eu</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3><span class="gradient-text">S256</span></h3>
+          <p class="footer-tagline">Digital Platinum</p>
+          <p class="footer-description">Double the Work, Double the Value. A revolutionary approach to cryptocurrency
+            built on proven SHA-256 technology.</p>
+          <div class="footer-contact">
+            <h4>Contact</h4>
+            <a href="mailto:contact@sha256coin.eu" class="email-link">
+              <span class="email-icon">📧</span>
+              contact@sha256coin.eu
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links-wrapper">
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
+              <li><a href="https://explorer.sha256coin.eu">Block Explorer</a></li>
+              <li><a href="index.html#downloads">Downloads</a></li>
+              <li><a href="https://github.com/sha256coin">GitHub</a></li>
+              <li><a href="https://github.com/bitcoin/bitcoin">Documentation</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>Community</h4>
+            <ul class="social-links">
+              <li>
+                <a href="https://discord.gg/dtn58HrC94" target="_blank" rel="noopener">
+                  <span class="social-icon">💬</span> Discord
+                </a>
+              </li>
+              <li>
+                <a href="https://t.me/s256coin" target="_blank" rel="noopener">
+                  <span class="social-icon">✈️</span> Telegram
+                </a>
+              </li>
+              <li>
+                <a href="https://bitcointalk.org/index.php?topic=5567429.msg66131557#msg66131557" target="_blank"
+                  rel="noopener">
+                  <span class="social-icon">₿</span> Bitcointalk
+                </a>
+              </li>
+              <li>
+                <a href="https://x.com/s256coin" target="_blank" rel="noopener">
+                  <span class="social-icon">𝕏</span> Twitter
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noopener">
+                  <span class="social-icon">🔴</span> Reddit
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>Network Info</h4>
+            <ul class="network-specs">
+              <li><span class="spec-label">Port:</span> <span class="spec-value">25256</span></li>
+              <li><span class="spec-label">RPC:</span> <span class="spec-value">25332</span></li>
+              <li><span class="spec-label">Algorithm:</span> <span class="spec-value">SHA-256</span></li>
+              <li><span class="spec-label">Genesis:</span> <span class="spec-value">Nov 30, 2025</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <p>&copy;
+            <script>document.write(new Date().getFullYear())</script> S256. Open source cryptocurrency project.
+          </p>
+          <div class="footer-bottom-links">
+            <a href="index.html#features">Features</a>
+            <span class="separator">•</span>
+            <a href="index.html#specs">Specs</a>
+            <span class="separator">•</span>
+            <a href="index.html#downloads">Downloads</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('.theme-icon');
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Dropdown toggle for mobile
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          toggle.closest('.dropdown').classList.toggle('active');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
