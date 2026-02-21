@@ -677,6 +677,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update every 30 seconds
     setInterval(fetchAllPriceData, 30000);
 
+    // Set current year in footer
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
     console.log('%c S256 - Digital Platinum ', 'background: linear-gradient(135deg, #a300ff 0%, #00d4ff 100%); color: white; font-size: 20px; padding: 10px;');
     console.log('%c Double the Work, Double the Value ', 'color: #a300ff; font-size: 14px;');
 });

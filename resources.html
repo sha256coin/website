@@ -146,7 +146,6 @@
         <li><a href="index.html#specs">Specs</a></li>
         <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
         <li><a href="index.html#downloads">Downloads</a></li>
-        <li><a href="resources.html" class="active">Resources</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle">
             Exchanges
@@ -322,6 +321,7 @@
               <li><a href="index.html#downloads">Downloads</a></li>
               <li><a href="https://github.com/sha256coin">GitHub</a></li>
               <li><a href="https://github.com/bitcoin/bitcoin">Documentation</a></li>
+              <li><a href="resources.html">Media Kit</a></li>
             </ul>
           </div>
 
@@ -371,9 +371,7 @@
 
       <div class="footer-bottom">
         <div class="footer-bottom-content">
-          <p>&copy;
-            <script>document.write(new Date().getFullYear())</script> S256. Open source cryptocurrency project.
-          </p>
+          <p>&copy; <span id="current-year">2025</span> S256. Open source cryptocurrency project.</p>
           <div class="footer-bottom-links">
             <a href="index.html#features">Features</a>
             <span class="separator">•</span>
@@ -423,6 +421,10 @@
         }
       });
     });
+
+    // Set current year in footer
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   </script>
 </body>
 
