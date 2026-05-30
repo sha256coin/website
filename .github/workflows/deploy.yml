@@ -54,4 +54,4 @@ jobs:
             # Install any new dependencies added to package.json
             npm install --production
             # Reload website
-            pm2 startOrReload s256-website --update-env
+            pm2 reload s256-website --update-env
