@@ -24,10 +24,10 @@ if (!RPC_CONFIG.user || !RPC_CONFIG.password) {
 }
 
 // Trust proxy - fixes rate limiter when behind nginx/cloudflare
-app.set('trust proxy', true);
+app.set('trust proxy', 1);
 
 // JSON body parser for RPC requests with size limit
-app.use(express.json({ limit: '100kb' }));
+app.use(express.json({ limit: '50kb' }));
 
 // Security Middleware - Helmet with enhanced configuration
 app.use(helmet({
@@ -42,7 +42,7 @@ app.use(helmet({
       fontSrc: ["'self'"],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
-      frameSrc: ["'none'"],
+      frameSrc: ["'self'", "https://www.youtube.com", "https://*.youtube.com"],
       baseUri: ["'self'"],
       formAction: ["'self'"],
       frameAncestors: ["'none'"],
@@ -83,11 +83,10 @@ app.use((req, res, next) => {
 // Rate Limiting - General
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 200, // Limit each IP to 200 requests per windowMs
+  max: 1200, // Limit each IP to 1200 requests per windowMs
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
-  validate: { trustProxy: false },
 });
 
 // Rate Limiting - API endpoints
@@ -97,7 +96,6 @@ const apiLimiter = rateLimit({
   message: { error: 'Too many API requests, please slow down.' },
   standardHeaders: true,
   legacyHeaders: false,
-  validate: { trustProxy: false },
 });
 
 // Rate Limiting - Downloads (more restrictive)
@@ -105,7 +103,6 @@ const downloadLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 20, // Limit downloads to 20 per 15 minutes
   message: 'Too many download requests, please try again later.',
-  validate: { trustProxy: false },
 });
 
 // Rate Limiting - RPC (restrictive for security)
@@ -115,20 +112,26 @@ const rpcLimiter = rateLimit({
   message: { error: 'Too many RPC requests, please slow down.' },
   standardHeaders: true,
   legacyHeaders: false,
-  validate: { trustProxy: false },
 });
 
 // Apply general rate limiting to all routes
 app.use(generalLimiter);
 
-// Block access to sensitive files
+// Block access to sensitive files and hidden files
 app.use((req, res, next) => {
   const blockedPatterns = [
     '.env', '.git', 'node_modules', 'package.json', 'package-lock.json',
-    'server.js', 'web-wallet-server.js', 'deploy.sh', '.md', '.log', '.bak', '.sql', '.db'
+    'server.js', 'web-wallet-server.js', 'deploy.sh', '.md', '.log', '.bak', 
+    '.sql', '.db', '.gemini', '.gitignore', 'ecosystem.config.js'
   ];
 
   const requestedPath = req.path.toLowerCase();
+  
+  // Block any hidden file or directory starting with a dot (except .well-known)
+  if (requestedPath.split('/').some(part => part.startsWith('.') && part !== '.well-known')) {
+    return res.status(403).json({ error: 'Access denied' });
+  }
+
   const isBlocked = blockedPatterns.some(pattern =>
     requestedPath.includes(pattern.toLowerCase())
   );
@@ -168,7 +171,78 @@ function sanitizeTickerData(data) {
 
   return sanitized;
 }
+// KlingEx API Proxy with timeout and response size limits
+app.get("/api/price-klingex", apiLimiter, async (req, res) => {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
 
+    const response = await fetch("https://api.klingex.io/api/tickers", {
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeout);
+
+    if (!response.ok) {
+      return res.status(500).json({ error: "Failed to fetch price data" });
+    }
+
+    const tickers = await response.json();
+
+    if (!Array.isArray(tickers)) {
+      return res.status(500).json({ error: "Invalid response format" });
+    }
+
+    const s256Ticker = tickers.find((t) => t.ticker_id === "S256_USDT");
+
+    return res.json(
+      sanitizeTickerData(s256Ticker) || { error: "S256_USDT not found" },
+    );
+  } catch (err) {
+    if (err.name === "AbortError") {
+      return res.status(504).json({ error: "Request timeout" });
+    }
+    return res.status(500).json({ error: "Internal error" });
+  }
+});
+
+// Rabid Rabbit API Proxy with timeout and response size limits
+app.get("/api/price-rabidrabbit", apiLimiter, async (req, res) => {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
+    const response = await fetch(
+      "https://rabid-rabbit.org/api/public/v1/ticker?format=json",
+      { signal: controller.signal },
+    );
+
+    clearTimeout(timeout);
+
+    if (!response.ok) {
+      return res.status(500).json({ error: "Failed to fetch price data" });
+    }
+
+    const tickers = await response.json();
+
+    if (typeof tickers !== "object") {
+      return res.status(500).json({ error: "Invalid response format" });
+    }
+
+    return res.json(
+      sanitizeTickerData(tickers["S256_USDT"]) || {
+        error: "S256_USDT not found",
+      },
+    );
+  } catch (err) {
+    if (err.name === "AbortError") {
+      return res.status(504).json({ error: "Request timeout" });
+    }
+    return res.status(500).json({ error: "Internal error" });
+  }
+});
+
+/*
 // KlingEx API Proxy
 app.get('/api/price-klingex', apiLimiter, async (req, res) => {
   try {
@@ -260,7 +334,7 @@ app.get('/api/price-rabidrabbit', apiLimiter, async (req, res) => {
     res.status(500).json({ error: 'Internal error' });
   }
 });
-
+*/
 // ============================================
 // RPC PROXY ENDPOINT (Secure)
 // ============================================
@@ -437,10 +511,21 @@ app.get('/whitepaper.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'whitepaper.html'));
 });
 
-// Serve resources page
-app.get('/resources.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'resources.html'));
+// Serve partners page
+app.get('/partners.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'partners.html'));
 });
+
+// Serve media page
+app.get('/media.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'media.html'));
+});
+
+// Serve media kit page
+app.get('/media_kit.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'media_kit.html'));
+});
+
 
 // Handle 404 - return proper 404, not index
 app.use((req, res) => {

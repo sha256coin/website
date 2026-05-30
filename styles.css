@@ -1,3 +1,5 @@
+:root {
+  --network-bar-height: 40px; --network-bar-height: 40px; }
 /* ============================================
    S256 - Digital Platinum Stylesheet
    Modern, Minimalist Design
@@ -5,6 +7,7 @@
 
 /* CSS Variables */
 :root {
+  --network-bar-height: 40px;
   --primary: #a300ff;
   --secondary: #ffd700;
   --accent: #00d4ff;
@@ -50,6 +53,7 @@ html {
 }
 
 body {
+  padding-top: calc(var(--network-bar-height) + 70px);
   font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
     sans-serif;
   background: var(--bg-main);
@@ -60,9 +64,9 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 /* Typography */
@@ -84,15 +88,15 @@ h4 {
 /* Navigation */
 .navbar {
   position: fixed;
-  top: 0;
+  top: var(--network-bar-height, 0);
   left: 0;
   right: 0;
   background: var(--nav-bg);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   box-shadow: var(--shadow);
   z-index: 1000;
-  padding: 1rem 0;
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 0;
+  transition: all 0.4s ease;
 }
 
 .navbar .container {
@@ -103,14 +107,15 @@ h4 {
 
 .nav-brand {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.75rem;
-  margin-right: 3rem;
+  margin-right: 2rem;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -118,39 +123,57 @@ h4 {
 }
 
 .tagline {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-light);
+  font-weight: 500;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 1.25rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
   color: var(--text);
-  font-weight: 500;
-  transition: color 0.3s;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
+  color: var(--primary);
+  background: rgba(163, 0, 255, 0.05);
+}
+
+[data-theme="dark"] .nav-links a:hover {
+  background: rgba(163, 0, 255, 0.15);
+}
+
+.nav-links a.active {
   color: var(--primary);
 }
 
 .btn-explorer {
   background: var(--gradient);
-  color: var(--white);
-  padding: 0.5rem 1.5rem;
+  color: white !important;
+  padding: 0.6rem 1.25rem !important;
+  font-weight: 700 !important;
   border-radius: var(--radius-sm);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(163, 0, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  margin-left: 0.5rem;
 }
 
 .btn-explorer:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 6px 18px rgba(163, 0, 255, 0.3);
+  filter: brightness(1.1);
 }
 
 /* Dropdown Menu */
@@ -305,7 +328,7 @@ h4 {
 
 .hero-gradient {
   position: absolute;
-  top: 0;
+  top: var(--network-bar-height, 0);
   left: 0;
   right: 0;
   bottom: 0;
@@ -557,6 +580,7 @@ section {
   }
 
   .nav-links {
+    pointer-events: none;
     gap: 1rem;
   }
 
@@ -805,7 +829,7 @@ tbody tr:hover {
 .footer::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: var(--network-bar-height, 0);
   left: 0;
   right: 0;
   height: 1px;
@@ -1071,6 +1095,7 @@ tbody tr:hover {
     overflow-y: auto;
     opacity: 1;
     padding: 1rem 0;
+    pointer-events: auto;
   }
 
   .nav-links li {
@@ -1115,10 +1140,11 @@ tbody tr:hover {
   }
 
   .dropdown-menu {
+    width: 100%;
     position: relative;
     left: 0;
     transform: none !important;
-    margin-top: 0;
+    margin-top: var(--network-bar-height, 0);
     box-shadow: none;
     border: none;
     background: var(--light);
@@ -1207,7 +1233,7 @@ tbody tr:hover {
 /* Matrix Terminal Overlay */
 .matrix-terminal {
   position: fixed;
-  top: 0;
+  top: var(--network-bar-height, 0);
   left: 0;
   width: 100%;
   height: 100%;
@@ -1245,7 +1271,7 @@ tbody tr:hover {
 .terminal-container::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: var(--network-bar-height, 0);
   left: 0;
   width: 100%;
   height: 100%;
@@ -1268,7 +1294,7 @@ tbody tr:hover {
 .terminal-container::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: var(--network-bar-height, 0);
   left: 0;
   width: 100%;
   height: 100%;
@@ -1389,7 +1415,7 @@ tbody tr:hover {
 /* Matrix Rain Background Effect */
 .matrix-rain {
   position: absolute;
-  top: 0;
+  top: var(--network-bar-height, 0);
   left: 0;
   width: 100%;
   height: 100%;
@@ -1403,14 +1429,20 @@ tbody tr:hover {
    ============================================ */
 .price-ticker {
   position: fixed;
+  pointer-events: none;
   top: 85px;
   right: 20px;
   z-index: 999;
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+.price-ticker.open {
+    pointer-events: auto;
+}
+
 .price-ticker-content {
   background: var(--bg-card);
+  pointer-events: none;
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
   padding: 20px;
@@ -1426,6 +1458,7 @@ tbody tr:hover {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* Navbar Price Ticker Toggle */
@@ -1615,6 +1648,12 @@ tbody tr:hover {
   opacity: 0.7;
 }
 
+.partner-feature-card {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .price-ticker {
@@ -1628,4 +1667,258 @@ tbody tr:hover {
     max-width: 340px;
     margin: 0 auto;
   }
+
+  .partner-feature-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Default for all partner logos */
+  .partner-feature-card img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* SVG logos: scale by height */
+  .partner-feature-card img[src$=".svg"] {
+    height: 80px;
+    width: auto;
+  }
+
+  /* PNG/JPG logos: scale by width */
+  .partner-feature-card img[src$=".png"],
+  .partner-feature-card img[src$=".jpg"],
+  .partner-feature-card img[src$=".jpeg"] {
+    max-width: 400px;
+    height: auto;
+  }
+
+  .logo-container {
+    padding-right: 0 !important;
+  }
+}
+
+/* Network Bar */
+.network-bar {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  background: #0b0f14;
+  color: white;
+  font-size: 0.75rem;
+  border-bottom: 1px solid rgba(163, 0, 255, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  overflow: hidden; /* Hide overflow for scrolling */
+}
+
+.network-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.network-stats-group {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  will-change: transform;
+}
+
+.marquee-set {
+  display: flex;
+  gap: 2rem;
+  padding-right: 4rem;
+}
+
+.network-bar .network-bar-stat {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  line-height: 1; /* Ensure consistent height */
+}
+
+.network-bar .network-bar-label {
+  color: var(--text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.7rem;
+}
+
+.network-bar .network-bar-value {
+  color: var(--accent);
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-top: 1px; /* Fine-tune vertical position of mono font */
+}
+
+.network-link {
+  background: #0b0f14;
+  padding-left: 1rem;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Adjust navbar for sticky network bar */
+.navbar {
+  top: var(--network-bar-height); /* Adjust based on network bar height */
+}
+
+@media (max-width: 768px) {
+  .network-stats-group {
+    gap: 0.75rem;
+  }
+  .navbar {
+    top: var(--network-bar-height);
+  }
+}
+
+/* Ecosystem Hub */
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.ecosystem-card {
+  background: var(--bg-card);
+  padding: 2.5rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(163, 0, 255, 0.1);
+  text-align: center;
+}
+
+.ecosystem-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.eco-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.ecosystem-card h3 {
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-size: 1.5rem;
+}
+
+.ecosystem-card p {
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.eco-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.eco-link:hover {
+  color: var(--accent);
+}
+
+/* Adjust navbar for sticky network bar */
+.navbar {
+  top: 34px;
+}
+
+@media (max-width: 768px) {
+  .network-stats-group {
+    gap: 1.5rem;
+  }
+  body {
+    padding-top: 120px !important;
+  }
+}
+
+/* Platinum Ecosystem Card Redesign */
+.ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.ecosystem-card {
+    background: linear-gradient(145deg, #1e2433, #111621) !important;
+    border: 1px solid rgba(163, 0, 255, 0.1) !important;
+    padding: 3rem 2rem !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(163, 0, 255, 0.05) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.ecosystem-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(163, 0, 255, 0.03), transparent);
+    transform: translateX(-100%);
+    transition: 0.6s;
+}
+
+.ecosystem-card:hover::before {
+    transform: translateX(100%);
+}
+
+.ecosystem-card:hover {
+    transform: translateY(-12px) scale(1.02) !important;
+    border-color: #a300ff !important;
+    box-shadow: 0 20px 40px rgba(163, 0, 255, 0.25) !important;
+}
+
+.eco-icon {
+    font-size: 3.5rem !important;
+    margin-bottom: 2rem !important;
+    display: inline-block;
+    filter: drop-shadow(0 0 12px rgba(163, 0, 255, 0.4)) !important;
+}
+
+.ecosystem-card h3 {
+    color: #fff !important;
+    font-size: 1.6rem !important;
+    letter-spacing: 0.5px;
+}
+
+.ecosystem-card p {
+    color: #9ca3af !important;
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+}
+
+.eco-link {
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem !important;
 }

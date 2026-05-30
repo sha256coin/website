@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
+                e.preventDefault();
                 const navHeight = document.querySelector('.navbar').offsetHeight;
                 const targetPosition = target.offsetTop - navHeight;
                 window.scrollTo({
@@ -454,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Toggle ticker open/close
-    if (priceTickerToggle) {
+    if (priceTickerToggle && priceTicker) {
         priceTickerToggle.addEventListener('click', function() {
             priceTicker.classList.toggle('open');
 
@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Restore ticker state from localStorage
     const savedTickerState = localStorage.getItem('priceTickerOpen');
-    if (savedTickerState === 'true') {
+    if (savedTickerState === 'true' && priceTicker) {
         priceTicker.classList.add('open');
     }
 
@@ -684,3 +684,112 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('%c S256 - Digital Platinum ', 'background: linear-gradient(135deg, #a300ff 0%, #00d4ff 100%); color: white; font-size: 20px; padding: 10px;');
     console.log('%c Double the Work, Double the Value ', 'color: #a300ff; font-size: 14px;');
 });
+
+// Helper to format large numbers with K/M/G/T suffixes
+function formatHashrate(value) {
+    if (value >= 1000000000000) return (value / 1000000000000).toFixed(2) + ' TH/s';
+    if (value >= 1000000000) return (value / 1000000000).toFixed(2) + ' GH/s';
+    if (value >= 1000000) return (value / 1000000).toFixed(2) + ' MH/s';
+    return value.toFixed(2) + ' H/s';
+}
+
+function formatDifficulty(value) {
+    if (value >= 1000000000) return (value / 1000000000).toFixed(2) + ' G';
+    if (value >= 1000000) return (value / 1000000).toFixed(2) + ' M';
+    if (value >= 1000) return (value / 1000).toFixed(2) + ' K';
+    return value.toFixed(2);
+}
+
+// Network Stats Functionality
+async function fetchNetworkStats() {
+    try {
+        const [blockchainResponse, priceResponse] = await Promise.all([
+            fetch('https://explorer.sha256coin.eu/api/blockchain-info'),
+            fetch('https://explorer.sha256coin.eu/api/price')
+        ]);
+        const data = await blockchainResponse.json();
+        const priceData = await priceResponse.json();
+
+        if (data) {
+            const heightEl = document.getElementById('network-height');
+            const hashrateEl = document.getElementById('network-hashrate');
+            const diffEl = document.getElementById('network-difficulty');
+            const priceEl = document.getElementById('network-price');
+            const volEl = document.getElementById('network-volume');
+
+            const blocks = (data.blocks || data.blockcount || 0).toLocaleString();
+            const hashrateRaw = data.networkhashps || 0;
+            const hashrateText = formatHashrate(hashrateRaw);
+            const diffText = formatDifficulty(data.difficulty || 0);
+            const priceText = priceData && priceData.price ? `${parseFloat(priceData.price).toFixed(6)} $` : 'N/A';
+            const volText = priceData && priceData.volume ? `${parseFloat(priceData.volume).toFixed(2)} $` : 'N/A';
+
+            if (heightEl) heightEl.textContent = blocks;
+            if (hashrateEl) hashrateEl.textContent = hashrateText;
+            if (diffEl) diffEl.textContent = diffText;
+            if (priceEl) priceEl.textContent = priceText;
+            if (volEl) volEl.textContent = volText;
+
+            // Update clone if it exists
+            const marqueeGroup = document.querySelector('.network-stats-group');
+            if (marqueeGroup && marqueeGroup.children.length > 1) {
+                const clone = marqueeGroup.children[1];
+                const stats = clone.querySelectorAll('.network-bar-value');
+                if (stats.length >= 5) {
+                    stats[0].textContent = blocks;
+                    stats[1].textContent = hashrateText;
+                    stats[2].textContent = diffText;
+                    stats[3].textContent = priceText;
+                    stats[4].textContent = volText;
+                }
+            }
+
+        }
+    } catch (error) {
+        console.error('Error fetching network stats:', error);
+    }
+}
+// Initialize Network Stats and Marquee
+fetchNetworkStats();
+setInterval(fetchNetworkStats, 60000); // Refresh every minute
+
+// JavaScript Marquee Implementation
+function initMarquee() {
+    const marqueeBar = document.querySelector('.network-bar');
+    const marqueeGroup = document.querySelector('.network-stats-group');
+    if (!marqueeBar || !marqueeGroup) return;
+
+    // Start position: right edge of the bar
+    let position = marqueeBar.offsetWidth;
+    const speed = 0.98; // Pixels per frame
+    let isPaused = false;
+
+    marqueeGroup.addEventListener('mouseenter', () => isPaused = true);
+    marqueeGroup.addEventListener('mouseleave', () => isPaused = false);
+
+    function step() {
+        if (!isPaused) {
+            const firstSet = marqueeGroup.querySelector('.marquee-set');
+            const setWidth = firstSet.offsetWidth;
+            
+            position -= speed;
+
+            // Reset when the first set has scrolled completely off the left edge
+            if (position <= -setWidth) {
+                position = marqueeBar.offsetWidth;
+            }
+
+            marqueeGroup.style.transform = `translateX(${position}px)`;
+        }
+        requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+}
+
+// Start Marquee when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMarquee);
+} else {
+    initMarquee();
+}

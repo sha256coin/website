@@ -4,15 +4,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="S256 - Digital Platinum. Double the Work, Double the Value. A SHA-256 cryptocurrency with 2x Bitcoin parameters." />
-  <title>S256 - Digital Platinum</title>
+  <meta name="description" content="S256 - Digital Platinum. Our partners and collaborations." />
+  <title>S256 - Partners</title>
   <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .exchange-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .exchange-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: var(--shadow);
+    }
+
+    .exchange-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .exchange-card a {
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+    }
+
+    .exchange-card img {
+      height: 80px;
+      margin-bottom: 1.5rem;
+      object-fit: contain;
+    }
+
+    .exchange-card h3 {
+      color: var(--text);
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Navigation -->
+  <!-- Network Bar -->
   <div class="network-bar"> 
     <div class="container"> 
       <div class="network-stats-group"> 
@@ -41,6 +78,7 @@
       </div> 
     </div> 
   </div>
+  <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
       <div class="nav-brand">
@@ -55,11 +93,11 @@
         <span class="hamburger"></span>
       </button>
       <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#specs">Specs</a></li>
-        <li><a href="#ecosystem">Ecosystem</a></li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#specs">Specs</a></li>
+        <li><a href="index.html#ecosystem">Ecosystem</a></li>
         <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
-        <li><a href="#downloads">Downloads</a></li>
+        <li><a href="index.html#downloads">Downloads</a></li>
         <li><a href="partners.html">Partners</a></li>
         <li><a href="media_kit.html">Media Kit</a></li>
         <li class="dropdown">
@@ -89,13 +127,13 @@
           </a>
           <ul class="dropdown-menu">
             <!--
-            <li>
-              <a href="https://solopool.site/pool/s256" target="_blank">
-                <img src="img/solo-mining-pool.jpeg" alt="Solo Mining Pool" class="exchange-logo">
-                Solo-pool.site
-              </a>
-            </li>
-             -->
+                        <li>
+                          <a href="https://solopool.site/pool/s256" target="_blank">
+                            <img src="img/solo-mining-pool.jpeg" alt="Solo Mining Pool" class="exchange-logo">
+                            Solo-pool.site
+                          </a>
+                        </li>
+                         -->
             <li>
               <a href="https://pool.rodb2008.com/" target="_blank">
                 <img src="public/s256_logo.png" alt="Solo Mining Pool" class="exchange-logo">
@@ -115,21 +153,21 @@
               </a>
             </li>
             <!--
-            <li>
-              <a href="https://www.coinxpool.com/" target="_blank">
-                <img src="img/coinx_logo.png" alt="CoinXpool" class="exchange-logo">
-                coinXpool.com
-              </a>
-            </li>
-            -->
+                    <li>
+                      <a href="https://www.coinxpool.com/" target="_blank">
+                        <img src="img/coinx_logo.png" alt="CoinXpool" class="exchange-logo">
+                        coinXpool.com
+                      </a>
+                    </li>
+                    -->
             <!--
-            <li>
-              <a href="https://koinium.it/" target="_blank">
-                <img src="img/koinium.svg" alt="Koinium" class="exchange-logo">
-                Koinium Mining
-              </a>
-            </li>
-            -->
+                    <li>
+                      <a href="https://koinium.it/" target="_blank">
+                        <img src="img/koinium.svg" alt="Koinium" class="exchange-logo">
+                        Koinium Mining
+                      </a>
+                    </li>
+                    -->
           </ul>
         </li>
         <li>
@@ -155,330 +193,81 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-gradient"></div>
-    <div class="container hero-content">
-      <h1 class="hero-title">
-        <span class="gradient-text">S256</span>
-        Digital Platinum
-      </h1>
-      <p class="hero-subtitle">Double the Work, Double the Value</p>
-      <p class="hero-description">
-        The contrarian approach to cryptocurrency: harder to mine, longer
-        block times, true scarcity through proof of real work.
-      </p>
-      <div class="hero-buttons">
-        <a href="#downloads" class="btn btn-primary">Download Wallet</a>
-        <a href="https://github.com/sha256coin/android-wallet/releases/tag/v1.0"
-          class="btn btn-primary">Android-Wallet</a>
-        <a href="https://sha256coin.eu/web-wallet/" class="btn btn-primary">Web-Wallet</a>
-        <a href="https://explorer.sha256coin.eu" class="btn btn-secondary">View Explorer</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stats-grid">
-          <div class="stat">
-            <div class="stat-label">Block Time</div>
-            <div class="stat-value">20 min</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Total Supply</div>
-            <div class="stat-value">84M</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Block Reward</div>
-            <div class="stat-value">100</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Algorithm</div>
-            <div class="stat-value">SHA-256</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Philosophy Section -->
-  <section class="philosophy">
+  <!-- Partners Section -->
+  <section class="partners-section" style="padding-top: 100px; padding-bottom: 50px;">
     <div class="container">
-      <h2 class="section-title">The Philosophy</h2>
-      <div class="philosophy-grid">
-        <div class="philosophy-card">
-          <div class="icon">⛏️</div>
-          <h3>Harder, Not Easier</h3>
-          <p>
-            While others race to make mining easier, S256 takes the contrarian
-            path. True value comes from genuine work and scarcity.
-          </p>
-        </div>
-        <div class="philosophy-card">
-          <div class="icon">⏱️</div>
-          <h3>Time for Deliberation</h3>
-          <p>
-            20-minute blocks encourage thoughtful transactions over rushed
-            decisions. Quality over speed.
-          </p>
-        </div>
-        <div class="philosophy-card">
-          <div class="icon">💎</div>
-          <h3>Digital Platinum</h3>
-          <p>
-            Like platinum to gold, S256 is rarer and requires more effort.
-            Excellence takes time and energy.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <h1 class="section-title">Our Partners</h1>
+      <p class="section-subtitle" style="margin-bottom: 40px;">We are proud to collaborate with leading platforms in the
+        cryptocurrency space.</p>
 
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <div class="container">
-      <h2 class="section-title">
-        Everything <span class="gradient-text">2x Bitcoin</span>
-      </h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🕐</div>
-          <h3>20 Minute Blocks</h3>
-          <p>
-            Double Bitcoin's 10 minutes. More time for network consensus and
-            reduced orphan rates.
-          </p>
-          <div class="feature-comparison">
-            <span class="btc">BTC: 10 min</span>
-            <span class="s256">S256: 20 min</span>
+      <div class="exchanges-section" style="margin-bottom: 40px;">
+        <h2 class="section-title" style="font-size: 2rem; margin-bottom: 2rem;">Exchanges</h2>
+        <div class="exchange-grid">
+          <div class="exchange-card">
+            <a href="https://rabid-rabbit.org/account/trade/S256-USDT" target="_blank">
+              <img src="img/RR_Logo.svg" alt="Rabid Rabbit Logo">
+              <h3>Rabid Rabbit</h3>
+            </a>
           </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💰</div>
-          <h3>100 S256 Reward</h3>
-          <p>
-            Double Bitcoin's 50 BTC initial reward. More incentive for
-            securing the network.
-          </p>
-          <div class="feature-comparison">
-            <span class="btc">BTC: 50</span>
-            <span class="s256">S256: 100</span>
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3>84 Million Supply</h3>
-          <p>
-            Four times Bitcoin's 21 million cap. True scarcity with proportional
-            distribution.
-          </p>
-          <div class="feature-comparison">
-            <span class="btc">BTC: 21M</span>
-            <span class="s256">S256: 84M</span>
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⏳</div>
-          <h3>16 Year Halving</h3>
-          <p>
-            Four times Bitcoin's 4-year cycle. Longer economic epochs for
-            stability.
-          </p>
-          <div class="feature-comparison">
-            <span class="btc">BTC: 4 years</span>
-            <span class="s256">S256: 16 years</span>
+          <div class="exchange-card">
+            <a href="https://klingex.io/trade/S256-USDT" target="_blank">
+              <img src="img/klingex.svg" alt="KlingEx Logo">
+              <h3>KlingEx</h3>
+            </a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- Ecosystem Hub --> 
-  <section id="ecosystem" class="section"> 
-    <div class="container"> 
-      <div class="section-header"> 
-        <h2 class="section-title">S256 Ecosystem</h2> 
-        <p class="section-subtitle">A decentralized infrastructure built for the future of Digital Platinum.</p> 
-      </div> 
-      <div class="ecosystem-grid"> 
-        <div class="ecosystem-card"> 
-          <div class="eco-icon">🔍</div> 
-          <h3>Block Explorer</h3> 
-          <p>Real-time transparency for every transaction, block, and wallet on the network.</p> 
-          <a href="https://explorer.sha256coin.eu" class="eco-link">Explore Network →</a> 
-        </div> 
-        <div class="ecosystem-card"> 
-          <div class="eco-icon">💳</div> 
-          <h3>Web Wallet</h3> 
-          <p>Send and receive S256 instantly from any browser with our non-custodial wallet.</p> 
-          <a href="https://sha256coin.eu/web-wallet" class="eco-link">Open Web-Wallet →</a> 
-        </div> 
-        <div class="ecosystem-card"> 
-          <div class="eco-icon">⛏️</div> 
-          <h3>Mining Pools</h3> 
-          <p>Join the decentralized network and earn rewards by securing the blockchain.</p> 
-          <a href="#mining" class="eco-link">Start Mining →</a> 
-        </div> 
-        <div class="ecosystem-card"> 
-          <div class="eco-icon">💹</div> 
-          <h3>Exchanges</h3> 
-          <p>Trade S256 on professional global exchanges with deep liquidity.</p> 
-          <a href="#exchanges" class="eco-link">Trade Now →</a> 
-        </div> 
-      </div> 
-    </div> 
-  </section>
 
-  <!-- Specifications Section -->
-  <section id="specs" class="specifications">
-    <div class="container">
-      <h2 class="section-title">Technical Specifications</h2>
-      <div class="specs-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Bitcoin</th>
-              <th class="highlight">S256</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Block Time</td>
-              <td>10 minutes</td>
-              <td class="highlight">20 minutes</td>
-            </tr>
-            <tr>
-              <td>Block Reward (Initial)</td>
-              <td>50 BTC</td>
-              <td class="highlight">100 S256</td>
-            </tr>
-            <tr>
-              <td>Halving Interval</td>
-              <td>210,000 blocks</td>
-              <td class="highlight">420,000 blocks</td>
-            </tr>
-            <tr>
-              <td>Total Supply</td>
-              <td>21 million</td>
-              <td class="highlight">84 million</td>
-            </tr>
-            <tr>
-              <td>Time per Halving</td>
-              <td>~4 years</td>
-              <td class="highlight">~16 years</td>
-            </tr>
-            <tr>
-              <td>Coinbase Maturity</td>
-              <td>100 confirmations</td>
-              <td class="highlight">200 confirmations</td>
-            </tr>
-            <tr>
-              <td>Algorithm</td>
-              <td>SHA-256</td>
-              <td class="highlight">SHA-256</td>
-            </tr>
-            <tr>
-              <td>Port</td>
-              <td>8333</td>
-              <td class="highlight">25256</td>
-            </tr>
-            <tr>
-              <td>Address Prefix</td>
-              <td>1 or 3</td>
-              <td class="highlight">S or 8</td>
-            </tr>
-            <tr>
-              <td>Bech32 HRP</td>
-              <td>bc</td>
-              <td class="highlight">s2</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- Downloads Section -->
-  <section id="downloads" class="downloads">
-    <div class="container">
-      <h2 class="section-title">Download Wallet</h2>
-      <p class="section-subtitle">Available for Android, Linux and Windows</p>
-      <div class="download-cards">
-        <div class="download-card featured">
-          <div class="download-icon">📱</div>
-          <h3>Android</h3>
-          <p>S256 Wallet v1.0</p>
-          <p class="file-size">~74 MB</p>
-          <a href="https://github.com/sha256coin/android-wallet/releases/download/v1.0/s256-wallet-1.0.apk"
-            class="btn btn-download">Download .apk</a>
-          <div class="download-includes">
-            <p>Features:</p>
-            <ul>
-              <li>Send & Receive S256</li>
-              <li>QR Code Scanner</li>
-              <li>Biometric Security</li>
-              <li>Transaction History</li>
-            </ul>
-          </div>
+      <div class="partner-feature-card"
+        style="display: flex; align-items: center; background: var(--bg-card); padding: 2rem; border-radius: var(--radius); margin-bottom: 40px; box-shadow: var(--shadow-lg);">
+        <div class="logo-container" style="flex: 1; text-align: center; padding-right: 2rem;">
+          <img src="img/blockspot-500x500.png" alt="Blockspot.io Logo" style="max-width: 200px;">
         </div>
-        <div class="download-card">
-          <div class="download-icon">🐧</div>
-          <h3>Linux</h3>
-          <p>SHA256Coin v1.0.5</p>
-          <p class="file-size">~22 MB</p>
-          <a href="downloads/SHA256Coin-v1.0.5-linux64.tar.gz" class="btn btn-download">Download .tar.gz</a>
-          <div class="download-includes">
-            <p>Includes:</p>
-            <ul>
-              <li>sha256coind (daemon)</li>
-              <li>sha256coin-qt (GUI)</li>
-              <li>sha256coin-cli</li>
-              <li>Utilities</li>
-            </ul>
-          </div>
-        </div>
-        <div class="download-card featured">
-          <div class="download-icon">🪟</div>
-          <h3>Windows</h3>
-          <p>SHA256Coin v1.0.5</p>
-          <p class="file-size">~34 MB</p>
-          <a href="downloads/SHA256Coin-v1.0.5-win64.zip" class="btn btn-download">Download .zip</a>
-          <div class="download-includes">
-            <p>Includes:</p>
-            <ul>
-              <li>sha256coind.exe</li>
-              <li>sha256coin-qt.exe</li>
-              <li>sha256coin-cli.exe</li>
-              <li>Utilities</li>
-            </ul>
-          </div>
+        <div class="description-container" style="flex: 2;">
+          <h2 style="font-size: 2.5rem;">Blockspot.io</h2>
+          <p>Blockspot.io is a comprehensive crypto directory offering project profiles, fundamentals, ecosystem
+            insights, and metadata. Discover SHA256Coin’s background, technical details, and listings across the
+            broader crypto landscape.</p>
+          <a href="https://blockspot.io/coin/sha256coin/" target="_blank" class="btn btn-primary"
+            style="margin-top: 1rem;">Visit Blockspot</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Getting Started Section -->
-  <section class="getting-started">
-    <div class="container">
-      <h2 class="section-title">Getting Started</h2>
-      <div class="steps-grid">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>Download Wallet</h3>
-          <p>Choose your platform and download the S256 wallet</p>
+      <div class="partner-feature-card"
+        style="display: flex; align-items: center; background: var(--bg-card); padding: 2rem; border-radius: var(--radius); margin-bottom: 40px; box-shadow: var(--shadow-lg);">
+        <div class="logo-container" style="flex: 1; text-align: center; padding-right: 2rem;">
+          <img src="img/logo-livecoinw.svg" alt="Livecoinwatch Logo" style="max-width: 200px;">
         </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>Install & Sync</h3>
-          <p>Install the wallet and wait for blockchain synchronization</p>
+        <div class="description-container" style="flex: 2;">
+          <h2 style="font-size: 2.5rem;">Livecoinwatch</h2>
+          <p>Livecoinwatch delivers fast, community‑driven market tracking with real‑time price updates and clean,
+            intuitive charts. Follow SHA256Coin on Livecoinwatch to monitor performance, liquidity, and market trends
+            at a glance.</p>
+          <a href="https://www.livecoinwatch.com/price/SHA256COIN-S256" target="_blank" class="btn btn-primary"
+            style="margin-top: 1rem;">Visit Livecoinwatch</a>
         </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>Get S256</h3>
-          <p>Mine S256 or receive from another wallet</p>
+      </div>
+
+      <div class="partner-feature-card"
+        style="display: flex; align-items: center; background: var(--bg-card); padding: 2rem; border-radius: var(--radius); margin-bottom: 40px; box-shadow: var(--shadow-lg);">
+        <div class="logo-container" style="flex: 1; text-align: center; padding-right: 2rem;">
+          <img src="img/mps-app_logo.png" alt="MiningPoolstats.app Logo" style="max-width: 200px;">
         </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <h3>Start Using</h3>
-          <p>Send and receive S256 with your unique S-address</p>
+        <div class="description-container" style="flex: 2;">
+          <h2 style="font-size: 2.5rem;">MiningPoolstats.app</h2>
+          <p>MiningPoolstats.app provides comprehensive data and analytics for cryptocurrency mining pools. Follow
+            SHA256Coin on MiningPoolstats.app to monitor performance, liquidity, and market trends
+            at a glance.</p>
+          <a href="https://miningpoolstats.app/coins/S256" target="_blank" class="btn btn-primary"
+            style="margin-top: 1rem;">Visit MiningPoolstats.app</a>
         </div>
+      </div>
+
+      <div class="future-partners" style="text-align: center;">
+        <h2 class="section-title">Future Collaborations</h2>
+        <p>The SHA256Coin project is actively seeking to build a robust ecosystem. We are in discussion with several
+          future partners, including new exchanges, wallet providers, and payment gateways. Our goal is to foster
+          widespread adoption and create a resilient, decentralized network. Stay tuned for more announcements!</p>
       </div>
     </div>
   </section>
