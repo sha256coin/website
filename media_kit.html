@@ -128,33 +128,33 @@
 
 <body>
   <!-- Network Bar -->
-  <div class="network-bar"> 
-    <div class="container"> 
-      <div class="network-stats-group"> 
+  <div class="network-bar">
+    <div class="container">
+      <div class="network-stats-group">
         <div class="marquee-set">
-          <div class="network-bar-stat"> 
-            <span class="network-bar-label">Block Height:</span> 
-            <span class="network-bar-value" id="network-height">...</span> 
-          </div> 
-          <div class="network-bar-stat"> 
-            <span class="network-bar-label">Hashrate:</span> 
-            <span class="network-bar-value" id="network-hashrate">...</span> 
-          </div> 
-          <div class="network-bar-stat"> 
-            <span class="network-bar-label">Difficulty:</span> 
-            <span class="network-bar-value" id="network-difficulty">...</span> 
+          <div class="network-bar-stat">
+            <span class="network-bar-label">Block Height:</span>
+            <span class="network-bar-value" id="network-height">...</span>
           </div>
-          <div class="network-bar-stat"> 
-            <span class="network-bar-label">Price:</span> 
-            <span class="network-bar-value" id="network-price">...</span> 
+          <div class="network-bar-stat">
+            <span class="network-bar-label">Hashrate:</span>
+            <span class="network-bar-value" id="network-hashrate">...</span>
           </div>
-          <div class="network-bar-stat"> 
-            <span class="network-bar-label">Volume/24h:</span> 
-            <span class="network-bar-value" id="network-volume">...</span> 
+          <div class="network-bar-stat">
+            <span class="network-bar-label">Difficulty:</span>
+            <span class="network-bar-value" id="network-difficulty">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">Price:</span>
+            <span class="network-bar-value" id="network-price">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">Volume/24h:</span>
+            <span class="network-bar-value" id="network-volume">...</span>
           </div>
         </div>
-      </div> 
-    </div> 
+      </div>
+    </div>
   </div>
   <!-- Navigation -->
   <nav class="navbar">
@@ -230,7 +230,7 @@
                 Asham-pool.org
               </a>
             </li>
-        <!--
+            <!--
                     <li>
                       <a href="https://www.coinxpool.com/" target="_blank">
                         <img src="img/coinx_logo.png" alt="CoinXpool" class="exchange-logo">
@@ -238,7 +238,7 @@
                       </a>
                     </li>
                     -->
-        <!--
+            <!--
                     <li>
                       <a href="https://koinium.it/" target="_blank">
                         <img src="img/koinium.svg" alt="Koinium" class="exchange-logo">
@@ -246,27 +246,27 @@
                       </a>
                     </li>
                     -->
-      </ul>
-      </li>
-      <li>
-        <a href="media.html">Media</a>
-      </li>
-      <li>
-        <a href="https://explorer.sha256coin.eu" class="btn-explorer">Explorer</a>
-      </li>
-      <li>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-          <span class="theme-icon">🌙</span>
-        </button>
-      </li>
-      <li>
-        <span class="pi-symbol" id="pi-easter-egg" title="π">π</span>
-      </li>
-      <li>
-        <button id="price-ticker-toggle" class="price-ticker-toggle-nav" aria-label="Toggle price ticker">
-          <span class="toggle-icon">💰</span>
-        </button>
-      </li>
+          </ul>
+        </li>
+        <li>
+          <a href="media.html">Media</a>
+        </li>
+        <li>
+          <a href="https://explorer.sha256coin.eu" class="btn-explorer">Explorer</a>
+        </li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </li>
+        <li>
+          <span class="pi-symbol" id="pi-easter-egg" title="π">π</span>
+        </li>
+        <li>
+          <button id="price-ticker-toggle" class="price-ticker-toggle-nav" aria-label="Toggle price ticker">
+            <span class="toggle-icon">💰</span>
+          </button>
+        </li>
       </ul>
     </div>
   </nav>
@@ -358,99 +358,106 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-top">
+
+      <div class="footer-grid">
+
+        <!-- Brand -->
         <div class="footer-brand">
-          <h3><a href="index.html" class="nav-brand-link"><span class="gradient-text">S256</span></a></h3>
+          <a href="index.html" class="nav-brand-link">
+            <span class="gradient-text">S256</span>
+          </a>
           <p class="footer-tagline">Digital Platinum</p>
-          <p class="footer-description">Double the Work, Double the Value. A revolutionary approach to cryptocurrency
-            built on proven SHA-256 technology.</p>
-          <div class="footer-contact">
-            <h4>Contact</h4>
-            <a href="mailto:contact@sha256coin.eu" class="email-link">
-              <span class="email-icon">📧</span>
-              contact@sha256coin.eu
-            </a>
-          </div>
+          <a href="mailto:contact@sha256coin.eu" class="footer-email">
+            <span aria-hidden="true">📧</span>
+            info@sha256coin.eu
+          </a>
+          <a href="mailto:contact@sha256coin.eu" class="footer-email">
+            <span aria-hidden="true">📧</span>
+            contact@sha256coin.eu
+          </a>
         </div>
 
-        <div class="footer-links-wrapper">
-          <div class="footer-section">
-            <details open>
-              <summary>
-                <h4>Resources</h4>
-              </summary>
-              <ul>
-                <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
-                <li><a href="https://explorer.sha256coin.eu">Block Explorer</a></li>
-                <li><a href="index.html#downloads">Downloads</a></li>
-                <li><a href="https://github.com/sha256coin">GitHub</a></li>
-                <li><a href="https://github.com/bitcoin/bitcoin">Documentation</a></li>
-                <li><a href="media_kit.html">Media Kit</a></li>
-                <li><a href="partners.html">Partners</a></li>
-              </ul>
-            </details>
-          </div>
-
-          <div class="footer-section">
-            <details open>
-              <summary>
-                <h4>Community</h4>
-              </summary>
-              <ul class="social-links">
-                <li>
-                  <a href="https://discord.gg/dtn58HrC94" target="_blank" rel="noopener">
-                    <span class="social-icon">💬</span> Discord
-                  </a>
-                </li>
-                <li>
-                  <a href="https://t.me/s256coin" target="_blank" rel="noopener">
-                    <span class="social-icon">✈️</span> Telegram
-                  </a>
-                </li>
-                <li>
-                  <a href="https://bitcointalk.org/index.php?topic=5567429.msg66131557#msg66131557" target="_blank"
-                    rel="noopener">
-                    <span class="social-icon">₿</span> Bitcointalk
-                  </a>
-                </li>
-                <li>
-                  <a href="https://x.com/s256coin" target="_blank" rel="noopener">
-                    <span class="social-icon">𝕏</span> Twitter
-                  </a>
-                </li>
-              </ul>
-            </details>
-          </div>
-
-          <div class="footer-section">
-            <details open>
-              <summary>
-                <h4>Network Info</h4>
-              </summary>
-              <ul class="network-specs">
-                <li><span class="spec-label">Port:</span> <span class="spec-value">25256</span></li>
-                <li><span class="spec-label">RPC:</span> <span class="spec-value">25332</span></li>
-                <li><span class="spec-label">Algorithm:</span> <span class="spec-value">SHA-256</span></li>
-                <li><span class="spec-label">Genesis:</span> <span class="spec-value">Nov 30, 2025</span></li>
-              </ul>
-            </details>
-          </div>
+        <!-- Resources -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Resources</h4>
+          <ul>
+            <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
+            <li><a href="https://explorer.sha256coin.eu">Block Explorer</a></li>
+            <li><a href="index.html#downloads">Downloads</a></li>
+            <li><a href="https://github.com/sha256coin">GitHub</a></li>
+            <li><a href="https://github.com/bitcoin/bitcoin">Documentation</a></li>
+            <li><a href="media_kit.html">Media Kit</a></li>
+            <li><a href="partners.html">Partners</a></li>
+          </ul>
         </div>
-      </div>
+
+        <!-- Community -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Community</h4>
+          <ul>
+            <li>
+              <a href="https://discord.gg/dtn58HrC94" target="_blank" rel="noopener">
+                <span class="social-icon" aria-hidden="true">💬</span> Discord
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/s256coin" target="_blank" rel="noopener">
+                <span class="social-icon" aria-hidden="true">✈️</span> Telegram
+              </a>
+            </li>
+            <li>
+              <a href="https://bitcointalk.org/index.php?topic=5567429.msg66131557#msg66131557" target="_blank"
+                rel="noopener">
+                <span class="social-icon" aria-hidden="true">₿</span> Bitcointalk
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/s256coin" target="_blank" rel="noopener">
+                <span class="social-icon" aria-hidden="true">𝕏</span> Twitter / X
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Network Info -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Network</h4>
+          <dl class="network-specs">
+            <div>
+              <dt>Port</dt>
+              <dd>25256</dd>
+            </div>
+            <div>
+              <dt>RPC</dt>
+              <dd>25332</dd>
+            </div>
+            <div>
+              <dt>Algorithm</dt>
+              <dd>SHA-256</dd>
+            </div>
+            <div>
+              <dt>Genesis</dt>
+              <dd>Nov 30, 2025</dd>
+            </div>
+          </dl>
+        </div>
+
+      </div><!-- /.footer-grid -->
 
       <div class="footer-bottom">
-        <div class="footer-bottom-content">
-          <p>&copy; <span id="current-year">2025</span> S256. Open source cryptocurrency project.</p>
-          <div class="footer-bottom-links">
-            <a href="index.html#features">Features</a>
-            <span class="separator">•</span>
-            <a href="index.html#specs">Specs</a>
-            <span class="separator">•</span>
-            <a href="index.html#downloads">Downloads</a>
-          </div>
+        <p class="footer-copy">
+          &copy; <span id="current-year">2025</span> S256 &mdash; Open source cryptocurrency.
+        </p>
+        <span class="footer-origin">🇷🇴⚡Made in Romania</span>
+        <div class="footer-bottom-links">
+          <a href="index.html#features">Features</a>
+          <a href="index.html#ecosystem">Ecosystem</a>
+          <a href="index.html#specs">Specs</a>
+          <a href="index.html#downloads">Downloads</a>
         </div>
       </div>
-    </div>
+
+    </div><!-- /.container -->
   </footer>
 
   <!-- Live Price Ticker -->
