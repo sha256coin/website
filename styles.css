@@ -860,7 +860,7 @@ tbody tr:hover {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.65);
   margin: 0.35rem 0 1.3rem;
   font-weight: 600;
 }
@@ -870,19 +870,19 @@ tbody tr:hover {
   align-items: center;
   gap: 0.45rem;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.52);
+  color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
   width: fit-content;
   transition: color 0.2s ease;
 }
-.footer-email:hover { color: rgba(255, 255, 255, 0.88); }
+.footer-email:hover { color: rgba(119, 92, 216, 0.95); }
 
 /* ── Link columns ── */
 .footer-col-title {
   font-size: 1.4rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.65);
   margin: 0 0 0.9rem;
   font-weight: 600;
 }
@@ -898,14 +898,14 @@ tbody tr:hover {
 
 .footer-col ul a {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   transition: color 0.2s ease;
 }
-.footer-col ul a:hover { color: rgba(255, 255, 255, 0.92); }
+.footer-col ul a:hover { color: rgba(39, 43, 236, 0.95); }
 
 .social-icon {
   font-size: 0.9rem;
@@ -930,7 +930,7 @@ tbody tr:hover {
 
 .network-specs dt {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.33);
+  color: rgba(255, 255, 255, 0.65);
   font-weight: 400;
 }
 
@@ -956,13 +956,13 @@ tbody tr:hover {
 
 .footer-copy {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.45);
   margin: 0;
 }
 
 .footer-origin {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.55);
   letter-spacing: 0.04em;
 }
 
@@ -974,11 +974,11 @@ tbody tr:hover {
 
 .footer-bottom-links a {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.45);
   text-decoration: none;
   transition: color 0.2s ease;
 }
-.footer-bottom-links a:hover { color: rgba(255, 255, 255, 0.65); }
+.footer-bottom-links a:hover { color: rgba(39, 43, 236, 0.95); }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
@@ -1699,34 +1699,38 @@ tbody tr:hover {
   color: var(--text-light);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.7rem;
+  letter-spacing: 1.85px;
+  font-size: 0.85rem;
 }
 
 .network-bar .network-bar-text {
   color: var(--text-light);
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.75rem;
+  letter-spacing: 1.85px;
+  font-size: 0.85rem;
 }
 
 .network-bar .network-bar-value {
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
   font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   display: inline-block;
   margin-top: 1px; /* Fine-tune vertical position of mono font */
 }
 
 .network-link {
-  background: #0b0f14;
-  padding-left: 1rem;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  align-items: center;
+  color: var(--text-light);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.85px;
+  font-size: 0.85rem;
+}
+
+.network-link a {
+    color: inherit; /* Inherits the color of your text */
+    text-decoration: none; /* Removes the underline if you don't want it */
 }
 
 /* Adjust navbar for sticky network bar */
