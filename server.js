@@ -118,7 +118,7 @@ const downloadLimiter = rateLimit({
 // Rate Limiting - RPC (restrictive for security)
 const rpcLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 30, // Max 30 RPC requests per minute per IP
+  max: 300, // Max 300  RPC requests per minute per IP
   message: { error: "Too many RPC requests, please slow down." },
   standardHeaders: true,
   legacyHeaders: false,
@@ -288,99 +288,6 @@ app.get("/api/price-rabidrabbit", apiLimiter, async (req, res) => {
   }
 });
 
-/*
-// KlingEx API Proxy
-app.get('/api/price-klingex', apiLimiter, async (req, res) => {
-  try {
-    const https = require('https');
-
-    const apiReq = https.get('https://api.klingex.io/api/tickers', {
-      timeout: 10000 // 10 second timeout
-    }, (apiRes) => {
-      let data = '';
-
-      // Limit response size
-      apiRes.on('data', (chunk) => {
-        data += chunk;
-        if (data.length > 1000000) { // 1MB limit
-          apiReq.destroy();
-          return res.status(500).json({ error: 'Response too large' });
-        }
-      });
-
-      apiRes.on('end', () => {
-        try {
-          const tickers = JSON.parse(data);
-          if (!Array.isArray(tickers)) {
-            return res.status(500).json({ error: 'Invalid response format' });
-          }
-          const s256Ticker = tickers.find(t => t.ticker_id === 'S256_USDT');
-          res.json(sanitizeTickerData(s256Ticker) || { error: 'S256_USDT not found' });
-        } catch (e) {
-          res.status(500).json({ error: 'Failed to process response' });
-        }
-      });
-    });
-
-    apiReq.on('error', () => {
-      res.status(500).json({ error: 'Failed to fetch price data' });
-    });
-
-    apiReq.on('timeout', () => {
-      apiReq.destroy();
-      res.status(504).json({ error: 'Request timeout' });
-    });
-
-  } catch (error) {
-    res.status(500).json({ error: 'Internal error' });
-  }
-});
-
-// Rabid Rabbit API Proxy
-app.get('/api/price-rabidrabbit', apiLimiter, async (req, res) => {
-  try {
-    const https = require('https');
-
-    const apiReq = https.get('https://rabid-rabbit.org/api/public/v1/ticker?format=json', {
-      timeout: 10000
-    }, (apiRes) => {
-      let data = '';
-
-      apiRes.on('data', (chunk) => {
-        data += chunk;
-        if (data.length > 1000000) {
-          apiReq.destroy();
-          return res.status(500).json({ error: 'Response too large' });
-        }
-      });
-
-      apiRes.on('end', () => {
-        try {
-          const tickers = JSON.parse(data);
-          if (typeof tickers !== 'object') {
-            return res.status(500).json({ error: 'Invalid response format' });
-          }
-          res.json(sanitizeTickerData(tickers['S256_USDT']) || { error: 'S256_USDT not found' });
-        } catch (e) {
-          res.status(500).json({ error: 'Failed to process response' });
-        }
-      });
-    });
-
-    apiReq.on('error', () => {
-      res.status(500).json({ error: 'Failed to fetch price data' });
-    });
-
-    apiReq.on('timeout', () => {
-      apiReq.destroy();
-      res.status(504).json({ error: 'Request timeout' });
-    });
-
-  } catch (error) {
-    res.status(500).json({ error: 'Internal error' });
-  }
-});
-*/
 // ============================================
 // RPC PROXY ENDPOINT (Secure)
 // ============================================
@@ -401,13 +308,32 @@ function validateRpcParams(method, params) {
       break;
     case "validateaddress":
     case "getaddressinfo":
-      // Address validation (S256 addresses start with S, 8, or s2)
-      if (params[0] && !/^(S|8|s2)[a-zA-Z0-9]{25,90}$/.test(params[0]))
+      // Address validation (S256 addresses start with S, 8, or s21)
+      if (params[0] && !/^(S|8|s21)[a-zA-Z0-9]{25,90}$/.test(params[0]))
         return false;
       break;
     case "sendrawtransaction":
       // Raw tx should be hex
       if (params[0] && !/^[a-fA-F0-9]+$/.test(params[0])) return false;
+      break;
+    case "signrawtransactionwithkey":
+      // 1st param: Raw tx hex string
+      if (params[0] && !/^[a-fA-F0-9]+$/.test(params[0])) return false;
+
+      // 2nd param: Array of WIF private keys
+      if (params[1] && Array.isArray(params[1])) {
+        for (const key of params[1]) {
+          // Validate WIF format (base58, typically 51-52 chars)
+          // Adjust regex if S256 WIFs have a specific length or starting character
+          if (
+            typeof key !== "string" ||
+            !/^[1-9A-HJ-NP-Za-km-z]{51,52}$/.test(key)
+          )
+            return false;
+        }
+      } else {
+        return false; // Expected array of keys as second parameter
+      }
       break;
   }
 
@@ -415,6 +341,7 @@ function validateRpcParams(method, params) {
 }
 
 app.post("/rpc", rpcLimiter, async (req, res) => {
+  //console.log("DEBUG: Proxy received RPC request", JSON.stringify(req.body)); // <-- Add this for debugging incoming requests
   // CORS headers for web wallet (restricted to sha256coin.eu)
   const allowedOrigins = ["https://sha256coin.eu", "https://www.sha256coin.eu"];
   const origin = req.headers.origin;
@@ -450,6 +377,9 @@ app.post("/rpc", rpcLimiter, async (req, res) => {
     "decoderawtransaction",
     "validateaddress",
     "getaddressinfo",
+    "getnetworkinfo",
+    "getmempoolinfo",
+    "getmininginfo"
   ];
 
   const method = req.body.method.toLowerCase();
@@ -470,6 +400,8 @@ app.post("/rpc", rpcLimiter, async (req, res) => {
     method: method,
     params: params,
   });
+
+  //console.log("DEBUG: Forwarding to daemon:", rpcRequest); // <-- ADD THIS to log the exact RPC request being sent to the daemon for debugging purposes
 
   // Basic auth for RPC
   const auth = Buffer.from(
@@ -505,6 +437,7 @@ app.post("/rpc", rpcLimiter, async (req, res) => {
 
     rpcRes.on("end", () => {
       try {
+        //console.log("DEBUG: Daemon raw response:", data); // <-- ADD THIS to log the raw response from the daemon for debugging purposes
         const response = JSON.parse(data);
         res.json(response);
       } catch (e) {
