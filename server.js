@@ -379,7 +379,8 @@ app.post("/rpc", rpcLimiter, async (req, res) => {
     "getaddressinfo",
     "getnetworkinfo",
     "getmempoolinfo",
-    "getmininginfo"
+    "getmininginfo",
+    "getrawmempool"
   ];
 
   const method = req.body.method.toLowerCase();
