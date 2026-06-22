@@ -4,9 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://sha256coin.eu/">
   <meta name="description"
     content="S256 - Digital Platinum. Double the Work, Double the Value. A SHA-256 cryptocurrency with 2x Bitcoin parameters." />
   <title>S256 - Digital Platinum</title>
+  <!-- Basic OG tags (required for Discord/Twitter/Facebook) -->
+  <meta property="og:title" content="S256 - Digital Platinum" />
+  <meta property="og:description"
+    content="S256 - Digital Platinum. Double the Work, Double the Value. A SHA-256 cryptocurrency with 2x Bitcoin parameters." />
+  <meta property="og:image" content="https://sha256coin.eu/img/og_image.png" />
+  <meta property="og:url" content="https://sha256coin.eu/" />
+  <meta property="og:type" content="website" />
+  <!-- Twitter/X card (also used by some other platforms) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="S256 - Digital Platinum" />
+  <meta name="twitter:description"
+    content="S256 - Digital Platinum. Double the Work, Double the Value. A SHA-256 cryptocurrency with 2x Bitcoin parameters." />
+  <meta name="twitter:image" content="https://sha256coin.eu/img/og_image.png" />
+  <meta name="twitter:url" content="https://sha256coin.eu/" />
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,7 +35,8 @@
       <div class="network-stats-group">
         <div class="marquee-set">
           <div class="network-bar-stat">
-            <span class="network-bar-text">📱S256 Android Wallet version 1.3 released🎉 New Features: 🔐Seed Phrase Backup</span>
+            <span class="network-bar-text">📱S256 Android Wallet version 1.4 released🎉 New Features: 🔐Seed Phrase
+              Backup</span>
           </div>
           <div class="network-bar-stat">
             <span class="network-bar-label">📊Block Height:</span>
@@ -34,14 +51,6 @@
             <span class="network-bar-value" id="network-difficulty">...</span>
           </div>
           <div class="network-bar-stat">
-            <span class="network-bar-label">📉Price:</span>
-            <span class="network-bar-value" id="network-price">...</span>
-          </div>
-          <div class="network-bar-stat">
-            <span class="network-bar-label">📅Volume/24h:</span>
-            <span class="network-bar-value" id="network-volume">...</span>
-          </div>
-          <div class="network-bar-stat">
             <span class="network-link">
               <a href="https://www.livecoinwatch.com/price/SHA256COIN-S256" target="_blank">LiveCoinWatch</a>
             </span>
@@ -50,7 +59,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
@@ -69,44 +78,23 @@
         <li><a href="#features">Features</a></li>
         <li><a href="#specs">Specs</a></li>
         <li><a href="#ecosystem">Ecosystem</a></li>
-        <li><a href="whitepaper.html" target="_blank">Whitepaper</a></li>
+        <li><a href="whitepaper.html" target="_blank">Technical Paper</a></li>
         <li><a href="#downloads">Downloads</a></li>
         <li><a href="partners.html">Partners</a></li>
         <li><a href="media_kit.html">Media Kit</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle">
-            Exchanges
-            <span class="dropdown-arrow">▼</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="https://rabid-rabbit.org/account/trade/S256-USDT" target="_blank">
-                <img src="img/RR_Logo.svg" alt="Rabid Rabbit" class="exchange-logo">
-                Rabid Rabbit
-              </a>
-            </li>
-            <li>
-              <a href="https://klingex.io/trade/S256-USDT" target="_blank">
-                <img src="img/klingex.svg" alt="KlingEx" class="exchange-logo">
-                KlingEx
-              </a>
-            </li>
-          </ul>
-        </li>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle">
             Mining Pools
             <span class="dropdown-arrow">▼</span>
           </a>
           <ul class="dropdown-menu">
-            <!--
             <li>
-              <a href="https://solopool.site/pool/s256" target="_blank">
-                <img src="img/solo-mining-pool.jpeg" alt="Solo Mining Pool" class="exchange-logo">
-                Solo-pool.site
+              <a href="https://sha256-mining.go.ro:50300/" target="_blank">
+                <img src="img/sha256-mining-logo_small.png" alt="Sha256-Mining Pool" class="exchange-logo">
+                Sha256-Mining Pool
               </a>
             </li>
-             -->
             <li>
               <a href="https://pool.rodb2008.com/" target="_blank">
                 <img src="public/s256_logo.png" alt="Solo Mining Pool" class="exchange-logo">
@@ -157,11 +145,6 @@
         <li>
           <span class="pi-symbol" id="pi-easter-egg" title="π">π</span>
         </li>
-        <li>
-          <button id="price-ticker-toggle" class="price-ticker-toggle-nav" aria-label="Toggle price ticker">
-            <span class="toggle-icon">💰</span>
-          </button>
-        </li>
       </ul>
     </div>
   </nav>
@@ -181,7 +164,7 @@
       </p>
       <div class="hero-buttons">
         <a href="#downloads" class="btn btn-primary">Download Wallet</a>
-        <a href="https://github.com/sha256coin/android-wallet/releases/tag/v1.3" target="_blank"
+        <a href="https://github.com/sha256coin/android-wallet/releases/tag/v1.4" target="_blank"
           class="btn btn-primary">Android-Wallet</a>
         <a href="https://sha256coin.eu/web-wallet/" class="btn btn-primary">Web-Wallet</a>
         <a href="https://explorer.sha256coin.eu" class="btn btn-secondary">View Explorer</a>
@@ -328,9 +311,9 @@
         </div>
         <div class="ecosystem-card">
           <div class="eco-icon">💹</div>
-          <h3>Exchanges</h3>
-          <p>Trade S256 on professional global exchanges with deep liquidity.</p>
-          <a href="https://sha256coin.eu/partners.html" class="eco-link">Trade Now →</a>
+          <h3>Trading & Liquidity</h3>
+          <p>S256 trades on third-party venues. Trading availability and regulations vary by jurisdiction.</p>
+          <a href="https://sha256coin.eu/partners.html" class="eco-link">Learn More →</a>
         </div>
       </div>
     </div>
@@ -415,9 +398,9 @@
         <div class="download-card featured">
           <div class="download-icon">📱</div>
           <h3>Android</h3>
-          <p>S256 Wallet v1.3</p>
+          <p>S256 Wallet v1.4</p>
           <p class="file-size">~70 MB</p>
-          <a href="downloads/s256-wallet-1.3.apk" class="btn btn-download">Download .apk</a>
+          <a href="downloads/s256-wallet-1.4.apk" class="btn btn-download">Download .apk</a>
           <div class="download-includes">
             <p>Features:</p>
             <ul>
@@ -517,7 +500,8 @@
         <div class="footer-col">
           <h4 class="footer-col-title"><i class="fa-solid fa-layer-group"></i> Resources</h4>
           <ul>
-            <li><a href="whitepaper.html" target="_blank"><i class="fa-regular fa-file-lines"></i> Whitepaper</a></li>
+            <li><a href="whitepaper.html" target="_blank"><i class="fa-regular fa-file-lines"></i> Technical Paper</a>
+            </li>
             <li><a href="https://explorer.sha256coin.eu"><i class="fa-solid fa-magnifying-glass"></i> BlockChain
                 Explorer</a>
             </li>
@@ -593,103 +577,22 @@
           <a href="index.html#ecosystem"><i class="fa-solid fa-hubspot fa-xs"></i> Ecosystem</a>
           <a href="index.html#specs"><i class="fa-solid fa-list-check fa-xs"></i> Specs</a>
           <a href="index.html#downloads"><i class="fa-solid fa-download fa-xs"></i> Downloads</a>
+          <a href="privacy.html"><i class="fa-solid fa-shield-halved fa-xs"></i> Privacy</a>
+          <a href="terms.html"><i class="fa-solid fa-file-contract fa-xs"></i> Terms</a>
+          <a href="risk-disclosure.html"><i class="fa-solid fa-triangle-exclamation fa-xs"></i> Risk Disclosure</a>
         </div>
+      </div>
+
+      <div class="footer-legal">
+        <p><strong>Legal Disclaimer:</strong> <em>S256 (SHA256Coin) is a fully decentralized, open-source cryptocurrency
+            based on the Proof-of-Work algorithm. There is no corporate entity, no pre-sale, no pre-mine, and no
+            developer allocation. This website is for technical and informational purposes only. The software is
+            provided "as is", without warranty of any kind. Users are solely responsible for securing their private keys
+            and complying with local tax regulations.</em></p>
       </div>
 
     </div><!-- /.container -->
   </footer>
-
-  <!-- Live Price Ticker -->
-  <div class="price-ticker" id="price-ticker">
-    <div class="price-ticker-content" id="price-ticker-content">
-      <div class="price-ticker-header">
-        <div class="price-ticker-tabs">
-          <button class="exchange-tab active" data-exchange="klingex">
-            <img src="img/klingex.svg" alt="KlingEx" class="exchange-logo-small">
-            KlingEx
-          </button>
-          <button class="exchange-tab" data-exchange="rabidrabbit">
-            <img src="img/RR_Logo.svg" alt="Rabid Rabbit" class="exchange-logo-small">
-            Rabid Rabbit
-          </button>
-        </div>
-      </div>
-
-      <!-- KlingEx Data -->
-      <div class="exchange-data" id="klingex-data">
-        <div class="price-ticker-main">
-          <div class="price-ticker-pair">S256/USDT</div>
-          <div class="price-ticker-price" id="klingex-price">$0.000024</div>
-          <div class="price-ticker-change neutral" id="klingex-change">
-            <span class="change-value">+0.00%</span>
-          </div>
-        </div>
-        <div class="price-ticker-details">
-          <div class="price-detail">
-            <span class="detail-label">24h High</span>
-            <span class="detail-value" id="klingex-high">$0.00</span>
-          </div>
-          <div class="price-detail">
-            <span class="detail-label">24h Low</span>
-            <span class="detail-value" id="klingex-low">$0.00</span>
-          </div>
-          <div class="price-detail">
-            <span class="detail-label">Volume (S256)</span>
-            <span class="detail-value" id="klingex-volume">0 S256</span>
-          </div>
-          <div class="price-detail">
-            <span class="detail-label">Volume (USDT)</span>
-            <span class="detail-value" id="klingex-volume-usdt">$0.00</span>
-          </div>
-        </div>
-        <div class="price-ticker-footer">
-          <a href="https://klingex.io/trade/S256-USDT" target="_blank" class="ticker-trade-btn">
-            Trade on KlingEx →
-          </a>
-        </div>
-        <div class="price-ticker-last-update" id="klingex-last-update">
-          Updated: --
-        </div>
-      </div>
-
-      <!-- Rabid Rabbit Data -->
-      <div class="exchange-data" id="rabidrabbit-data" style="display: none;">
-        <div class="price-ticker-main">
-          <div class="price-ticker-pair">S256/USDT</div>
-          <div class="price-ticker-price" id="rabidrabbit-price">$0.000024</div>
-          <div class="price-ticker-change neutral" id="rabidrabbit-change">
-            <span class="change-value">+0.00%</span>
-          </div>
-        </div>
-        <div class="price-ticker-details">
-          <div class="price-detail">
-            <span class="detail-label">24h High</span>
-            <span class="detail-value" id="rabidrabbit-high">N/A</span>
-          </div>
-          <div class="price-detail">
-            <span class="detail-label">24h Low</span>
-            <span class="detail-value" id="rabidrabbit-low">N/A</span>
-          </div>
-          <div class="price-detail">
-            <span class="detail-label">Volume (S256)</span>
-            <span class="detail-value" id="rabidrabbit-volume">0 S256</span>
-          </div>
-          <div class="price-detail">
-            <span class="detail-label">Volume (USDT)</span>
-            <span class="detail-value" id="rabidrabbit-volume-usdt">$0.00</span>
-          </div>
-        </div>
-        <div class="price-ticker-footer">
-          <a href="https://rabid-rabbit.org/account/trade/S256-USDT" target="_blank" class="ticker-trade-btn">
-            Trade on Rabid Rabbit →
-          </a>
-        </div>
-        <div class="price-ticker-last-update" id="rabidrabbit-last-update">
-          Updated: --
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script src="script.js"></script>
   <script src="easter-egg.js"></script>

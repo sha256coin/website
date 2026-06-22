@@ -20,9 +20,21 @@
     <loc>https://sha256coin.eu/partners.html</loc>
     <lastmod>2026-05-29</lastmod>
   </url>
-    <url>
+  <url>
     <loc>https://sha256coin.eu/media.html</loc>
     <lastmod>2026-05-29</lastmod>
+  </url>
+  <url>
+    <loc>https://sha256coin.eu/privacy</loc>
+    <lastmod>2026-06-22</lastmod>
+  </url>
+  <url>
+    <loc>https://sha256coin.eu/terms</loc>
+    <lastmod>2026-06-22</lastmod>
+  </url>
+  <url>
+    <loc>https://sha256coin.eu/risk-disclosure</loc>
+    <lastmod>2026-06-22</lastmod>
   </url>
   <url>
     <loc>https://sha256coin.eu/web-wallet/</loc>

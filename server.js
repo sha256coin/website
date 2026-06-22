@@ -170,125 +170,6 @@ app.use((req, res, next) => {
 });
 
 // ============================================
-// EXCHANGE API PROXY ENDPOINTS (with rate limiting)
-// ============================================
-
-// Input sanitization helper
-function sanitizeTickerData(data) {
-  if (!data || typeof data !== "object") return null;
-
-  // Only allow expected fields with proper types
-  const sanitized = {};
-  const allowedFields = [
-    "ticker_id",
-    "last_price",
-    "high",
-    "low",
-    "base_volume",
-    "target_volume",
-    "quote_volume",
-    "bid",
-    "ask",
-  ];
-
-  for (const field of allowedFields) {
-    if (data[field] !== undefined) {
-      // Ensure numeric fields are actually numbers
-      if (
-        [
-          "last_price",
-          "high",
-          "low",
-          "base_volume",
-          "target_volume",
-          "quote_volume",
-          "bid",
-          "ask",
-        ].includes(field)
-      ) {
-        const num = parseFloat(data[field]);
-        sanitized[field] = isNaN(num) ? 0 : num;
-      } else {
-        // String fields - escape HTML entities
-        sanitized[field] = String(data[field]).replace(/[<>&"']/g, "");
-      }
-    }
-  }
-
-  return sanitized;
-}
-// KlingEx API Proxy with timeout and response size limits
-app.get("/api/price-klingex", apiLimiter, async (req, res) => {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-
-    const response = await fetch("https://api.klingex.io/api/tickers", {
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeout);
-
-    if (!response.ok) {
-      return res.status(500).json({ error: "Failed to fetch price data" });
-    }
-
-    const tickers = await response.json();
-
-    if (!Array.isArray(tickers)) {
-      return res.status(500).json({ error: "Invalid response format" });
-    }
-
-    const s256Ticker = tickers.find((t) => t.ticker_id === "S256_USDT");
-
-    return res.json(
-      sanitizeTickerData(s256Ticker) || { error: "S256_USDT not found" },
-    );
-  } catch (err) {
-    if (err.name === "AbortError") {
-      return res.status(504).json({ error: "Request timeout" });
-    }
-    return res.status(500).json({ error: "Internal error" });
-  }
-});
-
-// Rabid Rabbit API Proxy with timeout and response size limits
-app.get("/api/price-rabidrabbit", apiLimiter, async (req, res) => {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-
-    const response = await fetch(
-      "https://rabid-rabbit.org/api/public/v1/ticker?format=json",
-      { signal: controller.signal },
-    );
-
-    clearTimeout(timeout);
-
-    if (!response.ok) {
-      return res.status(500).json({ error: "Failed to fetch price data" });
-    }
-
-    const tickers = await response.json();
-
-    if (typeof tickers !== "object") {
-      return res.status(500).json({ error: "Invalid response format" });
-    }
-
-    return res.json(
-      sanitizeTickerData(tickers["S256_USDT"]) || {
-        error: "S256_USDT not found",
-      },
-    );
-  } catch (err) {
-    if (err.name === "AbortError") {
-      return res.status(504).json({ error: "Request timeout" });
-    }
-    return res.status(500).json({ error: "Internal error" });
-  }
-});
-
-// ============================================
 // RPC PROXY ENDPOINT (Secure)
 // ============================================
 
@@ -369,6 +250,7 @@ app.post("/rpc", rpcLimiter, async (req, res) => {
     "getbestblockhash",
     "getblock",
     "getrawtransaction",
+    "gettxout",
     "sendrawtransaction",
     "estimatesmartfee",
     "scantxoutset",
@@ -380,7 +262,7 @@ app.post("/rpc", rpcLimiter, async (req, res) => {
     "getnetworkinfo",
     "getmempoolinfo",
     "getmininginfo",
-    "getrawmempool"
+    "getrawmempool",
   ];
 
   const method = req.body.method.toLowerCase();
@@ -397,7 +279,7 @@ app.post("/rpc", rpcLimiter, async (req, res) => {
   // Build RPC request
   const rpcRequest = JSON.stringify({
     jsonrpc: "1.0",
-    id: "web-wallet",
+    id: "S256COIN-RPC-PROXY",
     method: method,
     params: params,
   });
@@ -509,6 +391,36 @@ app.get("/media.html", (req, res) => {
 // Serve media kit page
 app.get("/media_kit.html", (req, res) => {
   res.sendFile(path.join(__dirname, "media_kit.html"));
+});
+
+// Serve privacy policy page
+app.get("/privacy.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "privacy.html"));
+});
+
+// Clean URL for privacy policy
+app.get("/privacy", (req, res) => {
+  res.sendFile(path.join(__dirname, "privacy.html"));
+});
+
+// Serve terms page
+app.get("/terms.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "terms.html"));
+});
+
+// Clean URL for terms page
+app.get("/terms", (req, res) => {
+  res.sendFile(path.join(__dirname, "terms.html"));
+});
+
+// Serve risk disclosure page
+app.get("/risk-disclosure.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "risk-disclosure.html"));
+});
+
+// Clean URL for risk disclosure page
+app.get("/risk-disclosure", (req, res) => {
+  res.sendFile(path.join(__dirname, "risk-disclosure.html"));
 });
 
 // Handle 404 - return proper 404, not index
