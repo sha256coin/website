@@ -62,6 +62,40 @@
 </head>
 
 <body class="privacy-page">
+    <!-- Network Bar -->
+    <div class="network-bar">
+        <div class="container">
+            <div class="network-stats-group">
+                <div class="marquee-set">
+                    <div class="network-bar-stat">
+                        <span class="network-bar-text">📱S256 Android Wallet version 1.5 released🎉 New Features: 🔐Seed
+                            Phrase
+                            Backup</span>
+                    </div>
+                    <div class="network-bar-stat">
+                        <span class="network-bar-label">📊Block Height:</span>
+                        <span class="network-bar-value" id="network-height">...</span>
+                    </div>
+                    <div class="network-bar-stat">
+                        <span class="network-bar-label">⚡Hashrate:</span>
+                        <span class="network-bar-value" id="network-hashrate">...</span>
+                    </div>
+                    <div class="network-bar-stat">
+                        <span class="network-bar-label">⛏️Difficulty:</span>
+                        <span class="network-bar-value" id="network-difficulty">...</span>
+                    </div>
+                    <div class="network-bar-stat">
+                        <span class="network-link">
+                            <a href="https://www.livecoinwatch.com/price/SHA256COIN-S256"
+                                target="_blank">LiveCoinWatch</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -70,12 +104,83 @@
                     <span class="tagline">Digital Platinum</span>
                 </a>
             </div>
-            <ul class="nav-links" style="position: static; opacity: 1; max-height: none; box-shadow: none;">
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links">
                 <li><a href="index.html#features">Features</a></li>
                 <li><a href="index.html#specs">Specs</a></li>
                 <li><a href="index.html#ecosystem">Ecosystem</a></li>
                 <li><a href="whitepaper.html" target="_blank">Technical Paper</a></li>
-                <li><a href="privacy.html" class="active">Privacy</a></li>
+                <li><a href="index.html#downloads">Downloads</a></li>
+                <li><a href="partners.html">Partners</a></li>
+                <li><a href="media_kit.html">Media Kit</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        Mining Pools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="https://sha256-mining.go.ro:50300/" target="_blank">
+                                <img src="img/sha256-mining-logo_small.png" alt="Sha256-Mining Pool"
+                                    class="exchange-logo">
+                                Sha256-Mining Pool
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pool.rodb2008.com/" target="_blank">
+                                <img src="public/s256_logo.png" alt="Solo Mining Pool" class="exchange-logo">
+                                Rodb`s Pool
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://klingex.io/mining/S256" target="_blank">
+                                <img src="img/klingex.svg" alt="KlingEx" class="exchange-logo">
+                                KlingEx Mining
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://ashampool.org/" target="_blank">
+                                <img src="img/asham-pool.png" alt="Asham Pool" class="exchange-logo">
+                                Asham-pool.org
+                            </a>
+                        </li>
+                        <!--
+            <li>
+              <a href="https://www.coinxpool.com/" target="_blank">
+                <img src="img/coinx_logo.png" alt="CoinXpool" class="exchange-logo">
+                coinXpool.com
+              </a>
+            </li>
+            -->
+                        <!--
+            <li>
+              <a href="https://koinium.it/" target="_blank">
+                <img src="img/koinium.svg" alt="Koinium" class="exchange-logo">
+                Koinium Mining
+              </a>
+            </li>
+            -->
+                    </ul>
+                </li>
+                <li>
+                    <a href="media.html">Media</a>
+                </li>
+                <li>
+                    <a href="https://explorer.sha256coin.eu" class="btn-explorer">Explorer</a>
+                </li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </li>
+                <li>
+                    <span class="pi-symbol" id="pi-easter-egg" title="π">π</span>
+                </li>
             </ul>
         </div>
     </nav>
@@ -84,40 +189,150 @@
         <div class="container">
             <section class="privacy-card">
                 <h1>Privacy Policy</h1>
+                <p style="font-size:0.85rem; color:rgba(255,255,255,0.45); margin-bottom:1.2rem;">Effective date: June
+                    2026
+                </p>
+
                 <p><em>S256 does not collect, store, or process any personal data. Transactions in the Web Wallet and
-                        Android Wallet are
-                        signed locally on your device; your seed phrases or private keys are never transmitted to
-                        any server. We do not use tracking cookies. Server logs may temporarily collect IP addresses
-                        strictly for infrastructure security and DDoS prevention. Both wallets are designed as fully
-                        noncustodial solutions where users maintain complete control and ownership of their funds.</em>
+                        Android Wallet are signed locally on your device; your seed phrases and private keys are never
+                        transmitted to any server. We do not use tracking cookies, analytics services, or any
+                        third-party data processors. Server logs may temporarily record IP addresses strictly for
+                        infrastructure security and DDoS prevention purposes; these logs are not shared with third
+                        parties. Both wallets are designed as fully noncustodial solutions where users maintain
+                        complete control and ownership of their funds at all times.</em>
+                </p>
+
+                <p style="margin-top:1.4rem;"><em><strong>Regulatory Notice:</strong> S256 (SHA256Coin) is an
+                        open-source, decentralized Proof-of-Work cryptocurrency. This project does not constitute
+                        a crypto-asset service as defined under EU Regulation 2023/1114 (MiCA). No financial
+                        services, custody, exchange, or investment advisory services are offered. Users are solely
+                        responsible for compliance with the laws and regulations applicable in their jurisdiction.</em>
                 </p>
             </section>
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
+
+            <div class="footer-grid">
+
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-brand-link">
+                        <span class="gradient-text"><i class="fa-solid fa-coins"></i> S256</span>
+                    </a>
+                    <p class="footer-tagline">Digital Platinum</p>
+                    <a href="mailto:info@sha256coin.eu" class="footer-email">
+                        <i class="fa-regular fa-envelope"></i> info@sha256coin.eu
+                    </a>
+                    <a href="mailto:contact@sha256coin.eu" class="footer-email">
+                        <i class="fa-solid fa-envelope-open-text"></i> contact@sha256coin.eu
+                    </a>
+                </div>
+
+                <!-- Resources -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title"><i class="fa-solid fa-layer-group"></i> Resources</h4>
+                    <ul>
+                        <li><a href="whitepaper.html" target="_blank"><i class="fa-regular fa-file-lines"></i> Technical
+                                Paper</a>
+                        </li>
+                        <li><a href="https://explorer.sha256coin.eu"><i class="fa-solid fa-magnifying-glass"></i>
+                                BlockChain
+                                Explorer</a>
+                        </li>
+                        <li><a href="https://github.com/sha256coin"><i class="fa-brands fa-github"></i> GitHub</a></li>
+                        <li><a href="https://github.com/bitcoin/bitcoin"><i class="fa-brands fa-bitcoin"></i>
+                                Documentation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Community -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title"><i class="fa-solid fa-users"></i> Community</h4>
+                    <ul>
+                        <li>
+                            <a href="https://discord.gg/dtn58HrC94" target="_blank" rel="noopener">
+                                <i class="fa-brands fa-discord"></i> Discord
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://t.me/s256coin" target="_blank" rel="noopener">
+                                <i class="fa-brands fa-telegram"></i> Telegram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bitcointalk.org/index.php?topic=5567429.msg66131557#msg66131557"
+                                target="_blank" rel="noopener">
+                                <i class="fa-brands fa-bitcoin"></i> Bitcointalk
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://x.com/s256coin" target="_blank" rel="noopener">
+                                <i class="fa-brands fa-x-twitter"></i> Twitter / X
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Network Info -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title"><i class="fa-solid fa-network-wired"></i> Network</h4>
+                    <dl class="network-specs">
+                        <div>
+                            <dt><i class="fa-solid fa-door-open"></i> Port</dt>
+                            <dd>25256</dd>
+                        </div>
+                        <div>
+                            <dt><i class="fa-solid fa-terminal"></i> RPC</dt>
+                            <dd>25332</dd>
+                        </div>
+                        <div>
+                            <dt><i class="fa-solid fa-gears"></i> Algorithm</dt>
+                            <dd>SHA-256</dd>
+                        </div>
+                        <div>
+                            <dt><i class="fa-solid fa-cube"></i> Genesis</dt>
+                            <dd>Nov 30, 2025</dd>
+                        </div>
+                    </dl>
+                </div>
+
+            </div><!-- /.footer-grid -->
+
             <div class="footer-bottom">
-                <p class="footer-copy">&copy; <span>2026</span> S256 &mdash; Open source cryptocurrency.</p>
+                <p class="footer-copy">
+                    &copy; <span id="current-year">2026</span> S256 &mdash; Open source cryptocurrency.
+                </p>
+                <span class="footer-origin">
+                    <i class="fa-solid fa-flag-usa"
+                        style="color: transparent; background: linear-gradient(to right, #002B7F 33.3%, #FCD116 33.3%, #FCD116 66.6%, #CE1126 66.6%); background-clip: text; -webkit-background-clip: text; display: none;"></i>
+                    <i class="fa-solid fa-bolt"></i> Made in <i class="fa-solid fa-location-dot"></i> Romania 🇷🇴
+                </span>
                 <div class="footer-bottom-links">
-                    <a href="index.html#features"><i class="fa-solid fa-star fa-xs"></i> Features</a>
-                    <a href="index.html#downloads"><i class="fa-solid fa-download fa-xs"></i> Downloads</a>
-                    <a href="whitepaper.html" target="_blank"><i class="fa-regular fa-file-lines fa-xs"></i> Technical
-                        Paper</a>
+                    <a href="privacy.html"><i class="fa-solid fa-shield-halved fa-xs"></i> Privacy</a>
                     <a href="terms.html"><i class="fa-solid fa-file-contract fa-xs"></i> Terms</a>
                     <a href="risk-disclosure.html"><i class="fa-solid fa-triangle-exclamation fa-xs"></i> Risk
                         Disclosure</a>
                 </div>
             </div>
+
             <div class="footer-legal">
                 <p><strong>Legal Disclaimer:</strong> <em>S256 (SHA256Coin) is a fully decentralized, open-source
                         cryptocurrency based on the Proof-of-Work algorithm. There is no corporate entity, no pre-sale,
                         no pre-mine, and no developer allocation. This website is for technical and informational
                         purposes only. The software is provided "as is", without warranty of any kind. Users are solely
-                        responsible for securing their private keys and complying with local tax regulations.</em></p>
+                        responsible for securing their private keys and seed phrases and for complying with applicable
+                        local laws and tax regulations. S256 does not constitute a crypto-asset service under EU
+                        Regulation 2023/1114 (MiCA).</em></p>
             </div>
-        </div>
+
+        </div><!-- /.container -->
     </footer>
+    <script src="script.js"></script>
+    <script src="easter-egg.js"></script>
 </body>
 
 </html>
