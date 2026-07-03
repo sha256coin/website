@@ -1019,19 +1019,19 @@ tbody tr:hover {
   color: rgba(39, 43, 236, 0.95);
 }
 
-.footer-legal {
+.footer-bottom {
   padding: 0.8rem 0 1.4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.footer-legal p {
+.footer-bottom p {
   margin: 0;
   font-size: 0.8rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.52);
 }
 
-.footer-legal strong {
+.footer-bottom strong {
   color: rgba(255, 255, 255, 0.72);
 }
 
