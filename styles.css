@@ -735,6 +735,23 @@ tbody tr:hover {
   margin: 0 auto;
 }
 
+.release-notice {
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--primary);
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.release-notice a {
+  color: var(--accent);
+}
+
 .download-card {
   background: var(--bg-card);
   padding: 2.5rem;
