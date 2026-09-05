@@ -729,10 +729,21 @@ tbody tr:hover {
 
 .download-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
+}
+
+.download-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1.5rem 0;
+}
+
+.download-options .btn-download {
+  margin: 0;
 }
 
 .release-notice {
