@@ -538,9 +538,63 @@ async function fetchNetworkStats() {
     console.error("Error fetching network stats:", error);
   }
 }
-// Initialize Network Stats and Marquee
+// Latest block card in the hero: hash with its leading zeros, linked to the explorer
+async function fetchLatestBlock() {
+  const card = document.getElementById("latest-block");
+  if (!card) return;
+  try {
+    const response = await fetch(
+      "https://explorer.sha256coin.eu/api/blocks/recent/1",
+    );
+    const blocks = await response.json();
+    const block = Array.isArray(blocks) ? blocks[0] : null;
+    if (!block) return;
+
+    const hash = String(block.hash || "");
+    const height = Number(block.height);
+    if (!/^[0-9a-f]{64}$/.test(hash) || !Number.isInteger(height)) return;
+
+    const zeros = hash.match(/^0*/)[0].length;
+    const hashEl = document.getElementById("latest-block-hash");
+    const zerosEl = document.createElement("span");
+    zerosEl.className = "hash-zeros";
+    zerosEl.textContent = hash.slice(0, zeros);
+    hashEl.replaceChildren(zerosEl, document.createTextNode(hash.slice(zeros)));
+
+    document.getElementById("latest-block-title").textContent =
+      "Latest block \u00b7 " + height.toLocaleString("en-US");
+
+    const ageEl = document.getElementById("latest-block-age");
+    const minutes = Math.floor((Date.now() / 1000 - Number(block.time)) / 60);
+    if (Number.isFinite(minutes) && minutes >= 0) {
+      ageEl.textContent =
+        minutes < 1 ? "just now"
+          : minutes < 60 ? minutes + " min ago"
+            : Math.floor(minutes / 60) + " h " + (minutes % 60) + " min ago";
+    }
+
+    const workEl = document.getElementById("latest-block-work");
+    const sup = document.createElement("sup");
+    sup.textContent = String(zeros * 4);
+    workEl.replaceChildren(
+      document.createTextNode(zeros + " leading hex zeros \u2248 2"),
+      sup,
+      document.createTextNode(" hashes of work"),
+    );
+
+    card.href = "https://explorer.sha256coin.eu/block/" + hash;
+  } catch (error) {
+    console.error("Error fetching latest block:", error);
+  }
+}
+
+// Initialize Network Stats, Latest Block and Marquee
 fetchNetworkStats();
-setInterval(fetchNetworkStats, 60000); // Refresh every minute
+fetchLatestBlock();
+setInterval(() => {
+  fetchNetworkStats();
+  fetchLatestBlock();
+}, 60000); // Refresh every minute
 
 // JavaScript Marquee Implementation
 function initMarquee() {

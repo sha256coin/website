@@ -148,16 +148,17 @@
           <a href="https://explorer.sha256coin.eu" class="btn btn-ghost">View Explorer <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="coin-stage">
+      <div class="hero-visual">
+        <div class="coin-stage" aria-hidden="true">
           <div class="coin-ring"></div>
           <img src="public/s256_logo.png" alt="" class="coin-logo" width="320" height="320">
         </div>
-        <div class="hash-card">
-          <div class="hash-card-label">Proof of work &middot; block 16,997</div>
-          <code class="hash-value"><span class="hash-zeros">0000000000000000</span>b5ad091771ed1675f2d8c49053433d49647b8b6b8c283d16</code>
-          <div class="hash-card-foot">16 leading hex zeros &asymp; 2<sup>64</sup> hashes of work</div>
-        </div>
+        <a class="hash-card" id="latest-block" target="_blank" rel="noopener"
+          href="https://explorer.sha256coin.eu/block/0000000000000000b5ad091771ed1675f2d8c49053433d49647b8b6b8c283d16">
+          <div class="hash-card-label"><span id="latest-block-title">Proof of work &middot; block 16,997</span><span class="hash-card-age" id="latest-block-age"></span></div>
+          <code class="hash-value" id="latest-block-hash"><span class="hash-zeros">0000000000000000</span>b5ad091771ed1675f2d8c49053433d49647b8b6b8c283d16</code>
+          <div class="hash-card-foot" id="latest-block-work">16 leading hex zeros &asymp; 2<sup>64</sup> hashes of work</div>
+        </a>
       </div>
       <div class="hero-stats">
         <div class="hero-stats-grid">
