@@ -367,6 +367,13 @@ app.use(
     index: ["index.html"],
     maxAge: "1d", // Cache static assets
     etag: true,
+    // Pages are always revalidated (a cheap 304 when unchanged), so a new
+    // ?v= on the CSS/JS links reaches visitors on their next visit
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith(".html") || filePath.endsWith(".xml")) {
+        res.setHeader("Cache-Control", "no-cache");
+      }
+    },
   }),
 );
 
