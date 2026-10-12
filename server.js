@@ -37,10 +37,10 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "'unsafe-inline'"], // Required for static HTML with inline scripts
         scriptSrcAttr: ["'unsafe-inline'"],
-        styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"], // Inline styles needed for dynamic theming  Added cjsjs for Font Awesome CSS
+        styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com"], // Inline styles needed for dynamic theming  Added cjsjs for Font Awesome CSS
         imgSrc: ["'self'", "data:", "https:"],
         connectSrc: ["'self'", "https://explorer.sha256coin.eu"],
-        fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
+        fontSrc: ["'self'", "https://cdnjs.cloudflare.com", "https://fonts.gstatic.com"],
         objectSrc: ["'none'"],
         mediaSrc: ["'self'"],
         frameSrc: [
