@@ -988,3 +988,5 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
   justify-content: space-between;
   gap: 1rem;
 }
+
+.hash-card-age { color: var(--primary); white-space: nowrap; }
