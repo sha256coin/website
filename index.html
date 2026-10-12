@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="theme.css" />
+  <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -87,26 +88,7 @@
         <li><a href="partners.html">Partners</a></li>
         <li><a href="media_kit.html">Media Kit</a></li>
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle">
-            Mining Pools
-            <span class="dropdown-arrow">▼</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="https://sha256-mining.go.ro:50300/" target="_blank">
-                <img src="img/sha256-mining-logo_small.png" alt="Sha256-Mining Pool" class="exchange-logo">
-                Sha256-Mining Pool
-              </a>
-            </li>
-            <li>
-              <a href="https://pool.rodb2008.com/" target="_blank">
-                <img src="public/s256_logo.png" alt="Rodb's Pool" class="exchange-logo">
-                Rodb`s Pool
-              </a>
-            </li>
-          </ul>
-        </li>
+        <li><a href="mining.html">Mining</a></li>
         <li>
           <a href="media.html">Media</a>
         </li>
@@ -298,7 +280,7 @@
           <div class="eco-icon"><i class="fa-solid fa-server"></i></div>
           <h3>Mining Pools</h3>
           <p>Join the decentralized network and earn rewards by securing the blockchain.</p>
-          <a href="https://miningpoolstats.app/coins/S256" class="eco-link">Start Mining →</a>
+          <a href="mining.html" class="eco-link">Start Mining →</a>
         </div>
         <div class="ecosystem-card">
           <div class="eco-icon"><i class="fa-solid fa-chart-line"></i></div>

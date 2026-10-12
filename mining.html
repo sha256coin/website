@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mine S256 with any SHA-256 ASIC: mining pools, stratum settings and a step-by-step guide." />
+  <title>S256 - Mining</title>
+  <!-- Basic OG tags (required for Discord/Twitter/Facebook) -->
+  <meta property="og:title" content="S256 - Mining" />
+  <meta property="og:description"
+    content="S256 - Digital Platinum. Double the Work, Double the Value. A SHA-256 cryptocurrency with 2x Bitcoin parameters." />
+  <meta property="og:image" content="https://sha256coin.eu/img/og_image.png" />
+  <meta property="og:url" content="https://sha256coin.eu/mining.html" />
+  <meta property="og:type" content="website" />
+  <!-- Twitter/X card (also used by some other platforms) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="S256 - Mining" />
+  <meta name="twitter:description"
+    content="S256 - Digital Platinum. Double the Work, Double the Value. A SHA-256 cryptocurrency with 2x Bitcoin parameters." />
+  <meta name="twitter:image" content="https://sha256coin.eu/img/og_image.png" />
+  <meta name="twitter:url" content="https://sha256coin.eu/mining.html" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="theme.css" />
+  <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
+</head>
+
+<body>
+  <!-- Network Bar -->
+  <div class="network-bar">
+    <div class="container">
+      <div class="network-stats-group">
+        <div class="marquee-set">
+          <div class="network-bar-stat">
+            <span class="network-bar-text">🚀S256 Core v3.0.1 released — mandatory upgrade before block 17,500, when merged mining (AuxPoW) activates. Already on 3.0.0? Upgrade again! Download below ⬇️</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">📊Block Height:</span>
+            <span class="network-bar-value" id="network-height">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">⚡Hashrate:</span>
+            <span class="network-bar-value" id="network-hashrate">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">⛏️Difficulty:</span>
+            <span class="network-bar-value" id="network-difficulty">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-link">
+              <a href="https://www.livecoinwatch.com/price/SHA256COIN-S256" target="_blank">LiveCoinWatch</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <a href="index.html" class="nav-brand-link">
+          <img src="public/s256_logo_200x200.png" alt="" class="brand-mark" width="36" height="36">
+          <span class="logo">S256</span>
+          <span class="tagline">Digital Platinum</span>
+        </a>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#specs">Specs</a></li>
+        <li><a href="index.html#ecosystem">Ecosystem</a></li>
+        <li><a href="whitepaper.html" target="_blank">Technical Paper</a></li>
+        <li><a href="index.html#downloads">Downloads</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="media_kit.html">Media Kit</a></li>
+
+        <li><a href="mining.html" class="active">Mining</a></li>
+        <li>
+          <a href="media.html">Media</a>
+        </li>
+        <li>
+          <a href="https://explorer.sha256coin.eu" class="btn-explorer">Explorer</a>
+        </li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </li>
+        <li>
+          <span class="pi-symbol" id="pi-easter-egg" title="π">π</span>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Mining -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-eyebrow">SHA-256 &middot; ASIC &middot; 20-minute blocks</p>
+      <h1 class="page-title">Mine <span class="gradient-text">S256</span></h1>
+      <p class="page-lead">S256 uses the same SHA-256 proof of work as Bitcoin, so any Bitcoin ASIC can mine it.
+        Point your miner at a pool, use your S256 address as the username, and you are mining.</p>
+      <div class="hero-buttons">
+        <a href="#pools" class="btn btn-primary"><i class="fa-solid fa-server"></i> Mining Pools</a>
+        <a href="#guide" class="btn btn-secondary"><i class="fa-solid fa-list-check"></i> Setup Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="pools" class="mining-pools">
+    <div class="container">
+      <h2 class="section-title">Mining Pools</h2>
+      <p class="section-subtitle">Both pools took part in testing S256 merged mining on testnet3 before v3.0.1.</p>
+
+      <div class="pool-grid">
+        <article class="pool-card">
+          <div class="pool-card-head">
+            <img src="img/sha256-mining-logo_small.png" alt="" class="pool-logo" width="48" height="48">
+            <div>
+              <h3>Sha256-Mining Pool</h3>
+              <a class="pool-host" href="https://sha256-mining.go.ro:50300/" target="_blank" rel="noopener">sha256-mining.go.ro</a>
+            </div>
+          </div>
+
+          <dl class="pool-facts">
+            <div><dt>Modes</dt><dd>PROP pool (default) or solo</dd></div>
+            <div><dt>Fee</dt><dd>1% (pool and solo)</dd></div>
+            <div><dt>Payouts</dt><dd>Hourly, minimum 1 S256</dd></div>
+            <div><dt>Rewards mature</dt><dd>After 201 confirmations</dd></div>
+          </dl>
+
+          <div class="table-scroll">
+            <table class="port-table">
+              <thead>
+                <tr><th>Stratum URL</th><th>Start diff</th><th>Solo merged mining</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>stratum+tcp://sha256-mining.go.ro:50272</code></td><td>15K</td><td>+ VMESH</td></tr>
+                <tr><td><code>stratum+tcp://sha256-mining.go.ro:50273</code></td><td>50K</td><td>+ VMESH</td></tr>
+                <tr><td><code>stratum+tcp://sha256-mining.go.ro:50274</code></td><td>250K</td><td>+ VMESH</td></tr>
+                <tr><td><code>stratum+tcp://sha256-mining.go.ro:50276</code></td><td>1M</td><td>+ VMESH</td></tr>
+                <tr><td><code>stratum+tcp://sha256-mining.go.ro:50277</code></td><td>250K</td><td>+ ESF</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="pool-note">VarDiff adjusts each miner&rsquo;s difficulty, so the start difficulty only sets where it begins.
+            Solo miners also merge-mine VMESH or ESF on the same hashes when they add <code>vmesh=</code> or <code>esf=</code> with their address to the password.</p>
+
+          <div class="pool-actions">
+            <a href="https://sha256-mining.go.ro:50300/" class="btn btn-primary" target="_blank" rel="noopener">Open Pool <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <a href="https://sha256-mining.go.ro:50300/getting_started" class="btn btn-secondary" target="_blank" rel="noopener">Config Generator</a>
+          </div>
+        </article>
+
+        <article class="pool-card">
+          <div class="pool-card-head">
+            <img src="public/s256_logo.png" alt="" class="pool-logo" width="48" height="48">
+            <div>
+              <h3>Rodb&rsquo;s Pool</h3>
+              <a class="pool-host" href="https://pool.rodb2008.com/" target="_blank" rel="noopener">pool.rodb2008.com</a>
+            </div>
+          </div>
+          <p class="pool-note">A SHA-256 pool run by RodB, who tested S256 merged mining with mkpool and helped get the
+            v3.0.1 auxpow format right. Ports, fees and payout rules are listed on the pool&rsquo;s own site.</p>
+          <div class="pool-actions">
+            <a href="https://pool.rodb2008.com/" class="btn btn-primary" target="_blank" rel="noopener">Open Pool <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <p class="pool-more">Running a pool that mines S256? Contact <span class="select-all">info@sha256coin.eu</span> to be listed here.</p>
+    </div>
+  </section>
+
+  <section id="guide" class="mining-guide">
+    <div class="container">
+      <h2 class="section-title">Setup Guide</h2>
+      <p class="section-subtitle">From a new wallet to your first payout in four steps.</p>
+
+      <ol class="guide-steps">
+        <li class="guide-step">
+          <h3>Get an S256 address</h3>
+          <p>Install a <a href="index.html#downloads">wallet</a> or open the <a href="https://sha256coin.eu/web-wallet/">web wallet</a>
+            and create a receiving address. S256 addresses start with <code>s21</code> (bech32), <code>S</code> or <code>8</code>.
+            Pools pay to this address, so keep its keys or seed phrase backed up.</p>
+        </li>
+        <li class="guide-step">
+          <h3>Pick a pool and a port</h3>
+          <p>Choose a pool above. On Sha256-Mining, pick the port whose start difficulty is closest to what your miner handles;
+            a small miner goes on 50272, a large farm or rental on 50276. VarDiff tunes it from there.</p>
+        </li>
+        <li class="guide-step">
+          <h3>Configure your miner</h3>
+          <p>In your ASIC&rsquo;s pool settings, enter:</p>
+          <dl class="miner-config">
+            <div><dt>URL</dt><dd><code>stratum+tcp://sha256-mining.go.ro:50273</code></dd></div>
+            <div><dt>Username</dt><dd><code>your-s256-address.worker1</code></dd></div>
+            <div><dt>Password</dt><dd><code>x</code> for pool mining, <code>m=solo</code> to mine solo</dd></div>
+          </dl>
+          <p>The part after the dot is a worker name of your choice, so you can tell several miners apart.</p>
+        </li>
+        <li class="guide-step">
+          <h3>Watch shares and payouts</h3>
+          <p>Within a few minutes the pool shows your hashrate. Block rewards unlock after S256&rsquo;s coinbase maturity
+            (200 blocks; the pool waits for 201 confirmations) and are then paid out with the next payment run.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="mining-more">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card">
+          <h3><i class="fa-solid fa-microchip"></i> Hardware</h3>
+          <p>Any SHA-256 ASIC that mines Bitcoin mines S256: the block header and hashing are the same. GPU and CPU mining is not
+            competitive. Rented SHA-256 hashrate works too; point the rental at a pool&rsquo;s stratum URL.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="fa-solid fa-terminal"></i> Solo with your own node</h3>
+          <p>Run <code>sha256coind</code> with <code>server=1</code> and RPC credentials, then use mining or pool software that
+            speaks <code>getblocktemplate</code> against your node&rsquo;s RPC port, <code>25332</code>. The whole 100 S256 reward
+            is yours when you find a block.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="fa-solid fa-link"></i> Merged mining from block 17,500</h3>
+          <p>From block 17,500, pools on other SHA-256 chains can merge-mine S256 at no cost to their hashrate. S256&rsquo;s
+            merge-mining chain ID is <code>598</code>. Pool operators: see the
+            <a href="https://github.com/sha256coin/s256-core/blob/main/POOL_PROXY_NOTE.md" target="_blank" rel="noopener">pool integration notes</a>
+            and run S256 Core v3.0.1 or later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-brand-link">
+            <span class="gradient-text"><i class="fa-solid fa-coins"></i> S256</span>
+          </a>
+          <p class="footer-tagline">Digital Platinum</p>
+          <a href="mailto:info@sha256coin.eu" class="footer-email">
+            <i class="fa-regular fa-envelope"></i> info@sha256coin.eu
+          </a>
+          <a href="mailto:contact@sha256coin.eu" class="footer-email">
+            <i class="fa-solid fa-envelope-open-text"></i> contact@sha256coin.eu
+          </a>
+        </div>
+
+        <!-- Resources -->
+        <div class="footer-col">
+          <h4 class="footer-col-title"><i class="fa-solid fa-layer-group"></i> Resources</h4>
+          <ul>
+            <li><a href="whitepaper.html" target="_blank"><i class="fa-regular fa-file-lines"></i> Technical Paper</a>
+            </li>
+            <li><a href="https://explorer.sha256coin.eu"><i class="fa-solid fa-magnifying-glass"></i> BlockChain
+                Explorer</a>
+            </li>
+            <li><a href="https://github.com/sha256coin"><i class="fa-brands fa-github"></i> GitHub</a></li>
+            <li><a href="https://github.com/bitcoin/bitcoin"><i class="fa-brands fa-bitcoin"></i> Documentation</a></li>
+          </ul>
+        </div>
+
+        <!-- Community -->
+        <div class="footer-col">
+          <h4 class="footer-col-title"><i class="fa-solid fa-users"></i> Community</h4>
+          <ul>
+            <li>
+              <a href="https://discord.gg/dtn58HrC94" target="_blank" rel="noopener">
+                <i class="fa-brands fa-discord"></i> Discord
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/s256coin" target="_blank" rel="noopener">
+                <i class="fa-brands fa-telegram"></i> Telegram
+              </a>
+            </li>
+            <li>
+              <a href="https://bitcointalk.org/index.php?topic=5567429.msg66131557#msg66131557" target="_blank"
+                rel="noopener">
+                <i class="fa-brands fa-bitcoin"></i> Bitcointalk
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/s256coin" target="_blank" rel="noopener">
+                <i class="fa-brands fa-x-twitter"></i> Twitter / X
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Network Info -->
+        <div class="footer-col">
+          <h4 class="footer-col-title"><i class="fa-solid fa-network-wired"></i> Network</h4>
+          <dl class="network-specs">
+            <div>
+              <dt><i class="fa-solid fa-door-open"></i> Port</dt>
+              <dd>25256</dd>
+            </div>
+            <div>
+              <dt><i class="fa-solid fa-terminal"></i> RPC</dt>
+              <dd>25332</dd>
+            </div>
+            <div>
+              <dt><i class="fa-solid fa-gears"></i> Algorithm</dt>
+              <dd>SHA-256</dd>
+            </div>
+            <div>
+              <dt><i class="fa-solid fa-cube"></i> Genesis</dt>
+              <dd>Nov 30, 2025</dd>
+            </div>
+          </dl>
+        </div>
+
+      </div><!-- /.footer-grid -->
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          &copy; <span id="current-year">2026</span> S256 &mdash; Open source cryptocurrency.
+        </p>
+        <span class="footer-origin">
+          <i class="fa-solid fa-flag-usa"
+            style="color: transparent; background: linear-gradient(to right, #002B7F 33.3%, #FCD116 33.3%, #FCD116 66.6%, #CE1126 66.6%); background-clip: text; -webkit-background-clip: text; display: none;"></i>
+          <i class="fa-solid fa-bolt"></i> Made in <a href="https://www.discover-romania.site/" target="_blank" rel="noopener" class="footer-origin-link"><i class="fa-solid fa-location-dot"></i> Romania 🇷🇴</a>
+        </span>
+        <div class="footer-bottom-links">
+          <a href="privacy.html"><i class="fa-solid fa-shield-halved fa-xs"></i> Privacy</a>
+          <a href="terms.html"><i class="fa-solid fa-file-contract fa-xs"></i> Terms</a>
+          <a href="risk-disclosure.html"><i class="fa-solid fa-triangle-exclamation fa-xs"></i> Risk Disclosure</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p><strong>Disclaimer:</strong> <em>S256 (SHA256Coin) is a fully decentralized, open-source
+            cryptocurrency based on the Proof-of-Work algorithm. There is no corporate entity, no pre-sale,
+            no pre-mine, and no developer allocation. This website is for technical and informational
+            purposes only. The software is provided "as is", without warranty of any kind. Users are solely
+            responsible for securing their private keys and seed phrases and for complying with applicable
+            local laws and tax regulations. S256 does not constitute a crypto-asset service under EU
+            Regulation 2023/1114 (MiCA).</em></p>
+      </div>
+
+    </div><!-- /.container -->
+  </footer>
+
+
+  <script src="script.js"></script>
+  <script src="easter-egg.js"></script>
+
+</body>
+
+</html>

@@ -395,6 +395,16 @@ app.get("/media_kit.html", (req, res) => {
   res.sendFile(path.join(__dirname, "media_kit.html"));
 });
 
+// Serve mining page
+app.get("/mining.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "mining.html"));
+});
+
+// Clean URL for mining page
+app.get("/mining", (req, res) => {
+  res.sendFile(path.join(__dirname, "mining.html"));
+});
+
 // Serve privacy policy page
 app.get("/privacy.html", (req, res) => {
   res.sendFile(path.join(__dirname, "privacy.html"));

@@ -990,3 +990,251 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 }
 
 .hash-card-age { color: var(--primary); white-space: nowrap; }
+
+/* ============================================
+   Mining page
+   ============================================ */
+
+.page-hero {
+  background:
+    radial-gradient(50% 80% at 50% 0%, var(--glow), transparent 70%),
+    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 48px 48px;
+  border-bottom: 1px solid var(--line);
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(40px, 6vw, 72px);
+}
+
+.page-title {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.page-lead {
+  color: var(--text-light);
+  font-size: 1.08rem;
+  max-width: 62ch;
+  margin-bottom: 2rem;
+}
+
+.pool-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 2.5rem;
+}
+
+.pool-card {
+  min-width: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.pool-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.pool-card-head h3 { color: var(--text); font-size: 1.35rem; }
+
+.pool-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: #13161b;
+  padding: 4px;
+}
+
+.pool-host {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.pool-host:hover { text-decoration: underline; }
+
+.pool-facts,
+.miner-config {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.pool-facts > div,
+.miner-config > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.pool-facts dt,
+.miner-config dt {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  padding-top: 0.15rem;
+}
+
+.pool-facts dd,
+.miner-config dd {
+  margin: 0;
+  color: var(--text);
+  text-align: right;
+  min-width: 0;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.port-table { min-width: 520px; font-size: 0.9rem; }
+
+.port-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  background: var(--surface-2);
+  padding: 0.7rem 1rem;
+}
+
+.port-table td {
+  padding: 0.65rem 1rem;
+  color: var(--text-light);
+  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+
+.port-table tbody tr:last-child td { border-bottom: 0; }
+.port-table tbody tr:hover { background: var(--surface-2); }
+
+.mining-pools code,
+.mining-guide code,
+.mining-more code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+  overflow-wrap: anywhere;
+}
+
+.port-table code { background: none; border: 0; padding: 0; white-space: nowrap; }
+
+.pool-note { color: var(--text-light); font-size: 0.95rem; }
+
+.pool-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.pool-more {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.mining-guide {
+  background: var(--surface-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-steps {
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+  padding: 0;
+}
+
+.guide-step {
+  counter-increment: step;
+  min-width: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+.guide-step::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 165, 36, 0.45);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.guide-step h3 { color: var(--text); font-size: 1.2rem; }
+.guide-step p { color: var(--text-light); }
+.guide-step a,
+.info-card a { color: var(--primary); }
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.info-card {
+  min-width: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+}
+
+.info-card h3 {
+  color: var(--text);
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.info-card h3 i { color: var(--primary); }
+.info-card p { color: var(--text-light); }
+
+.nav-links a.active { color: var(--text); }
+
+@media (max-width: 900px) {
+  .pool-grid,
+  .guide-steps,
+  .info-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .pool-facts > div,
+  .miner-config > div { flex-direction: column; gap: 0.2rem; }
+  .pool-facts dd,
+  .miner-config dd { text-align: left; }
+}
