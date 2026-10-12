@@ -564,15 +564,6 @@ async function fetchLatestBlock() {
     document.getElementById("latest-block-title").textContent =
       "Latest block \u00b7 " + height.toLocaleString("en-US");
 
-    const ageEl = document.getElementById("latest-block-age");
-    const minutes = Math.floor((Date.now() / 1000 - Number(block.time)) / 60);
-    if (Number.isFinite(minutes) && minutes >= 0) {
-      ageEl.textContent =
-        minutes < 1 ? "just now"
-          : minutes < 60 ? minutes + " min ago"
-            : Math.floor(minutes / 60) + " h " + (minutes % 60) + " min ago";
-    }
-
     const workEl = document.getElementById("latest-block-work");
     const sup = document.createElement("sup");
     sup.textContent = String(zeros * 4);

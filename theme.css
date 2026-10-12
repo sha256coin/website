@@ -862,8 +862,8 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 
 .theme-toggle:hover { transform: none; box-shadow: none; border-color: var(--amber); }
 
-.footer-origin-link { color: inherit; text-decoration: none; }
-.footer-origin-link:hover { color: #ffbf55; text-decoration: underline; text-underline-offset: 3px; }
+.footer-origin-link { color: #ffbf55; font-weight: 500; text-decoration: none; }
+.footer-origin-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ============================================
    Other pages
@@ -988,5 +988,3 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
   justify-content: space-between;
   gap: 1rem;
 }
-
-.hash-card-age { color: var(--primary); white-space: nowrap; }
