@@ -250,11 +250,11 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelectorAll(".feature-card, .philosophy-card, .download-card")
     .forEach((card) => {
       card.addEventListener("mouseenter", function () {
-        this.style.transform = "translateY(-10px) scale(1.02)";
+        this.style.transform = "translateY(-4px)";
       });
 
       card.addEventListener("mouseleave", function () {
-        this.style.transform = "translateY(0) scale(1)";
+        this.style.transform = "";
       });
     });
 

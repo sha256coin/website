@@ -24,7 +24,11 @@
   <meta name="twitter:url" content="https://sha256coin.eu/" />
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -64,6 +68,7 @@
     <div class="container">
       <div class="nav-brand">
         <a href="index.html" class="nav-brand-link">
+          <img src="public/s256_logo_200x200.png" alt="" class="brand-mark" width="36" height="36">
           <span class="logo">S256</span>
           <span class="tagline">Digital Platinum</span>
         </a>
@@ -124,21 +129,35 @@
   <section class="hero">
     <div class="hero-gradient"></div>
     <div class="container hero-content">
-      <h1 class="hero-title">
-        <span class="gradient-text">S256</span>
-        Digital Platinum
-      </h1>
-      <p class="hero-subtitle">Double the Work, Double the Value</p>
-      <p class="hero-description">
-        The contrarian approach to cryptocurrency: harder to mine, longer
-        block times, true scarcity through proof of real work.
-      </p>
-      <div class="hero-buttons">
-        <a href="#downloads" class="btn btn-primary">Download Wallet</a>
-        <a href="https://github.com/sha256coin/android-wallet/releases/tag/v1.6" target="_blank"
-          class="btn btn-primary">Android-Wallet</a>
-        <a href="https://sha256coin.eu/web-wallet/" class="btn btn-primary">Web-Wallet</a>
-        <a href="https://explorer.sha256coin.eu" class="btn btn-secondary">View Explorer</a>
+      <div class="hero-copy">
+        <p class="hero-eyebrow">SHA-256 proof of work &middot; since Nov 30, 2025</p>
+        <h1 class="hero-title">
+          <span class="gradient-text">S256</span>
+          Digital Platinum
+        </h1>
+        <p class="hero-subtitle">Double the Work, Double the Value</p>
+        <p class="hero-description">
+          The contrarian approach to cryptocurrency: harder to mine, longer
+          block times, true scarcity through proof of real work.
+        </p>
+        <div class="hero-buttons">
+          <a href="#downloads" class="btn btn-primary"><i class="fa-solid fa-download"></i> Download Wallet</a>
+          <a href="https://github.com/sha256coin/android-wallet/releases/tag/v1.6" target="_blank"
+            class="btn btn-secondary"><i class="fa-brands fa-android"></i> Android Wallet</a>
+          <a href="https://sha256coin.eu/web-wallet/" class="btn btn-secondary"><i class="fa-solid fa-globe"></i> Web Wallet</a>
+          <a href="https://explorer.sha256coin.eu" class="btn btn-ghost">View Explorer <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="coin-stage">
+          <div class="coin-ring"></div>
+          <img src="public/s256_logo.png" alt="" class="coin-logo" width="320" height="320">
+        </div>
+        <div class="hash-card">
+          <div class="hash-card-label">Proof of work &middot; block 16,997</div>
+          <code class="hash-value"><span class="hash-zeros">0000000000000000</span>b5ad091771ed1675f2d8c49053433d49647b8b6b8c283d16</code>
+          <div class="hash-card-foot">16 leading hex zeros &asymp; 2<sup>64</sup> hashes of work</div>
+        </div>
       </div>
       <div class="hero-stats">
         <div class="hero-stats-grid">
@@ -169,7 +188,7 @@
       <h2 class="section-title">The Philosophy</h2>
       <div class="philosophy-grid">
         <div class="philosophy-card">
-          <div class="icon">⛏️</div>
+          <div class="icon"><i class="fa-solid fa-microchip"></i></div>
           <h3>Harder, Not Easier</h3>
           <p>
             While others race to make mining easier, S256 takes the contrarian
@@ -177,7 +196,7 @@
           </p>
         </div>
         <div class="philosophy-card">
-          <div class="icon">⏱️</div>
+          <div class="icon"><i class="fa-solid fa-hourglass-half"></i></div>
           <h3>Time for Deliberation</h3>
           <p>
             20-minute blocks encourage thoughtful transactions over rushed
@@ -185,7 +204,7 @@
           </p>
         </div>
         <div class="philosophy-card">
-          <div class="icon">💎</div>
+          <div class="icon"><i class="fa-regular fa-gem"></i></div>
           <h3>Digital Platinum</h3>
           <p>
             Like platinum to gold, S256 is rarer and requires more effort.
@@ -204,51 +223,51 @@
       </h2>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">🕐</div>
+          <div class="feature-icon"><i class="fa-regular fa-clock"></i><span class="ratio-badge">2&times;</span></div>
           <h3>20 Minute Blocks</h3>
           <p>
             Double Bitcoin's 10 minutes. More time for network consensus and
             reduced orphan rates.
           </p>
           <div class="feature-comparison">
-            <span class="btc">BTC: 10 min</span>
-            <span class="s256">S256: 20 min</span>
+            <span class="btc" style="--w: 50%">BTC: 10 min</span>
+            <span class="s256" style="--w: 100%">S256: 20 min</span>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">💰</div>
+          <div class="feature-icon"><i class="fa-solid fa-coins"></i><span class="ratio-badge">2&times;</span></div>
           <h3>100 S256 Reward</h3>
           <p>
             Double Bitcoin's 50 BTC initial reward. More incentive for
             securing the network.
           </p>
           <div class="feature-comparison">
-            <span class="btc">BTC: 50</span>
-            <span class="s256">S256: 100</span>
+            <span class="btc" style="--w: 50%">BTC: 50</span>
+            <span class="s256" style="--w: 100%">S256: 100</span>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">📊</div>
+          <div class="feature-icon"><i class="fa-solid fa-chart-pie"></i><span class="ratio-badge">4&times;</span></div>
           <h3>84 Million Supply</h3>
           <p>
             Four times Bitcoin's 21 million cap. True scarcity with proportional
             distribution.
           </p>
           <div class="feature-comparison">
-            <span class="btc">BTC: 21M</span>
-            <span class="s256">S256: 84M</span>
+            <span class="btc" style="--w: 25%">BTC: 21M</span>
+            <span class="s256" style="--w: 100%">S256: 84M</span>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">⏳</div>
+          <div class="feature-icon"><i class="fa-solid fa-hourglass-end"></i><span class="ratio-badge">4&times;</span></div>
           <h3>16 Year Halving</h3>
           <p>
             Four times Bitcoin's 4-year cycle. Longer economic epochs for
             stability.
           </p>
           <div class="feature-comparison">
-            <span class="btc">BTC: 4 years</span>
-            <span class="s256">S256: 16 years</span>
+            <span class="btc" style="--w: 25%">BTC: 4 years</span>
+            <span class="s256" style="--w: 100%">S256: 16 years</span>
           </div>
         </div>
       </div>
@@ -263,25 +282,25 @@
       </div>
       <div class="ecosystem-grid">
         <div class="ecosystem-card">
-          <div class="eco-icon">🔍</div>
+          <div class="eco-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
           <h3>Block Explorer</h3>
           <p>Real-time transparency for every transaction, block, and wallet on the network.</p>
           <a href="https://explorer.sha256coin.eu" class="eco-link">Explore Network →</a>
         </div>
         <div class="ecosystem-card">
-          <div class="eco-icon">💳</div>
+          <div class="eco-icon"><i class="fa-solid fa-wallet"></i></div>
           <h3>Web Wallet</h3>
           <p>Send and receive S256 instantly from any browser with our non-custodial wallet.</p>
           <a href="https://sha256coin.eu/web-wallet" class="eco-link">Open Web-Wallet →</a>
         </div>
         <div class="ecosystem-card">
-          <div class="eco-icon">⛏️</div>
+          <div class="eco-icon"><i class="fa-solid fa-server"></i></div>
           <h3>Mining Pools</h3>
           <p>Join the decentralized network and earn rewards by securing the blockchain.</p>
           <a href="https://miningpoolstats.app/coins/S256" class="eco-link">Start Mining →</a>
         </div>
         <div class="ecosystem-card">
-          <div class="eco-icon">💹</div>
+          <div class="eco-icon"><i class="fa-solid fa-chart-line"></i></div>
           <h3>Trading & Liquidity</h3>
           <p>S256 trades on third-party venues. Trading availability and regulations vary by jurisdiction.</p>
           <a href="https://sha256coin.eu/partners.html" class="eco-link">Learn More →</a>
@@ -376,7 +395,7 @@
       </div>
       <div class="download-cards">
         <div class="download-card featured">
-          <div class="download-icon">📱</div>
+          <div class="download-icon"><i class="fa-brands fa-android"></i></div>
           <h3>Android</h3>
           <p>S256 Wallet v1.6.2</p>
           <p class="file-size">~70 MB</p>
@@ -392,7 +411,7 @@
           </div>
         </div>
         <div class="download-card">
-          <div class="download-icon">🐧</div>
+          <div class="download-icon"><i class="fa-brands fa-linux"></i></div>
           <h3>Linux</h3>
           <p>SHA256Coin v3.0.1</p>
           <p class="file-size">~42 MB</p>
@@ -408,7 +427,7 @@
           </div>
         </div>
         <div class="download-card featured">
-          <div class="download-icon">🪟</div>
+          <div class="download-icon"><i class="fa-brands fa-windows"></i></div>
           <h3>Windows</h3>
           <p>SHA256Coin v3.0.1</p>
           <p class="file-size">~48 MB</p>
@@ -424,7 +443,7 @@
           </div>
         </div>
         <div class="download-card">
-          <div class="download-icon">🍎</div>
+          <div class="download-icon"><i class="fa-brands fa-apple"></i></div>
           <h3>macOS</h3>
           <p>SHA256Coin v3.0.1</p>
           <p class="file-size">~13 MB</p>
