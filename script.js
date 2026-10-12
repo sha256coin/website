@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function (entries) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const stats = entry.target.querySelectorAll(".stat-value");
+          const stats = entry.target.querySelectorAll(".stat-value:not(.stat-live)");
           stats.forEach((stat) => {
             const text = stat.textContent;
             if (text.includes("M")) {
@@ -511,6 +511,17 @@ async function fetchNetworkStats() {
       const volEl = document.getElementById("network-volume");
 
       const blocks = (data.blocks || data.blockcount || 0).toLocaleString();
+
+      // Countdown to merged mining (AuxPoW) at block 17,500, in blocks only
+      const height = Number(data.blocks || data.blockcount || 0);
+      const blocksLeft = 17500 - height;
+      if (height > 0) {
+        document.querySelectorAll(".network-bar-countdown").forEach((el) => {
+          el.textContent = blocksLeft > 0
+            ? "in " + blocksLeft.toLocaleString("en-US") + " blocks (at 17,500)"
+            : "active since block 17,500";
+        });
+      }
       const hashrateRaw = data.networkhashps || 0;
       const hashrateText = formatHashrate(hashrateRaw);
       const diffText = formatDifficulty(data.difficulty || 0);
@@ -588,12 +599,31 @@ async function fetchLatestBlock() {
   }
 }
 
-// Initialize Network Stats, Latest Block and Marquee
+// Circulating supply in the hero stats
+async function fetchSupply() {
+  const el = document.getElementById("hero-circulating");
+  if (!el) return;
+  try {
+    const response = await fetch("https://explorer.sha256coin.eu/api/supply");
+    const data = await response.json();
+    const supply = Number(data.circulatingSupply);
+    if (Number.isFinite(supply) && supply > 0) {
+      el.textContent = (supply / 1e6).toFixed(2) + "M";
+      el.title = supply.toLocaleString("en-US") + " S256 of 84,000,000";
+    }
+  } catch (error) {
+    console.error("Error fetching supply:", error);
+  }
+}
+
+// Initialize Network Stats, Latest Block, Supply and Marquee
 fetchNetworkStats();
 fetchLatestBlock();
+fetchSupply();
 setInterval(() => {
   fetchNetworkStats();
   fetchLatestBlock();
+  fetchSupply();
 }, 60000); // Refresh every minute
 
 // JavaScript Marquee Implementation

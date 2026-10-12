@@ -27,8 +27,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="styles.css?v=20261012" />
-  <link rel="stylesheet" href="theme.css?v=20261012" />
+  <link rel="stylesheet" href="styles.css?v=2026101202" />
+  <link rel="stylesheet" href="theme.css?v=2026101202" />
   <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -53,6 +53,10 @@
           <div class="network-bar-stat">
             <span class="network-bar-label">⛏️Difficulty:</span>
             <span class="network-bar-value" id="network-difficulty">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">⛓️Merged mining:</span>
+            <span class="network-bar-countdown">...</span>
           </div>
           <div class="network-bar-stat">
             <span class="network-link">
@@ -157,8 +161,8 @@
             <div class="stat-value">100</div>
           </div>
           <div class="stat">
-            <div class="stat-label">Algorithm</div>
-            <div class="stat-value">SHA-256</div>
+            <div class="stat-label">Circulating</div>
+            <div class="stat-value stat-live" id="hero-circulating">&hellip;</div>
           </div>
         </div>
       </div>
@@ -472,6 +476,19 @@
           </div>
         </div>
       </div>
+      <div class="verify-box">
+        <div>
+          <h3><i class="fa-solid fa-shield-halved"></i> Verify your download</h3>
+          <p>Before installing, check that your file&rsquo;s SHA-256 hash matches the one in the release&rsquo;s
+            <a href="https://github.com/sha256coin/s256-core/releases/download/v3.0.1/SHA256SUMS.txt" target="_blank" rel="noopener">SHA256SUMS.txt</a>.
+            A different hash means the file is damaged or not ours: don&rsquo;t run it.</p>
+        </div>
+        <dl class="verify-cmds">
+          <div><dt>Linux</dt><dd><code>sha256sum -c --ignore-missing SHA256SUMS.txt</code></dd></div>
+          <div><dt>macOS</dt><dd><code>shasum -a 256 SHA256Coin-v3.0.1-macos-arm64-Qt.dmg</code></dd></div>
+          <div><dt>Windows</dt><dd><code>certutil -hashfile SHA256Coin-v3.0.1-win64.zip SHA256</code></dd></div>
+        </dl>
+      </div>
     </div>
   </section>
 
@@ -620,8 +637,8 @@
     </div><!-- /.container -->
   </footer>
 
-  <script src="script.js?v=20261012"></script>
-  <script src="easter-egg.js?v=20261012"></script>
+  <script src="script.js?v=2026101202"></script>
+  <script src="easter-egg.js?v=2026101202"></script>
 
 </body>
 
