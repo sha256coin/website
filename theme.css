@@ -729,7 +729,6 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 .footer {
   background: #08090b;
   color: #c9d0da;
-  border-top: 1px solid rgba(245, 165, 36, 0.22);
 }
 
 .footer .gradient-text {
@@ -858,3 +857,122 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 [data-theme="dark"] .nav-links a:hover { background: var(--surface-2); }
 
 .theme-toggle:hover { transform: none; box-shadow: none; border-color: var(--amber); }
+
+.footer-origin-link { color: inherit; text-decoration: none; }
+.footer-origin-link:hover { color: #ffbf55; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ============================================
+   Other pages
+   ============================================ */
+
+/* page heroes (media, media kit): same ground as the home hero */
+.media-hero,
+.resources-hero {
+  background:
+    radial-gradient(50% 80% at 50% 0%, var(--glow), transparent 70%),
+    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 48px 48px;
+  border-bottom: 1px solid var(--line);
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(40px, 6vw, 64px);
+}
+
+/* partners */
+.exchange-card,
+.resource-card,
+.usage-guidelines,
+.partner-feature-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--line);
+  border-radius: var(--radius) !important;
+  box-shadow: none !important;
+  transition: border-color 0.25s ease;
+}
+
+.exchange-card:hover,
+.resource-card:hover,
+.partner-feature-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(245, 165, 36, 0.45);
+}
+
+.partner-feature-card h2 { color: var(--text); font-size: clamp(1.6rem, 3vw, 2.2rem) !important; }
+.partner-feature-card p,
+.future-partners p { color: var(--text-light); max-width: 70ch; margin-left: auto; margin-right: auto; }
+.partner-feature-card .description-container p { margin-left: 0; }
+
+/* several partner logos have white lettering: give them a dark plate in both themes */
+.partner-feature-card .logo-container img,
+.exchange-card img {
+  background: #13161b;
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+/* media kit */
+.resource-preview,
+[data-theme="dark"] .resource-preview {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.resource-meta { font-family: var(--font-mono); font-size: 0.78rem; }
+
+.btn-download-asset {
+  background: var(--amber);
+  color: var(--on-amber);
+  border-radius: 999px;
+}
+
+.btn-download-asset:hover { transform: none; box-shadow: 0 0 0 4px var(--glow); }
+
+.usage-guidelines h3 { color: var(--text); }
+
+/* media */
+.video-wrapper { border: 1px solid var(--line); box-shadow: none; }
+
+/* legal pages (privacy, terms, risk disclosure) follow the theme */
+.privacy-page,
+.legal-page {
+  background: var(--bg-main);
+  color: var(--text);
+}
+
+.privacy-card,
+.legal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  box-shadow: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.privacy-card h1,
+.legal-card h1 { color: var(--text); }
+
+.privacy-card p,
+.legal-card p { color: var(--text-light); max-width: 75ch; }
+
+.privacy-card em,
+.legal-card strong { color: var(--text); }
+
+/* 404 */
+.not-found-code {
+  font-family: var(--font-display);
+  background: var(--platinum);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.not-found-box p { color: var(--text-light); }
+
+.not-found-button {
+  background: var(--amber);
+  color: var(--on-amber);
+  border: 0;
+  border-radius: 999px;
+  padding: 0.75rem 1.4rem;
+  font-weight: 600;
+}
