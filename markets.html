@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Exchanges and market-data sites that list S256, with safety checks and legal and tax notes. Information only, not advice." />
+  <title>S256 - Markets</title>
+  <!-- Basic OG tags (required for Discord/Twitter/Facebook) -->
+  <meta property="og:title" content="S256 - Markets" />
+  <meta property="og:description"
+    content="Exchanges and market-data sites that list S256, with safety checks and legal and tax notes. Information only, not advice." />
+  <meta property="og:image" content="https://sha256coin.eu/img/og-image-2026.png" />
+  <meta property="og:url" content="https://sha256coin.eu/markets.html" />
+  <meta property="og:type" content="website" />
+  <!-- Twitter/X card (also used by some other platforms) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="S256 - Markets" />
+  <meta name="twitter:description"
+    content="Exchanges and market-data sites that list S256, with safety checks and legal and tax notes. Information only, not advice." />
+  <meta name="twitter:image" content="https://sha256coin.eu/img/og-image-2026.png" />
+  <meta name="twitter:url" content="https://sha256coin.eu/markets.html" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+  <link rel="stylesheet" href="styles.css?v=2026101302" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="theme.css?v=2026101302" />
+  <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
+</head>
+
+<body>
+  <!-- Network Bar -->
+  <div class="network-bar">
+    <div class="container">
+      <div class="network-stats-group">
+        <div class="marquee-set">
+          <div class="network-bar-stat">
+            <span class="network-bar-text">🚀S256 Core v3.0.1 released — mandatory upgrade before block 17,500, when merged mining (AuxPoW) activates. Already on 3.0.0? Upgrade again! Download below ⬇️</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">📊Block Height:</span>
+            <span class="network-bar-value" id="network-height">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">⚡Hashrate:</span>
+            <span class="network-bar-value" id="network-hashrate">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">⛏️Difficulty:</span>
+            <span class="network-bar-value" id="network-difficulty">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-bar-label">⛓️Merged mining:</span>
+            <span class="network-bar-countdown">...</span>
+          </div>
+          <div class="network-bar-stat">
+            <span class="network-link">
+              <a href="https://www.livecoinwatch.com/price/SHA256COIN-S256" target="_blank">LiveCoinWatch</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <a href="index.html" class="nav-brand-link">
+          <img src="public/s256_logo_200x200.png" alt="" class="brand-mark" width="36" height="36">
+          <span class="logo">S256</span>
+          <span class="tagline">Digital Platinum</span>
+        </a>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#specs">Specs</a></li>
+        <li><a href="index.html#ecosystem">Ecosystem</a></li>
+        <li><a href="whitepaper.html" target="_blank">Technical Paper</a></li>
+        <li><a href="index.html#downloads">Downloads</a></li>
+        <li><a href="markets.html" class="active">Markets</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="media_kit.html">Media Kit</a></li>
+
+        <li><a href="mining.html">Mining</a></li>
+        <li>
+          <a href="media.html">Media</a>
+        </li>
+        <li>
+          <a href="https://explorer.sha256coin.eu" class="btn-explorer">Explorer</a>
+        </li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </li>
+        <li>
+          <span class="pi-symbol" id="pi-easter-egg" title="π">π</span>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Markets -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-eyebrow">Third-party venues &middot; Information only</p>
+      <h1 class="page-title">Where <span class="gradient-text">S256</span> is listed</h1>
+      <p class="page-lead">Independent exchanges list S256 and independent sites track its market data. The S256 project
+        runs none of them. This page lists them so you can find the real addresses. It does not recommend any of them.</p>
+      <div class="market-notice" role="note">
+        <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+        <p><strong>Not advice.</strong> Nothing on this page is investment, financial, legal or tax advice, or an offer or
+          recommendation to buy, sell or hold S256. Digital assets can lose all their value. Read the
+          <a href="#legal">legal and tax notes</a> and the <a href="risk-disclosure.html">Risk Disclosure</a> before
+          you use any platform.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="exchanges" class="markets-section">
+    <div class="container">
+      <h2 class="section-title">Exchanges</h2>
+      <p class="section-subtitle">Listed in alphabetical order. The order is not a ranking.</p>
+
+      <div class="market-grid">
+        <article class="pool-card market-card">
+          <div class="pool-card-head">
+            <img src="img/fynex-mark.png" alt="" class="pool-logo market-logo" width="48" height="48">
+            <div>
+              <h3>FynEx</h3>
+              <span class="pool-host">fyn-ex.uk</span>
+            </div>
+          </div>
+          <dl class="pool-facts">
+            <div><dt>Pair</dt><dd>S256/USDT</dd></div>
+            <div><dt>Type</dt><dd>Custodial, centralized exchange</dd></div>
+          </dl>
+          <p class="pool-note">FynEx also lists <strong>SS256</strong> (&ldquo;SATOSHI-IS-SHA256&rdquo;), a BNB Smart Chain token
+            that is not S256. Check the ticker before you deposit or trade.</p>
+          <div class="pool-actions">
+            <a href="https://fyn-ex.uk/trading/s256usdt" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">Visit fyn-ex.uk <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
+        <article class="pool-card market-card">
+          <div class="pool-card-head">
+            <img src="img/RR_Logo.svg" alt="" class="pool-logo market-logo" width="48" height="48">
+            <div>
+              <h3>Rabid Rabbit</h3>
+              <span class="pool-host">rabid-rabbit.org</span>
+            </div>
+          </div>
+          <dl class="pool-facts">
+            <div><dt>Pair</dt><dd>S256/USDT</dd></div>
+            <div><dt>Type</dt><dd>Custodial, centralized exchange</dd></div>
+          </dl>
+          <div class="pool-actions">
+            <a href="https://rabid-rabbit.org/account/trade/S256-USDT" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">Visit rabid-rabbit.org <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <p class="pool-more">Last checked: <time datetime="2026-10-13">13 October 2026</time>. Listings, pairs, fees and
+        limits change without notice: check them on the platform itself.</p>
+    </div>
+  </section>
+
+  <section id="before" class="mining-guide">
+    <div class="container">
+      <h2 class="section-title">Before you use an exchange</h2>
+      <p class="section-subtitle">Basic safety checks. They do not replace your own research.</p>
+
+      <ol class="guide-steps">
+        <li class="guide-step">
+          <h3>Check the address</h3>
+          <p>Type the exchange address yourself or use the link on this page, then bookmark it. Fake exchange sites and
+            &ldquo;support&rdquo; accounts in private messages are common. The S256 project will never message you first,
+            ask for your keys or seed phrase, or ask you to send coins.</p>
+        </li>
+        <li class="guide-step">
+          <h3>Check that it is S256</h3>
+          <p>S256 is a native coin on its own blockchain. It has no token or contract on Ethereum, BNB Smart Chain or any other
+            network. S256 addresses start with <code>s21</code>, <code>S</code> or <code>8</code>. A token with a similar
+            name or ticker is a different asset.</p>
+        </li>
+        <li class="guide-step">
+          <h3>Start small</h3>
+          <p>Test a deposit and a withdrawal with a small amount first. Check the exchange&rsquo;s fees, minimum withdrawal
+            and confirmation count. Low-volume markets can have wide spreads and thin order books, so the price you get can
+            differ a lot from the last trade.</p>
+        </li>
+        <li class="guide-step">
+          <h3>Keep your coins in your own wallet</h3>
+          <p>Coins left on an exchange are held by the exchange, not by you. Exchanges can freeze withdrawals, delist assets,
+            get hacked or fail. Withdraw to an S256 <a href="index.html#downloads">wallet</a> whose keys you hold.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="data" class="markets-section">
+    <div class="container">
+      <h2 class="section-title">Market data</h2>
+      <p class="section-subtitle">Independent trackers that show S256 prices, volume and supply.</p>
+
+      <div class="market-grid market-grid-3">
+        <article class="pool-card market-card">
+          <div class="pool-card-head">
+            <img src="img/coincarp_logo.png" alt="" class="pool-logo market-logo" width="48" height="48">
+            <div>
+              <h3>CoinCarp</h3>
+              <span class="pool-host">coincarp.com</span>
+            </div>
+          </div>
+          <div class="pool-actions">
+            <a href="https://www.coincarp.com/currencies/sha256coin/" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">Visit <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
+        <article class="pool-card market-card">
+          <div class="pool-card-head">
+            <img src="img/coincodex.png" alt="" class="pool-logo market-logo" width="48" height="48">
+            <div>
+              <h3>CoinCodex</h3>
+              <span class="pool-host">coincodex.com</span>
+            </div>
+          </div>
+          <div class="pool-actions">
+            <a href="https://coincodex.com/crypto/sha256coin/" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">Visit <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
+        <article class="pool-card market-card">
+          <div class="pool-card-head">
+            <img src="img/logo-livecoinw.svg" alt="" class="pool-logo market-logo" width="48" height="48">
+            <div>
+              <h3>LiveCoinWatch</h3>
+              <span class="pool-host">livecoinwatch.com</span>
+            </div>
+          </div>
+          <div class="pool-actions">
+            <a href="https://www.livecoinwatch.com/price/SHA256COIN-S256" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">Visit <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <p class="pool-more">Trackers compute prices and market caps from a few low-volume markets. Their figures can be stale
+        or wrong and are not a valuation of S256. For supply and block data, use the
+        <a href="https://explorer.sha256coin.eu">S256 explorer</a>, which reads the blockchain directly.</p>
+    </div>
+  </section>
+
+  <section id="legal" class="markets-section markets-legal">
+    <div class="container">
+      <h2 class="section-title">Legal and tax notes</h2>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3><i class="fa-solid fa-scale-balanced"></i> No advice</h3>
+          <p>This page is for information only. It is not investment, financial, legal or tax advice and not an offer,
+            solicitation or recommendation to buy, sell or hold any crypto-asset. Get advice from a qualified professional
+            before you make any financial decision.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="fa-solid fa-link-slash"></i> No endorsement</h3>
+          <p>S256 has no company, foundation or issuer behind it. Listing S256 was each platform&rsquo;s own decision. The
+            S256 project does not operate, control, audit or vouch for any platform named here and is not responsible for
+            their services, security or solvency. A link is not an endorsement.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="fa-solid fa-earth-europe"></i> Your jurisdiction</h3>
+          <p>A platform may not be authorised to serve customers where you live. In the EU, crypto-asset service providers
+            need authorisation under MiCA (Regulation (EU) 2023/1114). ESMA publishes a
+            <a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica" target="_blank" rel="noopener">register of authorised providers</a>.
+            You are responsible for checking that using a platform is legal for you.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="fa-solid fa-receipt"></i> Taxes</h3>
+          <p>Selling, swapping or spending crypto-assets, and in some countries receiving mining rewards, can be taxable.
+            Rules differ by country. Keep records of every transaction. Under the EU&rsquo;s DAC8 directive, crypto-asset
+            service providers report their users&rsquo; transactions to tax authorities from 2026. Ask a tax adviser how the
+            rules apply to you.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="fa-solid fa-clock-rotate-left"></i> Accuracy</h3>
+          <p>This information is provided as is, without warranty, and can be out of date. Platforms change their listings,
+            pairs, fees and terms at any time. Always check the platform itself.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="fa-solid fa-flag"></i> Report a problem</h3>
+          <p>Seen a fake site, an impostor, or a listing here that is wrong or gone? Write to
+            <span class="select-all">contact@sha256coin.eu</span>. See also the <a href="terms.html">Terms</a> and
+            <a href="risk-disclosure.html">Risk Disclosure</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-brand-link">
+            <span class="gradient-text"><i class="fa-solid fa-coins"></i> S256</span>
+          </a>
+          <p class="footer-tagline">Digital Platinum</p>
+          <a href="mailto:info@sha256coin.eu" class="footer-email">
+            <i class="fa-regular fa-envelope"></i> info@sha256coin.eu
+          </a>
+          <a href="mailto:contact@sha256coin.eu" class="footer-email">
+            <i class="fa-solid fa-envelope-open-text"></i> contact@sha256coin.eu
+          </a>
+        </div>
+
+        <!-- Resources -->
+        <div class="footer-col">
+          <h4 class="footer-col-title"><i class="fa-solid fa-layer-group"></i> Resources</h4>
+          <ul>
+            <li><a href="whitepaper.html" target="_blank"><i class="fa-regular fa-file-lines"></i> Technical Paper</a>
+            </li>
+            <li><a href="https://explorer.sha256coin.eu"><i class="fa-solid fa-magnifying-glass"></i> BlockChain
+                Explorer</a>
+            </li>
+            <li><a href="https://github.com/sha256coin"><i class="fa-brands fa-github"></i> GitHub</a></li>
+            <li><a href="https://github.com/bitcoin/bitcoin"><i class="fa-brands fa-bitcoin"></i> Documentation</a></li>
+          </ul>
+        </div>
+
+        <!-- Community -->
+        <div class="footer-col">
+          <h4 class="footer-col-title"><i class="fa-solid fa-users"></i> Community</h4>
+          <ul>
+            <li>
+              <a href="https://discord.gg/dtn58HrC94" target="_blank" rel="noopener">
+                <i class="fa-brands fa-discord"></i> Discord
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/s256coin" target="_blank" rel="noopener">
+                <i class="fa-brands fa-telegram"></i> Telegram
+              </a>
+            </li>
+            <li>
+              <a href="https://bitcointalk.org/index.php?topic=5567429.msg66131557#msg66131557" target="_blank"
+                rel="noopener">
+                <i class="fa-brands fa-bitcoin"></i> Bitcointalk
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/s256coin" target="_blank" rel="noopener">
+                <i class="fa-brands fa-x-twitter"></i> Twitter / X
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Network Info -->
+        <div class="footer-col">
+          <h4 class="footer-col-title"><i class="fa-solid fa-network-wired"></i> Network</h4>
+          <dl class="network-specs">
+            <div>
+              <dt><i class="fa-solid fa-door-open"></i> Port</dt>
+              <dd>25256</dd>
+            </div>
+            <div>
+              <dt><i class="fa-solid fa-terminal"></i> RPC</dt>
+              <dd>25332</dd>
+            </div>
+            <div>
+              <dt><i class="fa-solid fa-gears"></i> Algorithm</dt>
+              <dd>SHA-256</dd>
+            </div>
+            <div>
+              <dt><i class="fa-solid fa-cube"></i> Genesis</dt>
+              <dd>Nov 30, 2025</dd>
+            </div>
+          </dl>
+        </div>
+
+      </div><!-- /.footer-grid -->
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          &copy; <span id="current-year">2026</span> S256 &mdash; Open source cryptocurrency.
+        </p>
+        <span class="footer-origin">
+          <i class="fa-solid fa-flag-usa"
+            style="color: transparent; background: linear-gradient(to right, #002B7F 33.3%, #FCD116 33.3%, #FCD116 66.6%, #CE1126 66.6%); background-clip: text; -webkit-background-clip: text; display: none;"></i>
+          <i class="fa-solid fa-bolt"></i> Hosted in <i class="fa-solid fa-location-dot"></i> <a href="https://discoveromania.ro/" target="_blank" rel="noopener" class="footer-origin-link">Romania</a> 🇷🇴
+        </span>
+        <div class="footer-bottom-links">
+          <a href="privacy.html"><i class="fa-solid fa-shield-halved fa-xs"></i> Privacy</a>
+          <a href="terms.html"><i class="fa-solid fa-file-contract fa-xs"></i> Terms</a>
+          <a href="risk-disclosure.html"><i class="fa-solid fa-triangle-exclamation fa-xs"></i> Risk Disclosure</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p><strong>Disclaimer:</strong> <em>S256 (SHA256Coin) is a fully decentralized, open-source
+            cryptocurrency based on the Proof-of-Work algorithm. There is no corporate entity, no pre-sale,
+            no pre-mine, and no developer allocation. This website is for technical and informational
+            purposes only. The software is provided "as is", without warranty of any kind. Users are solely
+            responsible for securing their private keys and seed phrases and for complying with applicable
+            local laws and tax regulations. S256 does not constitute a crypto-asset service under EU
+            Regulation 2023/1114 (MiCA).</em></p>
+      </div>
+
+    </div><!-- /.container -->
+  </footer>
+
+
+  <script src="script.js?v=2026101302"></script>
+  <script src="easter-egg.js?v=2026101302"></script>
+
+</body>
+
+</html>
