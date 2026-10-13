@@ -161,13 +161,76 @@
             margin-bottom: 8px;
         }
 
-        .footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 2px solid #e5e7eb;
+        /* closing colophon; not "footer", which the site stylesheet styles as the dark site footer */
+        .paper-end {
+            margin-top: 64px;
+            padding: 32px 28px 28px;
+            background: #fbfaf7;
+            border: 1px solid #e5e7eb;
+            border-top: 3px solid #a85f00;
             text-align: center;
+        }
+
+        .paper-end-mark,
+        .paper-end-motto { text-align: center !important; }
+
+        .paper-end-mark {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #a85f00;
+        }
+
+        .paper-end-facts {
+            max-width: 660px;
+            margin: 20px auto 0;
+            text-align: left;
+        }
+
+        .paper-end-facts div {
+            display: grid;
+            grid-template-columns: 130px minmax(0, 1fr);
+            gap: 12px;
+            align-items: baseline;
+            padding: 10px 0;
+            border-bottom: 1px solid #ece9e2;
+        }
+
+        .paper-end-facts div:last-child { border-bottom: 0; }
+
+        .paper-end-facts dt {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             color: #6b7280;
-            font-size: 14px;
+        }
+
+        .paper-end-facts dd {
+            margin: 0;
+            color: #1f2430;
+        }
+
+        .paper-end-facts code {
+            font-family: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+            font-size: 13px;
+            word-break: break-all;
+            background: none;
+            padding: 0;
+            border: 0;
+        }
+
+        .paper-end-motto {
+            margin: 22px 0 0;
+            font-size: 18px;
+            font-style: italic;
+            color: #1f2430;
+        }
+
+        @media (max-width: 560px) {
+            .paper-end { padding: 24px 16px 20px; }
+            .paper-end-facts div { grid-template-columns: 1fr; gap: 2px; }
         }
 
         @media print {
@@ -567,12 +630,14 @@
         <li>Proof of Work Summit (2022). The Energy Debate in Cryptocurrency</li>
     </ol>
 
-    <div class="footer">
-        <p><strong>S256 - Digital Platinum</strong></p>
-        <p>Genesis Block: 00000000abe2a78ceb00eca81258804d59fe4ad45345e1750e705139e6da7297</p>
-        <p>Merkle Root: 328fbe73f2b764658b57a0ac538d67e59b5c6bcde2c266a71bbb842f5430d595</p>
-        <p>Genesis Date: November 30, 2025</p>
-        <p style="margin-top: 20px;">Double the Work, Double the Value</p>
+    <div class="paper-end">
+        <p class="paper-end-mark">S256 &middot; Digital Platinum</p>
+        <dl class="paper-end-facts">
+            <div><dt>Genesis block</dt><dd><code>00000000abe2a78ceb00eca81258804d59fe4ad45345e1750e705139e6da7297</code></dd></div>
+            <div><dt>Merkle root</dt><dd><code>328fbe73f2b764658b57a0ac538d67e59b5c6bcde2c266a71bbb842f5430d595</code></dd></div>
+            <div><dt>Genesis date</dt><dd>November 30, 2025</dd></div>
+        </dl>
+        <p class="paper-end-motto">Double the Work, Double the Value</p>
     </div>
 
     <!-- Matrix Terminal Easter Egg -->
