@@ -1030,6 +1030,11 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
   margin-top: 2.5rem;
 }
 
+.coinbase-note {
+  max-width: 980px;
+  margin: 1.25rem auto 0;
+}
+
 .pool-card {
   min-width: 0;
   background: var(--bg-card);
