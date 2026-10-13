@@ -1252,7 +1252,15 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 .pool-card,
 .guide-step,
 .info-card,
-.genesis-panel {
+.genesis-panel,
+.exchange-card,
+.resource-card,
+.usage-guidelines,
+.partner-feature-card,
+.privacy-card,
+.legal-card,
+.not-found-box,
+.video-wrapper {
   position: relative;
   border-radius: 6px !important;
 }
@@ -1273,7 +1281,23 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 .info-card::before,
 .info-card::after,
 .genesis-panel::before,
-.genesis-panel::after {
+.genesis-panel::after,
+.exchange-card::before,
+.exchange-card::after,
+.resource-card::before,
+.resource-card::after,
+.usage-guidelines::before,
+.usage-guidelines::after,
+.partner-feature-card::before,
+.partner-feature-card::after,
+.privacy-card::before,
+.privacy-card::after,
+.legal-card::before,
+.legal-card::after,
+.not-found-box::before,
+.not-found-box::after,
+.video-wrapper::before,
+.video-wrapper::after {
   content: "";
   display: block !important;
   position: absolute;
@@ -1294,7 +1318,15 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 .step::before,
 .pool-card::before,
 .info-card::before,
-.genesis-panel::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.genesis-panel::before,
+.exchange-card::before,
+.resource-card::before,
+.usage-guidelines::before,
+.partner-feature-card::before,
+.privacy-card::before,
+.legal-card::before,
+.not-found-box::before,
+.video-wrapper::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
 
 .philosophy-card::after,
 .feature-card::after,
@@ -1304,7 +1336,30 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 .pool-card::after,
 .guide-step::after,
 .info-card::after,
-.genesis-panel::after { bottom: -1px; right: -1px; left: auto; top: auto; border-width: 0 2px 2px 0; }
+.genesis-panel::after,
+.exchange-card::after,
+.resource-card::after,
+.usage-guidelines::after,
+.partner-feature-card::after,
+.privacy-card::after,
+.legal-card::after,
+.not-found-box::after,
+.video-wrapper::after { bottom: -1px; right: -1px; left: auto; top: auto; border-width: 0 2px 2px 0; }
+
+/* brackets sit on the border: these cards clipped their content, round the inner parts instead */
+.resource-card { overflow: visible; }
+.resource-card .resource-preview { border-radius: 5px 5px 0 0; }
+.video-wrapper { overflow: visible; }
+.video-wrapper iframe { border-radius: 5px; }
+.video-wrapper::before,
+.video-wrapper::after { z-index: 1; }
+
+/* the 404 message sits in a card like the rest */
+.not-found-box {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
 
 /* square icon tiles, as on the explorer */
 .philosophy-card .icon i,
