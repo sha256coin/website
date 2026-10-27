@@ -27,14 +27,14 @@ app.use(
         scriptSrcAttr: ["'unsafe-inline'"],
         styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
         imgSrc: ["'self'", "data:", "https:"],
+        // Any https host is allowed because users can choose their own RPC
+        // server in the wallet's Server connection setting. http is limited
+        // to loopback, for people running their own node.
         connectSrc: [
           "'self'",
-          "https://sha256coin.eu",
-          "https://explorer.sha256coin.eu",
-          "https://www.gstatic.com",
-          "https://fonts.gstatic.com",
-          "https://fonts.googleapis.com",
-          "https://api.livecoinwatch.com",
+          "https:",
+          "http://localhost:*",
+          "http://127.0.0.1:*",
         ],
         fontSrc: ["'self'", "data:", "https://fonts.gstatic.com"],
         objectSrc: ["'none'"],
