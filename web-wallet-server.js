@@ -115,6 +115,15 @@ app.use(express.static(WEB_WALLET_PATH, {
     if (filePath.endsWith('.html')) {
       res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     }
+    // The app's entry files keep the same names in every release, so they must
+    // be revalidated on each load (a 304 when unchanged). Otherwise browsers
+    // keep running the previous release for up to a day. Large static assets
+    // (canvaskit, fonts, icons) keep the 1 day cache.
+    const base = path.basename(filePath);
+    if (['flutter_bootstrap.js', 'flutter.js', 'main.dart.js',
+         'flutter_service_worker.js', 'version.json', 'manifest.json'].includes(base)) {
+      res.set('Cache-Control', 'no-cache');
+    }
   }
 }));
 
