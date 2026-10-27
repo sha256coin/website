@@ -97,6 +97,8 @@ const generalLimiter = rateLimit({
   message: "Too many requests from this IP, please try again later.",
   standardHeaders: true,
   legacyHeaders: false,
+  // The RPC proxy has its own limiter (wallets make many calls per action).
+  skip: (req) => req.path === "/rpc",
 });
 
 // Rate Limiting - API endpoints
@@ -115,10 +117,10 @@ const downloadLimiter = rateLimit({
   message: { error: "Too many download requests, please try again later." },
 });
 
-// Rate Limiting - RPC (restrictive for security)
+// Rate Limiting - RPC (wallets with many UTXOs make hundreds of calls per send)
 const rpcLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 180, // Max 180 RPC requests per minute per IP
+  max: 600, // Max 600 RPC requests per minute per IP (same as nginx rpc_req)
   message: { error: "Too many RPC requests, please slow down." },
   standardHeaders: true,
   legacyHeaders: false,
