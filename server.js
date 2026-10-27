@@ -204,6 +204,11 @@ function validateRpcParams(method, params) {
 
   // Method-specific validation
   switch (method) {
+    case "getblockhash":
+      // Block height: a single non-negative integer
+      if (params.length !== 1 || !Number.isInteger(params[0]) || params[0] < 0)
+        return false;
+      break;
     case "getblock":
       // Block hash should be 64 hex chars
       if (params[0] && !/^[a-fA-F0-9]{64}$/.test(params[0])) return false;
@@ -253,6 +258,7 @@ app.post("/rpc", rpcLimiter, async (req, res) => {
     "getblockchaininfo",
     "getblockcount",
     "getbestblockhash",
+    "getblockhash",
     "getblock",
     "getrawtransaction",
     "gettxout",
