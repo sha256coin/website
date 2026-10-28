@@ -549,7 +549,12 @@ async function fetchNetworkStats() {
     console.error("Error fetching network stats:", error);
   }
 }
-// Latest block card in the hero: hash with its leading zeros, linked to the explorer
+// AuxPoW flag in the block version (S256 merge-mined blocks, from block 17,500)
+const VERSION_AUXPOW = 0x100;
+
+// Latest block card in the hero: hash with its leading zeros, linked to the explorer.
+// A merge-mined block's own hash has no leading zeros (the work is in the parent
+// block's header), so its card shows the work from the difficulty instead.
 async function fetchLatestBlock() {
   const card = document.getElementById("latest-block");
   if (!card) return;
@@ -572,8 +577,22 @@ async function fetchLatestBlock() {
     zerosEl.textContent = hash.slice(0, zeros);
     hashEl.replaceChildren(zerosEl, document.createTextNode(hash.slice(zeros)));
 
+    // /blocks/recent has no version; the block itself does
+    let merged = zeros < 8;
+    try {
+      const detail = await (
+        await fetch("https://explorer.sha256coin.eu/api/block/" + hash)
+      ).json();
+      if (Number.isInteger(detail.version)) {
+        merged = (detail.version & VERSION_AUXPOW) !== 0;
+      }
+    } catch (error) {
+      // keep the guess from the hash
+    }
+
     document.getElementById("latest-block-title").textContent =
-      "Latest block \u00b7 " + height.toLocaleString("en-US");
+      "Latest block \u00b7 " + height.toLocaleString("en-US") +
+      (merged ? " \u00b7 merge-mined" : "");
 
     const ageEl = document.getElementById("latest-block-age");
     const minutes = Math.floor((Date.now() / 1000 - Number(block.time)) / 60);
@@ -586,12 +605,23 @@ async function fetchLatestBlock() {
 
     const workEl = document.getElementById("latest-block-work");
     const sup = document.createElement("sup");
-    sup.textContent = String(zeros * 4);
-    workEl.replaceChildren(
-      document.createTextNode(zeros + " leading hex zeros \u2248 2"),
-      sup,
-      document.createTextNode(" hashes of work"),
-    );
+    const difficulty = Number(block.difficulty);
+    if (merged && difficulty > 0) {
+      // expected hashes = difficulty x 2^32
+      sup.textContent = String(Math.round(Math.log2(difficulty) + 32));
+      workEl.replaceChildren(
+        document.createTextNode("Proof of work in the parent block \u2248 2"),
+        sup,
+        document.createTextNode(" hashes"),
+      );
+    } else {
+      sup.textContent = String(zeros * 4);
+      workEl.replaceChildren(
+        document.createTextNode(zeros + " leading hex zeros \u2248 2"),
+        sup,
+        document.createTextNode(" hashes of work"),
+      );
+    }
 
     card.href = "https://explorer.sha256coin.eu/block/" + hash;
   } catch (error) {
