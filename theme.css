@@ -1030,11 +1030,13 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 
 .hash-card-label {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.25rem 1rem;
 }
 
 .hash-card-age { color: var(--primary); white-space: nowrap; }
+.hash-card-label .nowrap { white-space: nowrap; }
 
 /* ============================================
    Mining page

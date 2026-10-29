@@ -590,17 +590,23 @@ async function fetchLatestBlock() {
       // keep the guess from the hash
     }
 
-    document.getElementById("latest-block-title").textContent =
-      "Latest block \u00b7 " + height.toLocaleString("en-US") +
-      (merged ? " \u00b7 merge-mined" : "");
+    const titleEl = document.getElementById("latest-block-title");
+    titleEl.textContent = "Latest block \u00b7 " + height.toLocaleString("en-US");
+    if (merged) {
+      // kept in one piece so the title never breaks at the hyphen
+      const mergedEl = document.createElement("span");
+      mergedEl.className = "nowrap";
+      mergedEl.textContent = "\u00b7 merge-mined";
+      titleEl.append(" ", mergedEl);
+    }
 
     const ageEl = document.getElementById("latest-block-age");
     const minutes = Math.floor((Date.now() / 1000 - Number(block.time)) / 60);
     if (Number.isFinite(minutes) && minutes >= 0) {
       ageEl.textContent =
         minutes < 1 ? "just now"
-          : minutes < 60 ? minutes + " min ago"
-            : Math.floor(minutes / 60) + " h " + (minutes % 60) + " min ago";
+          : minutes < 60 ? minutes + "m ago"
+            : Math.floor(minutes / 60) + "h " + (minutes % 60) + "m ago";
     }
 
     const workEl = document.getElementById("latest-block-work");
