@@ -482,6 +482,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Helper to format large numbers with K/M/G/T suffixes
 function formatHashrate(value) {
+  if (value >= 1000000000000000000)
+    return (value / 1000000000000000000).toFixed(2) + " EH/s";
+  if (value >= 1000000000000000)
+    return (value / 1000000000000000).toFixed(2) + " PH/s";
   if (value >= 1000000000000)
     return (value / 1000000000000).toFixed(2) + " TH/s";
   if (value >= 1000000000) return (value / 1000000000).toFixed(2) + " GH/s";
