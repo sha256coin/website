@@ -512,16 +512,6 @@ async function fetchNetworkStats() {
 
       const blocks = (data.blocks || data.blockcount || 0).toLocaleString();
 
-      // Countdown to merged mining (AuxPoW) at block 17,500, in blocks only
-      const height = Number(data.blocks || data.blockcount || 0);
-      const blocksLeft = 17500 - height;
-      if (height > 0) {
-        document.querySelectorAll(".network-bar-countdown").forEach((el) => {
-          el.textContent = blocksLeft > 0
-            ? "in " + blocksLeft.toLocaleString("en-US") + " blocks (at 17,500)"
-            : "active since block 17,500";
-        });
-      }
       const hashrateRaw = data.networkhashps || 0;
       const hashrateText = formatHashrate(hashrateRaw);
       const diffText = formatDifficulty(data.difficulty || 0);
@@ -551,6 +541,45 @@ async function fetchNetworkStats() {
 }
 // AuxPoW flag in the block version (S256 merge-mined blocks, from block 17,500)
 const VERSION_AUXPOW = 0x100;
+
+// Price in the network bar, from the explorer (which reads LiveCoinWatch).
+// While no market trades S256 the explorer sends the last traded price with
+// its date; the bar says so. With no price at all the item stays hidden.
+async function fetchPrice() {
+  const stat = document.getElementById("network-price-stat");
+  const valueEl = document.getElementById("network-price");
+  const noteEl = document.getElementById("network-price-note");
+  if (!stat || !valueEl) return;
+  try {
+    const response = await fetch("https://explorer.sha256coin.eu/api/price");
+    const data = await response.json();
+    const price = Number(data && data.price);
+    if (!(price > 0) || !isFinite(price)) {
+      stat.hidden = true;
+      return;
+    }
+    valueEl.textContent =
+      "$" + price.toFixed(price < 0.01 ? 6 : price < 1 ? 4 : 2);
+    const traded = Number(data.lastTraded);
+    if (noteEl) {
+      noteEl.textContent =
+        traded > 0
+          ? "(last traded " +
+            new Date(traded).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+              timeZone: "UTC",
+            }) +
+            ")"
+          : "";
+    }
+    stat.hidden = false;
+  } catch (error) {
+    // keep whatever is shown; the price is optional
+    console.error("Error fetching price:", error);
+  }
+}
 
 // Latest block card in the hero: hash with its leading zeros, linked to the explorer.
 // A merge-mined block's own hash has no leading zeros (the work is in the parent
@@ -654,10 +683,12 @@ async function fetchSupply() {
 
 // Initialize Network Stats, Latest Block, Supply and Marquee
 fetchNetworkStats();
+fetchPrice();
 fetchLatestBlock();
 fetchSupply();
 setInterval(() => {
   fetchNetworkStats();
+  fetchPrice();
   fetchLatestBlock();
   fetchSupply();
 }, 60000); // Refresh every minute

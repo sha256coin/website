@@ -1564,6 +1564,14 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 
 .ecosystem-card:hover::before { transform: none; }
 
+.network-bar .network-bar-stat[hidden] { display: none; }
+
+.network-bar .network-bar-note {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: #9aa3b1;
+}
+
 .network-bar .network-bar-countdown {
   font-family: var(--font-mono);
   color: #ffbf55;

@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="styles.css?v=2026101302" />
-  <link rel="stylesheet" href="theme.css?v=2026102901" />
+  <link rel="stylesheet" href="theme.css?v=2026103101" />
   <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -40,7 +40,7 @@
       <div class="network-stats-group">
         <div class="marquee-set">
           <div class="network-bar-stat">
-            <span class="network-bar-text">🚀S256 Core v3.0.1 released — mandatory upgrade before block 17,500, when merged mining (AuxPoW) activates. Already on 3.0.0? Upgrade again! Download below ⬇️</span>
+            <span class="network-bar-text">🚀S256 Core v3.0.1 is the current release. Merged mining (AuxPoW) has been active since block 17,500. Download below ⬇️</span>
           </div>
           <div class="network-bar-stat">
             <span class="network-bar-label">📊Block Height:</span>
@@ -54,9 +54,10 @@
             <span class="network-bar-label">⛏️Difficulty:</span>
             <span class="network-bar-value" id="network-difficulty">...</span>
           </div>
-          <div class="network-bar-stat">
-            <span class="network-bar-label">⛓️Merged mining:</span>
-            <span class="network-bar-countdown">...</span>
+          <div class="network-bar-stat" id="network-price-stat" hidden>
+            <span class="network-bar-label">💲Price:</span>
+            <span class="network-bar-value" id="network-price">...</span>
+            <span class="network-bar-note" id="network-price-note"></span>
           </div>
           <div class="network-bar-stat">
             <span class="network-link">
@@ -638,7 +639,7 @@
     </div><!-- /.container -->
   </footer>
 
-  <script src="script.js?v=2026102901"></script>
+  <script src="script.js?v=2026103101"></script>
   <script src="easter-egg.js?v=2026101302"></script>
 
 </body>
