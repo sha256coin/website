@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="theme.css?v=2026103102" />
+  <link rel="stylesheet" href="theme.css?v=2026110401" />
   <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
 </head>
 
@@ -132,9 +132,42 @@
   <section id="exchanges" class="markets-section">
     <div class="container">
       <h2 class="section-title">Exchanges</h2>
-      <p class="section-subtitle">Listed in alphabetical order. The order is not a ranking.</p>
+      <p class="section-subtitle">Newest listing first. The order is not a ranking.</p>
+
+      <div class="live-card" id="live-card" hidden>
+        <div class="live-card-head">
+          <span class="live-badge"><span class="live-dot" aria-hidden="true"></span>Live on NestEx</span>
+          <span class="live-pair">S256 / USDT</span>
+        </div>
+        <div class="live-price"><span id="live-price">&hellip;</span><small>USDT</small></div>
+        <div class="live-stats">
+          <div><span class="live-label">24h volume</span><span class="live-val" id="live-vol-usdt">&hellip;</span></div>
+          <div><span class="live-label">24h volume (S256)</span><span class="live-val" id="live-vol-coin">&hellip;</span></div>
+          <div><span class="live-label">24h high</span><span class="live-val" id="live-high">&hellip;</span></div>
+          <div><span class="live-label">24h low</span><span class="live-val" id="live-low">&hellip;</span></div>
+        </div>
+        <p class="live-foot">Last trade price from the NestEx public API, read in your browser. Thin market: the price can
+          move a lot on a small order. Not advice. <a href="https://trade.nestex.one/spot/S256" target="_blank" rel="noopener noreferrer nofollow">Trade on NestEx</a></p>
+      </div>
 
       <div class="market-grid">
+        <article class="pool-card market-card">
+          <div class="pool-card-head">
+            <img src="img/nestex-logo.png" alt="" class="pool-logo market-logo" width="48" height="48">
+            <div>
+              <h3>NestEx</h3>
+              <span class="pool-host">trade.nestex.one</span>
+            </div>
+          </div>
+          <dl class="pool-facts">
+            <div><dt>Pair</dt><dd>S256/USDT</dd></div>
+            <div><dt>Type</dt><dd>Custodial, centralized exchange</dd></div>
+          </dl>
+          <div class="pool-actions">
+            <a href="https://trade.nestex.one/spot/S256" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">Visit trade.nestex.one <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
         <article class="pool-card market-card">
           <div class="pool-card-head">
             <img src="img/fynex-mark.png" alt="" class="pool-logo market-logo" width="48" height="48">
@@ -144,13 +177,14 @@
             </div>
           </div>
           <dl class="pool-facts">
-            <div><dt>Pair</dt><dd>S256/USDT</dd></div>
+            <div><dt>Pairs</dt><dd>S256/USDT, S256/USDC</dd></div>
             <div><dt>Type</dt><dd>Custodial, centralized exchange</dd></div>
           </dl>
           <p class="pool-note">FynEx also lists <strong>SS256</strong> (&ldquo;SATOSHI-IS-SHA256&rdquo;), a BNB Smart Chain token
             that is not S256. Check the ticker before you deposit or trade.</p>
           <div class="pool-actions">
-            <a href="https://fyn-ex.uk/trading/s256usdt" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">Visit fyn-ex.uk <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <a href="https://fyn-ex.uk/trading/s256usdt" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">S256/USDT <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <a href="https://fyn-ex.uk/trading/s256usdc" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">S256/USDC <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </article>
 
@@ -172,7 +206,7 @@
         </article>
       </div>
 
-      <p class="pool-more">Last checked: <time datetime="2026-10-13">13 October 2026</time>. Listings, pairs, fees and
+      <p class="pool-more">Last checked: <time datetime="2026-11-04">4 November 2026</time>. Listings, pairs, fees and
         limits change without notice: check them on the platform itself.</p>
     </div>
   </section>
@@ -426,6 +460,34 @@
 
 
   <script src="script.js?v=2026103102"></script>
+  <script>
+    (async function () {
+      var card = document.getElementById("live-card");
+      if (!card) return;
+      function num(v) { v = Number(v); return isFinite(v) ? v : null; }
+      function usd(v, d) { return "$" + v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+      async function load() {
+        try {
+          var r = await fetch("https://api.nestex.one/v1/info/S256");
+          var j = await r.json();
+          var i = j && j.info, d = i && i["24h"];
+          var ltp = i && num(i.ltp);
+          if (!(ltp > 0)) throw new Error("no price");
+          var dec = ltp < 0.01 ? 6 : 4;
+          document.getElementById("live-price").textContent = "$" + ltp.toFixed(dec);
+          var vu = d && num(d["24h_usdt_volume"]), vc = d && num(d["24h_coin_volume"]);
+          var hi = d && num(d["24h_high"]), lo = d && num(d["24h_low"]);
+          document.getElementById("live-vol-usdt").textContent = vu === null ? "n/a" : usd(vu, 2);
+          document.getElementById("live-vol-coin").textContent = vc === null ? "n/a" : vc.toLocaleString("en-US", { maximumFractionDigits: 0 });
+          document.getElementById("live-high").textContent = hi === null ? "n/a" : "$" + hi.toFixed(dec);
+          document.getElementById("live-low").textContent = lo === null ? "n/a" : "$" + lo.toFixed(dec);
+          card.hidden = false;
+        } catch (e) { /* keep the card hidden or the last values */ }
+      }
+      load();
+      setInterval(load, 60000);
+    })();
+  </script>
   <script src="easter-egg.js?v=2026101302"></script>
 
 </body>
