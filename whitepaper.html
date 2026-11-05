@@ -265,14 +265,14 @@
         <div class="title">S256</div>
         <div class="subtitle">Digital Platinum: A Contrarian Approach to Cryptocurrency</div>
         <div class="meta">
-            <strong>Version:</strong> 1.0<br>
-            <strong>Date:</strong> November 30, 2025<br>
+            <strong>Version:</strong> 1.1<br>
+            <strong>Date:</strong> November 5, 2026<br>
             <strong>Genesis Block:</strong> 00000000abe2a78ceb00eca81258804d59fe4ad45345e1750e705139e6da7297
         </div>
     </div>
 
     <div class="abstract">
-        <strong>Abstract:</strong> S256 is a SHA-256 proof-of-work cryptocurrency that challenges the conventional wisdom of blockchain scaling through increased throughput. Instead of making mining easier and blocks faster, S256 doubles Bitcoin's key parameters: 20-minute blocks, 100 S256 rewards, 84 million total supply (4x Bitcoin), and 16-year halving cycles. This whitepaper presents the philosophy, technical implementation, and economic model of a cryptocurrency built on the principle that true value comes from genuine scarcity and deliberate proof of work.
+        <strong>Abstract:</strong> S256 is a SHA-256 proof-of-work cryptocurrency that challenges the conventional wisdom of blockchain scaling through increased throughput. Instead of making mining easier and blocks faster, S256 doubles Bitcoin's key parameters: 20-minute blocks, 100 S256 rewards, 84 million total supply (4x Bitcoin), and 16-year halving cycles. Since block 17,500, S256 can also be merge-mined with SHA-256 parent chains, adding hashrate and security at no extra hashing cost. This whitepaper presents the philosophy, technical implementation, and economic model of a cryptocurrency built on the principle that true value comes from genuine scarcity and deliberate proof of work.
     </div>
 
     <h1>1. Introduction</h1>
@@ -372,15 +372,11 @@
             <tr>
                 <td>Difficulty Adjustment</td>
                 <td>2016 blocks</td>
-                <td>1008 blocks</td>
-                <td>~0.5x*</td>
+                <td>Every block (LWMA, 96-block window)</td>
+                <td>n/a</td>
             </tr>
         </tbody>
     </table>
-
-    <p style="font-size: 12px; color: #6b7280;">
-        *Difficulty adjusts every 1008 blocks to maintain ~14 day adjustment periods (1008 blocks × 20 minutes ≈ 14 days)
-    </p>
 
     <h2>3.2 Consensus Algorithm</h2>
     <p>
@@ -389,12 +385,17 @@
 
     <h3>3.2.1 Mining Difficulty</h3>
     <p>
-        The mining difficulty adjusts every 1008 blocks (approximately 14 days at 20-minute block times) to maintain the target block time. The difficulty adjustment follows the same algorithm as Bitcoin:
+        From block 17,500 the mining difficulty is adjusted on every block with LWMA (Linearly Weighted Moving Average), instead of Bitcoin's fixed-window retargeting. The target for the next block is computed from the last N = 96 blocks (about 32 hours at 20-minute block times). Recent solve times carry more weight than older ones, and a single solve time is capped at 6 times the target spacing:
     </p>
 
     <div class="formula">
-        new_difficulty = old_difficulty × (2_weeks / actual_time)
+        next_target = average_target × Σ(i × solvetime_i) / (T × N × (N+1) / 2)<br>
+        i = 1 (oldest) … N (newest), N = 96, T = 1200 seconds
     </div>
+
+    <p>
+        Difficulty therefore follows hashrate within a few blocks, which matters on a young network where a large miner or a merged-mining pool can join or leave suddenly. Before block 17,500 the network used Bitcoin's algorithm, retargeting every 1008 blocks (about 14 days).
+    </p>
 
     <h2>3.3 Network Configuration</h2>
     <ul>
@@ -416,13 +417,24 @@
         <li><strong>Standard Transactions:</strong> 3 confirmations (~1 hour)</li>
         <li><strong>High-Value Transactions:</strong> 6 confirmations (~2 hours)</li>
         <li><strong>Coinbase Maturity:</strong> 200 confirmations (~67 hours)</li>
-        <li><strong>Exchange Deposits:</strong> 500+ confirmations recommended (~7 days)</li>
+        <li><strong>Exchange Deposits:</strong> 50+ confirmations recommended (~17 hours)</li>
     </ul>
 
     <h3>3.4.2 51% Attack Resistance</h3>
     <p>
-        The longer block time increases the cost of a 51% attack. An attacker must sustain computational dominance for longer periods to execute deep reorganizations, making short-term attacks economically unviable. The recommended 500+ confirmations for exchange deposits create a security buffer exceeding 6 days, making double-spend attacks impractical.
+        The 20-minute block time means each confirmation represents twice the work of a Bitcoin confirmation at equal hashrate, so reorganizing a given number of blocks costs proportionally more. Merged mining (§3.5) lets SHA-256 pools add their hashrate to S256 at no extra cost, which raises the cost of an attack as adoption grows. As with any proof-of-work chain, security scales with total network hashrate. Exchanges should set confirmation requirements based on current hashrate and the value at risk; 50+ confirmations (about 17 hours) is the recommended baseline.
     </p>
+
+    <h2>3.5 Merged Mining (AuxPoW)</h2>
+    <p>
+        S256 supports merged mining (auxiliary proof of work). Merged mining activated at block 17,500 through a mandatory upgrade (S256 Core v3.0.x), together with the LWMA difficulty adjustment. A miner or pool that mines a SHA-256 parent chain can mine S256 at the same time, with the same hashing work, and a parent-chain proof of work that meets the S256 target is accepted as proof of work for an S256 block.
+    </p>
+    <ul>
+        <li><strong>Format:</strong> the standard Namecoin AuxPoW format, so existing merged-mining pool software works without S256-specific changes. Pools use the <code>createauxblock</code> and <code>submitauxblock</code> RPC calls.</li>
+        <li><strong>Chain ID:</strong> 598 (0x0256), which decides S256's slot when several auxiliary chains are mined together.</li>
+        <li><strong>Compatibility:</strong> blocks mined directly, without AuxPoW, stay valid at every height.</li>
+        <li><strong>Benefit:</strong> pools can add S256 to their existing SHA-256 work at no extra hashing cost. This brings in more hashrate and raises the cost of attacking the network.</li>
+    </ul>
 
     <h1>4. Economic Model</h1>
 
@@ -482,15 +494,19 @@
 
     <h2>4.2 Inflation Rate</h2>
     <p>
-        S256's inflation rate follows an identical curve to Bitcoin, maintaining the same scarcity properties:
+        S256's issuance is fixed by the block reward. At 72 blocks per day, the first epoch issues about 2.63 million S256 per year (100 S256 × 72 blocks × 365 days = 2,628,000), and the amount is halved every 420,000 blocks (about 16 years):
     </p>
 
     <ul>
-        <li><strong>Year 1-16:</strong> ~4% annual inflation</li>
-        <li><strong>Year 16-32:</strong> ~2% annual inflation</li>
-        <li><strong>Year 32-48:</strong> ~1% annual inflation</li>
-        <li><strong>Year 48+:</strong> <0.5% annual inflation, approaching zero</li>
+        <li><strong>Epoch 1 (years 1-16):</strong> ~2.63 million S256 per year</li>
+        <li><strong>Epoch 2 (years 16-32):</strong> ~1.31 million S256 per year</li>
+        <li><strong>Epoch 3 (years 32-48):</strong> ~0.66 million S256 per year</li>
+        <li><strong>Epoch 4 and later:</strong> ~0.33 million S256 per year and halving again, approaching zero</li>
     </ul>
+
+    <p>
+        The percentage inflation rate is the yearly issuance divided by the supply already in circulation. As with Bitcoin, supply starts at zero, so the rate is very high at first and falls steeply: about 100% in the second year, 50% in the third, 25% in the fifth, and roughly 7% at the end of the first epoch. It drops to about 3% when the first halving takes effect, to about 1% after the second, and to under 0.5% after the third.
+    </p>
 
     <h2>4.3 Mining Economics</h2>
     <p>
@@ -527,7 +543,7 @@
     <h2>6.1 Similarities</h2>
     <ul>
         <li>SHA-256 proof-of-work algorithm</li>
-        <li>Same fundamental code base (Bitcoin Core v30.0)</li>
+        <li>Same fundamental code base (Bitcoin Core v31.1)</li>
         <li>Identical security assumptions</li>
         <li>Compatible mining hardware</li>
         <li>Same total supply curve (scaled 2x)</li>
@@ -535,8 +551,9 @@
 
     <h2>6.2 Differences</h2>
     <ul>
-        <li>All time-based parameters doubled</li>
-        <li>All quantity-based parameters doubled</li>
+        <li>Block time, block reward, halving interval and coinbase maturity doubled</li>
+        <li>Per-block LWMA difficulty adjustment instead of Bitcoin's fixed-window retargeting</li>
+        <li>Merged mining (AuxPoW) with SHA-256 parent chains from block 17,500</li>
         <li>Unique network identity (different magic bytes, ports, addresses)</li>
         <li>Optimized for different use case (store of value vs. medium of exchange)</li>
     </ul>
@@ -545,7 +562,7 @@
 
     <h2>7.1 Open Source</h2>
     <p>
-        S256 is fully open source, based on Bitcoin Core v30.0. All modifications are transparent and verifiable. The codebase maintains Bitcoin's MIT license, ensuring permissionless use and modification.
+        S256 is fully open source, based on Bitcoin Core v31.1. All modifications are transparent and verifiable. The codebase maintains Bitcoin's MIT license, ensuring permissionless use and modification.
     </p>
 
     <h2>7.2 Conservative Development</h2>
@@ -555,7 +572,7 @@
 
     <h2>7.3 Testnet and Regtest</h2>
     <p>
-        While the initial release focuses on mainnet, testnet and regtest environments can be configured for development and testing purposes. The core infrastructure supports all Bitcoin testing networks with appropriate parameter modifications.
+        Testnet3 and regtest are actively used for development. Merged mining was tested on testnet3 with participating pool operators before it activated on mainnet. Both networks have S256's own parameters (separate magic bytes, address prefixes and bech32 prefixes), with AuxPoW and LWMA active from the start.
     </p>
 
     <h1>8. Security Considerations</h1>
@@ -565,7 +582,7 @@
         Exchanges integrating S256 must account for the extended block time:
     </p>
     <ul>
-        <li>Minimum 500 confirmations for deposits (~167 hours / 7 days)</li>
+        <li>Recommended 50+ confirmations for deposits (~17 hours)</li>
         <li>Withdrawal processing after 6 confirmations (~2 hours)</li>
         <li>Clear communication to users about expected wait times</li>
     </ul>
@@ -595,8 +612,10 @@
     <h2>Phase 2: Infrastructure (Q1 2026)</h2>
     <ul>
         <li>✅ Additional seed nodes</li>
-        <li>✅ Web wallet development</li>
-        <li>⏳ Mobile wallet (Android/iOS)</li>
+        <li>✅ Web wallet development (transactions are signed client-side; private keys never leave the browser or device)</li>
+        <li>⏳ Android wallet (Google Play release pending)</li>
+        <li>⏳ iOS wallet</li>
+        <li>✅ Merged mining (AuxPoW) activated at block 17,500</li>
         <li>✅ Mining pool diversity</li>
         <li>✅ Exchange listings</li>
     </ul>
@@ -641,7 +660,7 @@
 
     <ol>
         <li>Nakamoto, S. (2008). Bitcoin: A Peer-to-Peer Electronic Cash System</li>
-        <li>Bitcoin Core Development Team (2025). Bitcoin Core v30.0</li>
+        <li>Bitcoin Core Development Team (2026). Bitcoin Core v31.1</li>
         <li>Antonopoulos, A. M. (2017). Mastering Bitcoin, 2nd Edition</li>
         <li>Proof of Work Summit (2022). The Energy Debate in Cryptocurrency</li>
     </ol>
