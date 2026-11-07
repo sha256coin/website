@@ -1742,4 +1742,4 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
 /* Google Play badge (official artwork, unaltered; keep its clear space) */
 .play-badge { display: inline-block; margin: 0.25rem 0 0.5rem; }
 .play-badge img { display: block; width: 190px; height: auto; }
-.play-legal { font-size: 0.72rem; opacity: 0.7; margin-top: 0.75rem; }
+.download-includes p.play-legal { font-size: 0.72rem; font-weight: 400; line-height: 1.5; opacity: 0.65; margin: 1rem 0 0; }
