@@ -1738,3 +1738,8 @@ section { padding: clamp(64px, 9vw, 112px) 0; }
   .live-stats > div:nth-child(n + 3) { border-top: 1px solid var(--line); margin-top: 1rem; }
 }
 @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+
+/* Google Play badge (official artwork, unaltered; keep its clear space) */
+.play-badge { display: inline-block; margin: 0.25rem 0 0.5rem; }
+.play-badge img { display: block; width: 190px; height: auto; }
+.play-legal { font-size: 0.72rem; opacity: 0.7; margin-top: 0.75rem; }
