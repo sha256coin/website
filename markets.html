@@ -29,44 +29,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="theme.css?v=2026110401" />
   <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
+  <style>:root{--network-bar-height:0px}.navbar{top:0!important}</style>
 </head>
 
 <body>
-  <!-- Network Bar -->
-  <div class="network-bar">
-    <div class="container">
-      <div class="network-stats-group">
-        <div class="marquee-set">
-          <div class="network-bar-stat">
-            <span class="network-bar-text">🚀S256 Core v3.0.1 is the current release. Merged mining (AuxPoW) has been active since block 17,500. Download below ⬇️</span>
-          </div>
-          <div class="network-bar-stat">
-            <span class="network-bar-label">📊Block Height:</span>
-            <span class="network-bar-value" id="network-height">...</span>
-          </div>
-          <div class="network-bar-stat">
-            <span class="network-bar-label">⚡Hashrate:</span>
-            <span class="network-bar-value" id="network-hashrate">...</span>
-          </div>
-          <div class="network-bar-stat">
-            <span class="network-bar-label">⛏️Difficulty:</span>
-            <span class="network-bar-value" id="network-difficulty">...</span>
-          </div>
-          <div class="network-bar-stat" id="network-price-stat" hidden>
-            <span class="network-bar-label">💲Price:</span>
-            <span class="network-bar-value" id="network-price">...</span>
-            <span class="network-bar-note" id="network-price-note"></span>
-          </div>
-          <div class="network-bar-stat">
-            <span class="network-link">
-              <a href="https://www.livecoinwatch.com/price/SHA256COIN-S256" target="_blank">LiveCoinWatch</a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
@@ -177,14 +143,13 @@
             </div>
           </div>
           <dl class="pool-facts">
-            <div><dt>Pairs</dt><dd>S256/USDT, S256/USDC</dd></div>
+            <div><dt>Pairs</dt><dd>S256/USDT</dd></div>
             <div><dt>Type</dt><dd>Custodial, centralized exchange</dd></div>
           </dl>
           <p class="pool-note">FynEx also lists <strong>SS256</strong> (&ldquo;SATOSHI-IS-SHA256&rdquo;), a BNB Smart Chain token
             that is not S256. Check the ticker before you deposit or trade.</p>
           <div class="pool-actions">
             <a href="https://fyn-ex.uk/trading/s256usdt" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">S256/USDT <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-            <a href="https://fyn-ex.uk/trading/s256usdc" class="btn btn-secondary" target="_blank" rel="noopener noreferrer nofollow">S256/USDC <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </article>
 
